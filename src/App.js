@@ -6,13 +6,19 @@ import Markdown1 from 'markdown-to-jsx';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
+
+import AceEditor from "react-ace";
+import "ace-builds/src-noconflict/mode-java";
+import "ace-builds/src-noconflict/theme-github";
+
+
 import "video-react/dist/video-react.css"; // import css
 import ReactPlayer from "react-player"
 import Twosum from './Code/twosum.md';
+import Threesum from './Code/threesum.md';
 import Empty from './Code/empty.md';
 
-let codes=[[Empty,""],[Twosum,"https://www.youtube.com/watch?v=R6RAumiDmKQ"]];
-
+let codes=[[Empty,""],[Twosum,"https://www.youtube.com/watch?v=R6RAumiDmKQ"],[Threesum,"https://www.youtube.com/watch?v=R6RAumiDmKQ"]];
 
 class App extends Component {
   render() {
@@ -30,7 +36,7 @@ class App extends Component {
 class MySideBar extends Component{
 	constructor() {
 		super();
-		this.state = { index: 0 };
+		this.state = { index: 0,code:null };
      } 
 	render(){
 		return(
@@ -39,9 +45,9 @@ class MySideBar extends Component{
 					onSelect={(selected) => {
 						// Add your code here
 						if(!isNaN(selected)){
-							this.setState({ index: parseInt(selected) })
+							this.setState({ index: parseInt(selected),code:<Code content={codes[parseInt(selected)][0]}/> })
 						}else{
-							this.setState({ index: 0 })
+							this.setState({ index: 0,code:null })
 						}
 					}}
 				>
@@ -68,6 +74,11 @@ class MySideBar extends Component{
 									2 sum
 								</NavText>
 							</NavItem>
+							<NavItem eventKey="2">
+								<NavText>
+									3 sum
+								</NavText>
+							</NavItem>
 						</NavItem>
 					</SideNav.Nav>
 				</SideNav>
@@ -76,7 +87,7 @@ class MySideBar extends Component{
 					<ReactPlayer
         				url={codes[this.state.index][1]}
       				/> 
-					<Code content={codes[this.state.index][0]}/>					
+					{this.state.code}
 				</div>
 			</div>
 		);
@@ -86,23 +97,78 @@ class MySideBar extends Component{
 class Code extends Component {
   constructor() {
     super();
-    this.state = { markdown: '' };
+    this.state = { markdown: '',editor:null };
+	
   }
-  componentWillMount() {
-    fetch(this.props.content).then(res => res.text()).then(text => this.setState({ markdown: text }));
+  componentDidMount() {
+    fetch(this.props.content).then(res => res.text()).then(text => this.setState({ markdown: text,editor:<Editor code={text}/> }));
   }
-  componentDidUpdate(){
-	  fetch(this.props.content).then(res => res.text()).then(text => this.setState({ markdown: text }));
+  componentDidUpdate(previousProps, previousState){
+	  if(previousProps.content!=this.props.content){
+		  fetch(this.props.content).then(res => res.text()).then(text => this.setState({ markdown:text,editor:<Editor code={text}/> }));
+	  }
+	  
   } 
+	
 	
   render() {
     const { markdown } = this.state;
     return(
-		<div  style={{'background-color':'#FFEBCD'}}> 
-			<ReactMarkdown source={markdown} />
+		<div>
+			<div  style={{'background-color':'#FFEBCD'}}> 
+				<ReactMarkdown source={markdown} />
+			</div>
+			{this.state.editor}
 		</div>
+
 	)
   }
+}
+
+class Editor extends Component{
+  constructor() {
+    super();
+    this.state = {mycode:'' };
+	this.onchange = this.onchange.bind(this);
+  }
+	
+ componentDidUpdate(previousProps, previousState){
+	  if(previousProps.code!=this.props.code){
+		  fetch(this.props.content).then(res => res.text()).then(text => this.setState({ mycode:this.props.code }));
+	  }
+	  
+  }
+	
+	componentDidMount(){
+		this.setState({mycode:this.props.code});
+	} 
+	 onchange(newvalue){
+		  this.setState({mycode:newvalue});
+	  }
+	
+  render(){
+	  return(
+	  			<AceEditor
+				  mode="java"
+				  theme="github"
+				  name="blah2"
+				  onChange={this.onchange}
+				  fontSize={14}
+				  showPrintMargin={true}
+				  showGutter={true}
+				  highlightActiveLine={true}
+				  value={this.state.mycode}
+				  setOptions={{
+				  enableBasicAutocompletion: true,
+				  enableLiveAutocompletion: true,
+				  enableSnippets: false,
+				  showLineNumbers: true,
+				  tabSize: 2,
+			  }}/>
+	  );
+	  
+  }
+	
 }
 
 export default App;
