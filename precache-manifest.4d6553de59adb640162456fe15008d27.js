@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/Leetcode-TutorialBlog/static/css/1.4a887acb.chunk.css"
   },
   {
-    "revision": "6aadcfaef79cc4cc325628aff95b4571",
+    "revision": "bab7c76ed7b516169560781464e769ce",
     "url": "/Leetcode-TutorialBlog/index.html"
   }
 ];
