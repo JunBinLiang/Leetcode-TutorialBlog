@@ -2,7 +2,7 @@
   "name": "shopping-list-demo",
   "version": "0.1.0",
   "private": true,
-  "homwpage": "https://junbinliang.github.io/Leetcode-TutorialBlog",
+  "homwpage": "https://junbinliang.github.io/Leetcode-TutorialBlog/",
   "dependencies": {
     "@trendmicro/react-sidenav": "^0.5.0",
     "bootstrap": "^4.5.0",
