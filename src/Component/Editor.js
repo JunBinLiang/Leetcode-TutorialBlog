@@ -43,13 +43,14 @@ class Editor extends Component{
         'Content-Type': 'text/plain'
     };
 	 this.setState({loading:true});
-	 axios.post(`http://localhost:8080/api/run`, {
+	 axios.post(`https://frozen-atoll-01566.herokuapp.com/api/run`, {
 		 lang:'java',
 		 code:this.state.mycode
 	 })
       .then(res => {
 		 let data=res.data;
 		 let status=parseInt(data.message.status);
+		 console.log(res)
 		this.setState({
 			status:status,
 			output:data.message,
