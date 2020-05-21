@@ -2,18 +2,24 @@ import React, { Component } from "react";
 import { Route, Switch, NavLink,BrowserRouter as Router } from "react-router-dom";
 import renderHTML from 'react-render-html';
 import ReactMarkdown from 'react-markdown';
-import Markdown1 from 'markdown-to-jsx';
+
+
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-
+import Button from 'react-bootstrap/Button'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-github";
 
+import Editor from './Component/Editor';
 
-import "video-react/dist/video-react.css"; // import css
+
 import ReactPlayer from "react-player"
+
+
+
 import Twosum from './Code/twosum.md';
 import Threesum from './Code/threesum.md';
 import Empty from './Code/empty.md';
@@ -29,9 +35,6 @@ class App extends Component {
     );
   }
 }
-
-
-
 //https://reactjsexample.com/react-side-nav-component/
 class MySideBar extends Component{
 	constructor() {
@@ -74,11 +77,7 @@ class MySideBar extends Component{
 									2 sum
 								</NavText>
 							</NavItem>
-							<NavItem eventKey="2">
-								<NavText>
-									3 sum
-								</NavText>
-							</NavItem>
+							
 						</NavItem>
 					</SideNav.Nav>
 				</SideNav>
@@ -98,7 +97,6 @@ class Code extends Component {
   constructor() {
     super();
     this.state = { markdown: '',editor:null };
-	
   }
   componentDidMount() {
     fetch(this.props.content).then(res => res.text()).then(text => this.setState({ markdown: text,editor:<Editor code={text}/> }));
@@ -109,67 +107,20 @@ class Code extends Component {
 	  }
 	  
   } 
-	
-	
   render() {
     const { markdown } = this.state;
     return(
 		<div>
-			<div  style={{'background-color':'#FFEBCD'}}> 
-				<ReactMarkdown source={markdown} />
-			</div>
+			<br/>
 			{this.state.editor}
+			<br/>
 		</div>
 
 	)
   }
 }
 
-class Editor extends Component{
-  constructor() {
-    super();
-    this.state = {mycode:'' };
-	this.onchange = this.onchange.bind(this);
-  }
-	
- componentDidUpdate(previousProps, previousState){
-	  if(previousProps.code!=this.props.code){
-		  fetch(this.props.content).then(res => res.text()).then(text => this.setState({ mycode:this.props.code }));
-	  }
-	  
-  }
-	
-	componentDidMount(){
-		this.setState({mycode:this.props.code});
-	} 
-	 onchange(newvalue){
-		  this.setState({mycode:newvalue});
-	  }
-	
-  render(){
-	  return(
-	  			<AceEditor
-				  mode="java"
-				  theme="github"
-				  name="blah2"
-				  onChange={this.onchange}
-				  fontSize={14}
-				  showPrintMargin={true}
-				  showGutter={true}
-				  highlightActiveLine={true}
-				  value={this.state.mycode}
-				  setOptions={{
-				  enableBasicAutocompletion: true,
-				  enableLiveAutocompletion: true,
-				  enableSnippets: false,
-				  showLineNumbers: true,
-				  tabSize: 2,
-			  }}/>
-	  );
-	  
-  }
-	
-}
+
 
 export default App;
 

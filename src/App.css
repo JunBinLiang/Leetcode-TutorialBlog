@@ -30,3 +30,15 @@
     transform: rotate(360deg);
   }
 }
+
+.output{
+		transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        box-shadow: none;
+        border-bottom: 1px solid #ced4da;
+        border-radius: 0;
+        box-sizing: content-box;
+        background-color: transparent;
+        overflow-y: hidden;
+        resize: none;
+	
+}
