@@ -20,11 +20,15 @@ import ReactPlayer from "react-player"
 
 
 
-import Twosum from './Code/twosum.md';
-import NineZeroThree from './Code/903.md';
-import Empty from './Code/empty.md';
+import Twosum from './LeetCode/twosum.md';
+import NineZeroThree from './LeetCode/903.md';
+import Empty from './LeetCode/empty.md';
 
-let codes=[[Empty,""],[Twosum,""],[NineZeroThree,"https://www.youtube.com/watch?v=bo26ZbpYT60&feature=youtu.be"]];
+import oneninezerofour from './LintCode/1904.md';
+
+let leetcodes=[[Empty,""],[Twosum,""],[NineZeroThree,"https://www.youtube.com/watch?v=bo26ZbpYT60&feature=youtu.be"]];
+
+let lintcodes=[[Empty,""],[oneninezerofour,""]];
 
 class App extends Component {
   render() {
@@ -47,9 +51,16 @@ class MySideBar extends Component{
 				<SideNav
 					onSelect={(selected) => {
 						// Add your code here
-						if(!isNaN(selected)){
-							this.setState({ index: parseInt(selected),code:<Code content={codes[parseInt(selected)][0]}/> })
-						}else{
+						let first=selected.split(' ')[0];
+			
+						if(first=='Leetcode'){
+							console.log(parseInt(selected.split(' ')[1]))
+							this.setState({ index: parseInt(selected.split(' ')[1]),code:<Code content={leetcodes[parseInt(selected.split(' ')[1])][0]}/> })
+						}
+						else if(first=='LintCode'){
+							this.setState({ index: parseInt(selected.split(' ')[1]),code:<Code content={lintcodes[parseInt(selected.split(' ')[1])][0]}/> })
+						}
+						else{
 							this.setState({ index: 0,code:null })
 						}
 					}}
@@ -67,29 +78,45 @@ class MySideBar extends Component{
 
 						<NavItem eventKey="Leetcode">
 							<NavIcon>
-								<i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
+								LeetCode
 							</NavIcon>
 							<NavText>
 								Leetcode
 							</NavText>
-							<NavItem eventKey="1">
+							<NavItem eventKey="Leetcode 1">
 								<NavText>
 									1. Two sum
 								</NavText>
 							</NavItem>
-						   <NavItem eventKey="2">
+						   <NavItem eventKey="Leetcode 2">
 								<NavText>
 									903. Valid Permutations for DI Sequence
 								</NavText>
 						   </NavItem>
 							
 						</NavItem>
+				
+						<NavItem eventKey="LintCode">
+							<NavIcon>
+								LintCode
+							</NavIcon>
+							<NavText>
+								LintCode
+							</NavText>
+
+							<NavItem eventKey="LintCode 1">
+								<NavText>
+									1904. Put small balls
+								</NavText>
+							</NavItem>
+						</NavItem>
+
 					</SideNav.Nav>
 				</SideNav>
 				
 				<div style={{'width':'50%','margin-left':'20%'}}>
 					<ReactPlayer
-        				url={codes[this.state.index][1]}
+        				url={leetcodes[this.state.index][1]}
       				/> 
 					{this.state.code}
 				</div>
