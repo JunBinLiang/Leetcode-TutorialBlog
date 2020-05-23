@@ -21,10 +21,10 @@ import ReactPlayer from "react-player"
 
 
 import Twosum from './Code/twosum.md';
-import Threesum from './Code/threesum.md';
+import NineZeroThree from './Code/903.md';
 import Empty from './Code/empty.md';
 
-let codes=[[Empty,""],[Twosum,"https://www.youtube.com/watch?v=R6RAumiDmKQ"],[Threesum,"https://www.youtube.com/watch?v=R6RAumiDmKQ"]];
+let codes=[[Empty,""],[Twosum,""],[NineZeroThree,"https://www.youtube.com/watch?v=bo26ZbpYT60&feature=youtu.be"]];
 
 class App extends Component {
   render() {
@@ -74,9 +74,14 @@ class MySideBar extends Component{
 							</NavText>
 							<NavItem eventKey="1">
 								<NavText>
-									2 sum
+									1. Two sum
 								</NavText>
 							</NavItem>
+						   <NavItem eventKey="2">
+								<NavText>
+									903. Valid Permutations for DI Sequence
+								</NavText>
+						   </NavItem>
 							
 						</NavItem>
 					</SideNav.Nav>
