@@ -80,9 +80,6 @@ class MySideBar extends Component{
 							<NavIcon>
 								LeetCode
 							</NavIcon>
-							<NavText>
-								Leetcode
-							</NavText>
 							<NavItem eventKey="Leetcode 1">
 								<NavText>
 									1. Two sum
@@ -100,9 +97,6 @@ class MySideBar extends Component{
 							<NavIcon>
 								LintCode
 							</NavIcon>
-							<NavText>
-								LintCode
-							</NavText>
 
 							<NavItem eventKey="LintCode 1">
 								<NavText>
