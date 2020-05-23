@@ -19,6 +19,8 @@ import Editor from './Component/Editor';
 import ReactPlayer from "react-player"
 
 
+import theme from './picture/theme.png';
+
 
 import Twosum from './LeetCode/twosum.md';
 import NineZeroThree from './LeetCode/903.md';
@@ -43,9 +45,11 @@ class App extends Component {
 class MySideBar extends Component{
 	constructor() {
 		super();
-		this.state = { index: 0,code:null };
+		this.state = { index: 0,code:null,isHome:true };
      } 
 	render(){
+		let picture=null;
+		if(this.state.isHome)picture=<img style={{'margin-left':'25%'}} src={theme} alt="Logo" />;
 		return(
 			<div>
 				<SideNav
@@ -55,13 +59,13 @@ class MySideBar extends Component{
 			
 						if(first=='Leetcode'){
 							console.log(parseInt(selected.split(' ')[1]))
-							this.setState({ index: parseInt(selected.split(' ')[1]),code:<Code content={leetcodes[parseInt(selected.split(' ')[1])][0]}/> })
+							this.setState({isHome:false, index: parseInt(selected.split(' ')[1]),code:<Code content={leetcodes[parseInt(selected.split(' ')[1])][0]}/> })
 						}
 						else if(first=='LintCode'){
-							this.setState({ index: parseInt(selected.split(' ')[1]),code:<Code content={lintcodes[parseInt(selected.split(' ')[1])][0]}/> })
+							this.setState({isHome:false, index: parseInt(selected.split(' ')[1]),code:<Code content={lintcodes[parseInt(selected.split(' ')[1])][0]}/> })
 						}
 						else{
-							this.setState({ index: 0,code:null })
+							this.setState({ index: 0,code:null,isHome:true })
 						}
 					}}
 				>
@@ -108,6 +112,7 @@ class MySideBar extends Component{
 					</SideNav.Nav>
 				</SideNav>
 				
+				{picture}
 				<div style={{'width':'50%','margin-left':'20%'}}>
 					<ReactPlayer
         				url={leetcodes[this.state.index][1]}
