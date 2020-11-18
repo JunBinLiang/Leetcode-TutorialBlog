@@ -42,3 +42,7 @@
         resize: none;
 	
 }
+
+.code{
+	display:flex
+}

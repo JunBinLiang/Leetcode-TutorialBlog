@@ -18,3 +18,21 @@ class Solution {
 		System.out.println();
 	}
 }
+
+```
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& A, int target) {
+        unordered_map<int,int>hash;
+        for(int i=0;i<A.size();i++){
+            if(hash.count(target-A[i])!=0){
+                return {hash[target-A[i]],i};
+            }
+            hash[A[i]]=i;
+        }
+        
+        return {0,0};
+    }
+};
+
+```

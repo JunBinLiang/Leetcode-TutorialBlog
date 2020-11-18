@@ -19,18 +19,29 @@ import Editor from './Component/Editor';
 import ReactPlayer from "react-player"
 
 
+
+
+
+
 import theme from './picture/theme.png';
-
-
 import Twosum from './LeetCode/twosum.md';
 import NineZeroThree from './LeetCode/903.md';
 import Empty from './LeetCode/empty.md';
-
 import oneninezerofour from './LintCode/1904.md';
 
-let leetcodes=[[Empty,""],[Twosum,""],[NineZeroThree,"https://www.youtube.com/watch?v=bo26ZbpYT60&feature=youtu.be"]];
+import p1 from './problems/1.md';
 
-let lintcodes=[[Empty,""],[oneninezerofour,""]];
+
+import Markdown from 'react-markdown';
+
+
+
+
+
+let leetcodes=[[Twosum,""],[NineZeroThree,"https://www.youtube.com/watch?v=bo26ZbpYT60&feature=youtu.be"]];
+let statements=[p1];
+let problemNames=[];
+
 
 class App extends Component {
   render() {
@@ -48,8 +59,11 @@ class MySideBar extends Component{
 		this.state = { index: 0,code:null,isHome:true };
      } 
 	render(){
-		let picture=null;
-		if(this.state.isHome)picture=<img style={{'margin-left':'25%'}} src={theme} alt="Logo" />;
+		let heading=null;
+		if(this.state.isHome){
+			heading=<h1 style={{'margin-left':'35%'}}>My Coding Platform</h1>;
+			
+		}
 		return(
 			<div>
 				<SideNav
@@ -58,11 +72,9 @@ class MySideBar extends Component{
 						let first=selected.split(' ')[0];
 			
 						if(first=='Leetcode'){
-							console.log(parseInt(selected.split(' ')[1]))
-							this.setState({isHome:false, index: parseInt(selected.split(' ')[1]),code:<Code content={leetcodes[parseInt(selected.split(' ')[1])][0]}/> })
-						}
-						else if(first=='LintCode'){
-							this.setState({isHome:false, index: parseInt(selected.split(' ')[1]),code:<Code content={lintcodes[parseInt(selected.split(' ')[1])][0]}/> })
+							let index=parseInt(selected.split(' ')[1]);
+							this.setState({isHome:false, index: index,
+										   code:<Code content={leetcodes[index][0]} description={statements[index]}/> })
 						}
 						else{
 							this.setState({ index: 0,code:null,isHome:true })
@@ -82,55 +94,54 @@ class MySideBar extends Component{
 
 						<NavItem eventKey="Leetcode">
 							<NavIcon>
-								LeetCode
+								Problems
 							</NavIcon>
-							<NavItem eventKey="Leetcode 1">
+							<NavItem eventKey="Leetcode 0">
 								<NavText>
 									1. Two sum
 								</NavText>
 							</NavItem>
-						   <NavItem eventKey="Leetcode 2">
+						   <NavItem eventKey="Leetcode 1">
 								<NavText>
 									903. Valid Permutations for DI Sequence
 								</NavText>
 						   </NavItem>
 							
 						</NavItem>
-				
-						<NavItem eventKey="LintCode">
-							<NavIcon>
-								LintCode
-							</NavIcon>
-
-							<NavItem eventKey="LintCode 1">
-								<NavText>
-									1904. Put small balls
-								</NavText>
-							</NavItem>
-						</NavItem>
 
 					</SideNav.Nav>
 				</SideNav>
 				
-				{picture}
-				<div style={{'width':'50%','margin-left':'20%'}}>
-					<ReactPlayer
-        				url={leetcodes[this.state.index][1]}
-      				/> 
-					{this.state.code}
-				</div>
+				{heading}
+				
+				
+
+				
+				{this.state.code}
+				
 			</div>
 		);
 	}
 }
 
+
+
+
+
+
 class Code extends Component {
   constructor() {
     super();
-    this.state = { markdown: '',editor:null };
+    this.state = { markdown: '',editor:null,problem:"Two Sum",description:"" };
   }
   componentDidMount() {
-    fetch(this.props.content).then(res => res.text()).then(text => this.setState({ markdown: text,editor:<Editor code={text}/> }));
+    fetch(this.props.content).then(res => res.text()).then(text => {
+		this.setState({ markdown: text,editor:<Editor code={text}/> })
+	});
+	  
+	fetch(this.props.description).then(res => res.text()).then(text => {
+		this.setState({ description: text})
+	});
   }
   componentDidUpdate(previousProps, previousState){
 	  if(previousProps.content!=this.props.content){
@@ -142,9 +153,21 @@ class Code extends Component {
     const { markdown } = this.state;
     return(
 		<div>
-			<br/>
-			{this.state.editor}
-			<br/>
+			<h2 style={{'width':'100%','margin-left':'45%'}}>{this.state.problem}</h2>
+			<div style={{'width':'100%','margin-left':'5%'}} class="code">
+				<div style={{'margin':'5%'}}>
+					<Markdown 
+						escapeHtml={true}
+						source={this.state.description} 
+					/>
+				</div>
+
+				<div  style={{'margin':'5%'}}>
+					{this.state.editor}
+					<br/>
+				</div>
+			</div>
+			
 		</div>
 
 	)

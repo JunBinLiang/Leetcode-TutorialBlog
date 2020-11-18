@@ -49,9 +49,9 @@ class Editor extends Component{
 		 code:this.state.mycode
 	 })
       .then(res => {
-		 let data=res.data;
-		 let status=parseInt(data.message.status);
-		 console.log(res)
+		let data=res.data;
+		let status=parseInt(data.message.status);
+		console.log(res)
 		this.setState({
 			status:status,
 			output:data.message,
@@ -66,9 +66,9 @@ class Editor extends Component{
 	  
 	  return(
 		  		<div>
-		  			<h3>Java support only currently</h3>
 					<AceEditor
-					  height={250}
+					  height={550}
+		  			  width={750}
 					  mode="java"
 					  theme="github"
 					  name="blah2"
@@ -94,8 +94,8 @@ class Editor extends Component{
 					  type="textarea"
 					  componentClass="textarea"
 					  rows="5"
-		  			  cols="75"
-		  			  width={250}
+		  			  cols="100"
+		  			  width={200}
 					  value={this.state.output}
 		  			  onChange={this.changeOutput}
 				 />
