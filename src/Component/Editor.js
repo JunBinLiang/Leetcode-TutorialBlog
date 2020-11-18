@@ -16,10 +16,11 @@ import axios from 'axios';
 class Editor extends Component{
   constructor() {
     super();
-    this.state = {mycode:'',status:0,output:'',loading:false };
+    this.state = {mycode:'',status:0,output:'',loading:false,summiting:false };
 	this.onchange = this.onchange.bind(this);
 	this.handleCompile = this.handleCompile.bind(this);
 	this.changeOutput = this.changeOutput.bind(this);
+	this.handleSubmit = this.handleSubmit.bind(this);
   }
 	
  componentDidUpdate(previousProps, previousState){
@@ -46,7 +47,7 @@ class Editor extends Component{
 	 this.setState({loading:true});
 	 axios.post(`https://frozen-atoll-01566.herokuapp.com/api/run`, {
 		 lang:'java',
-		 code:this.state.mycode
+		 code:this.state.mycode+this.props.test
 	 })
       .then(res => {
 		let data=res.data;
@@ -60,9 +61,50 @@ class Editor extends Component{
       });
 	}
 	
+	handleSubmit(){
+	const headers = {
+        'Content-Type': 'text/plain'
+    };
+	 this.setState({summiting:true});
+	 axios.post(`https://frozen-atoll-01566.herokuapp.com/api/run`, {
+		 lang:'java',
+		 code:this.state.mycode+this.props.test
+	 })
+      .then(res => {
+		let data=res.data;
+		let status=parseInt(data.message.status);
+		console.log(res)
+		this.setState({
+			status:status,
+			output:data.message,
+			summiting:false
+		});
+      });
+	}
+	
   render(){
 	  let B=B=<Button className="outline-primary" ><i class="fa fa-refresh fa-spin"></i></Button>;
-	  if(!this.state.loading)B=<Button className="outline-primary" onClick={this.handleCompile}>Compile</Button>;
+	  let S=B=<Button className="btn-info" style={{'margin':'5%'}} ><i class="fa fa-refresh fa-spin"></i></Button>;
+	  
+	  if(!this.state.loading){
+		  if(this.state.summiting){
+			  B=<Button className="outline-primary">Compile</Button>;
+		  }
+		  else{
+			 B=<Button className="outline-primary" onClick={this.handleCompile}>Compile</Button>; 
+		  }
+		  
+	  }
+
+	  if(!this.state.summiting){
+		  if(this.state.loading){
+			  S=<Button className="btn-info" style={{'margin':'5%'}}>Submit</Button>;
+		  }
+		  else{
+			  S=<Button className="btn-info" style={{'margin':'5%'}} onClick={this.handleSubmit}>Submit</Button>;
+		  }
+		  
+	  }
 	  
 	  return(
 		  		<div>
@@ -86,7 +128,7 @@ class Editor extends Component{
 					  tabSize: 2,
 				  }}/>
 		  		  <br/>
-		  		  {B}
+		  		  {B}{S}
 		  		<br/><br/>
 				 <textarea
 		  			  className="output"

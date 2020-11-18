@@ -24,13 +24,16 @@ import ReactPlayer from "react-player"
 
 
 import theme from './picture/theme.png';
-import Twosum from './LeetCode/twosum.md';
-import NineZeroThree from './LeetCode/903.md';
-import Empty from './LeetCode/empty.md';
-import oneninezerofour from './LintCode/1904.md';
 
-import p1 from './problems/1.md';
 
+
+
+
+
+
+import p1 from './LeetCode/1.md';
+import sta1 from './problems/1.md';
+import test1 from './test/test1.md';
 
 import Markdown from 'react-markdown';
 
@@ -38,9 +41,10 @@ import Markdown from 'react-markdown';
 
 
 
-let leetcodes=[[Twosum,""],[NineZeroThree,"https://www.youtube.com/watch?v=bo26ZbpYT60&feature=youtu.be"]];
-let statements=[p1];
-let problemNames=[];
+let leetcodes=[[p1,""]];
+let statements=[sta1];
+let names=["Two Sum"];
+let Test=[test1];
 
 
 class App extends Component {
@@ -74,7 +78,7 @@ class MySideBar extends Component{
 						if(first=='Leetcode'){
 							let index=parseInt(selected.split(' ')[1]);
 							this.setState({isHome:false, index: index,
-										   code:<Code content={leetcodes[index][0]} description={statements[index]}/> })
+										   code:<Code content={leetcodes[index][0]} description={statements[index]} name={names[index]} test={Test[index]}/> })
 						}
 						else{
 							this.setState({ index: 0,code:null,isHome:true })
@@ -101,11 +105,6 @@ class MySideBar extends Component{
 									1. Two sum
 								</NavText>
 							</NavItem>
-						   <NavItem eventKey="Leetcode 1">
-								<NavText>
-									903. Valid Permutations for DI Sequence
-								</NavText>
-						   </NavItem>
 							
 						</NavItem>
 
@@ -132,20 +131,24 @@ class MySideBar extends Component{
 class Code extends Component {
   constructor() {
     super();
-    this.state = { markdown: '',editor:null,problem:"Two Sum",description:"" };
+    this.state = { markdown: '',editor:null,name:"Two Sum",description:"",test:"" };
   }
   componentDidMount() {
     fetch(this.props.content).then(res => res.text()).then(text => {
-		this.setState({ markdown: text,editor:<Editor code={text}/> })
+		this.setState({ markdown: text})
 	});
 	  
 	fetch(this.props.description).then(res => res.text()).then(text => {
 		this.setState({ description: text})
 	});
+	  
+	fetch(this.props.test).then(res => res.text()).then(text => {
+		this.setState({ test: text})
+	});
   }
   componentDidUpdate(previousProps, previousState){
 	  if(previousProps.content!=this.props.content){
-		  fetch(this.props.content).then(res => res.text()).then(text => this.setState({ markdown:text,editor:<Editor code={text}/> }));
+		  fetch(this.props.content).then(res => res.text()).then(text => this.setState({ markdown:text }));
 	  }
 	  
   } 
@@ -153,7 +156,7 @@ class Code extends Component {
     const { markdown } = this.state;
     return(
 		<div>
-			<h2 style={{'width':'100%','margin-left':'45%'}}>{this.state.problem}</h2>
+			<h2 style={{'width':'100%','margin-left':'45%'}}>{this.state.name}</h2>
 			<div style={{'width':'100%','margin-left':'5%'}} class="code">
 				<div style={{'margin':'5%'}}>
 					<Markdown 
@@ -163,7 +166,7 @@ class Code extends Component {
 				</div>
 
 				<div  style={{'margin':'5%'}}>
-					{this.state.editor}
+					<Editor code={this.state.markdown} test={this.state.test}/>
 					<br/>
 				</div>
 			</div>
