@@ -23,11 +23,13 @@ import axios from 'axios';
 class Editor extends Component{
   constructor() {
     super();
-    this.state = {mycode:'',status:0,output:'',loading:false,summiting:false,A:[] };
+    this.state = {mycode:'',status:0,output:'',loading:false,summiting:false,A:[],inputstate:false,myinput:"",done:false };
 	this.onchange = this.onchange.bind(this);
 	this.handleCompile = this.handleCompile.bind(this);
 	this.changeOutput = this.changeOutput.bind(this);
+	this.changeInput = this.changeInput.bind(this);
 	this.handleSubmit = this.handleSubmit.bind(this);
+	  this.inputstateChange=this.inputstateChange.bind(this);
   }
 	
  componentDidUpdate(previousProps, previousState){
@@ -36,6 +38,10 @@ class Editor extends Component{
 	  }
 	  
   }
+	inputstateChange(){
+		let newstate=!this.state.inputstate;
+		this.setState({inputstate:newstate});
+	}
 	
 	componentDidMount(){
 		this.setState({mycode:this.props.code});
@@ -47,14 +53,20 @@ class Editor extends Component{
 		this.setState({output:event.target.value});
 	}
 	
+	changeInput(event){
+		this.setState({myinput:event.target.value});
+	}
+	
 	handleCompile(){
 	const headers = {
         'Content-Type': 'text/plain'
     };
 	 this.setState({loading:true});
-	 axios.post(`http://localhost:8080/api/run`, {
+		
+	 axios.post(`https://frozen-atoll-01566.herokuapp.com/api/run`, {
 		 lang:'java',
-		 code:this.state.mycode+this.props.test
+		 code:this.state.mycode+this.props.test,
+		 input:this.state.myinput
 	 })
       .then(res => {
 		let data=res.data;
@@ -63,7 +75,8 @@ class Editor extends Component{
 		this.setState({
 			status:status,
 			output:data.message,
-			loading:false
+			loading:false,
+			inputstate:false
 		});
       });
 	}
@@ -73,7 +86,7 @@ class Editor extends Component{
         'Content-Type': 'text/plain'
     };
 	 this.setState({summiting:true});
-	 axios.post(`http://localhost:8080/api/submit`, {
+	 axios.post(`https://frozen-atoll-01566.herokuapp.com/api/submit`, {
 		 lang:'java',
 		 code:this.state.mycode+this.props.submit
 	 })
@@ -85,26 +98,68 @@ class Editor extends Component{
 			status:status,
 			output:data.message,
 			summiting:false,
+			inputstate:false,
+			done:true,
 			A:B
 		});
       });
 	}
 	
+	
+	
+	
   render(){
 	  let B=<Button className="outline-primary" ><i class="fa fa-refresh fa-spin"></i></Button>;
 	  let S=<Button className="btn-info" style={{'margin':'5%'}} ><i class="fa fa-refresh fa-spin"></i></Button>;
+	  let stateButon="";
+      let smalltext="";
+	  
+	 if(this.state.inputstate){
+		 stateButon=<Button className="btn-success " style={{'margin':'5%'}} onClick={this.inputstateChange}>My output</Button>;
+		 smalltext="Input Your Data please!"
+	 }
+	 else{
+		 stateButon=<Button className="btn-success" style={{'margin':'5%'}} onClick={this.inputstateChange} >Input</Button>;
+	     smalltext="Here is Your Output!"
+	 }
+
+	  let textarea=	<textarea
+		  			  className="output"
+					  name="code"
+					  type="textarea"
+					  componentClass="textarea"
+					  rows="5"
+		  			  cols="100"
+		  			  width={200}
+					  value={this.state.output}
+		  			  onChange={this.changeOutput}
+				 />;
+	  
+	  if(this.state.inputstate){
+		  textarea=	<textarea
+		  			  className="output"
+					  name="code"
+					  type="textarea"
+					  componentClass="textarea"
+					  rows="5"
+		  			  cols="100"
+		  			  width={200}
+					  value={this.state.myinput}
+		  			  onChange={this.changeInput}
+				 />;
+	  }	
+					  
 	  let inputs=[];
 	  
-	  for(let i=0;i<3;i++){
-		  if(this.state.A.length==0){
+	  for(let i=0;i<this.props.testcase;i++){
+		  if(!this.state.done){
 			  inputs.push(<Button className="btn-secondary" style={{'margin-left':'3%'}}>Test{i}</Button>)
 		  }
 			
 		  else{
-			console.log(typeof(this.state.A[i]));			  
-			 if(this.state.A[i].charAt(0)=='t'){
+			  console.log((this.state.A));			  
+			 if(this.state.A[i]!=null&&this.state.A[i].length>=1&&this.state.A[i].charAt(0)=='t'){
 				 inputs.push(<Button className="btn-success" style={{'margin-left':'3%'}}>O</Button>)
-
 			 }
 			 else{
 							 	
@@ -139,7 +194,7 @@ class Editor extends Component{
 		  			{inputs}
 		  			<br/><br/>
 					<AceEditor
-					  height={550}
+					  height={500}
 		  			  width={750}
 					  mode="java"
 					  theme="github"
@@ -157,20 +212,13 @@ class Editor extends Component{
 					  showLineNumbers: true,
 					  tabSize: 2,
 				  }}/>
-		  		  <br/>
-		  		  {B}{S}
-		  		<br/><br/>
-				 <textarea
-		  			  className="output"
-					  name="code"
-					  type="textarea"
-					  componentClass="textarea"
-					  rows="5"
-		  			  cols="100"
-		  			  width={200}
-					  value={this.state.output}
-		  			  onChange={this.changeOutput}
-				 />
+		  		  {stateButon}
+		  		<br/>
+		  		{smalltext}
+		  		{textarea}
+		  
+		  		<br/>
+		  		{B}{S}
 		  		</div>
 	  );
 	  

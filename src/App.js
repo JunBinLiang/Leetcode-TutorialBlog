@@ -36,6 +36,7 @@ import sta1 from './problems/1.md';
 import test1 from './test/test1.md';
 import submit1 from './submit/submit1.md';
 
+
 import Markdown from 'react-markdown';
 
 
@@ -47,6 +48,7 @@ let statements=[sta1];
 let names=["Two Sum"];
 let Test=[test1];
 let Submit=[submit1];
+let testcases=[3];
 
 
 class App extends Component {
@@ -80,7 +82,7 @@ class MySideBar extends Component{
 						if(first=='Leetcode'){
 							let index=parseInt(selected.split(' ')[1]);
 							this.setState({isHome:false, index: index,
-										   code:<Code content={leetcodes[index][0]} description={statements[index]} name={names[index]} test={Test[index]} index={index} submit={Submit[index]}/> })
+										   code:<Code content={leetcodes[index][0]} description={statements[index]} name={names[index]} test={Test[index]} index={index} submit={Submit[index]} testcase={testcases[index]}/> })
 						}
 						else{
 							this.setState({ index: 0,code:null,isHome:true })
@@ -133,7 +135,7 @@ class MySideBar extends Component{
 class Code extends Component {
   constructor() {
     super();
-    this.state = { markdown: '',editor:null,name:"Two Sum",description:"",test:"",submit:"" };
+    this.state = { markdown: '',editor:null,name:"Two Sum",description:"",test:"",submit:"",testcases:0 };
   }
   componentDidMount() {
     fetch(this.props.content).then(res => res.text()).then(text => {
@@ -173,7 +175,7 @@ class Code extends Component {
 				</div>
 
 				<div  style={{'margin':'5%'}}>
-					<Editor code={this.state.markdown} test={this.state.test} submit={this.state.submit}/>
+					<Editor testcase={this.props.testcase} code={this.state.markdown} test={this.state.test} submit={this.state.submit}/>
 					<br/>
 				</div>
 			</div>
