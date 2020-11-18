@@ -34,6 +34,7 @@ import theme from './picture/theme.png';
 import p1 from './LeetCode/1.md';
 import sta1 from './problems/1.md';
 import test1 from './test/test1.md';
+import submit1 from './submit/submit1.md';
 
 import Markdown from 'react-markdown';
 
@@ -45,6 +46,7 @@ let leetcodes=[[p1,""]];
 let statements=[sta1];
 let names=["Two Sum"];
 let Test=[test1];
+let Submit=[submit1];
 
 
 class App extends Component {
@@ -78,7 +80,7 @@ class MySideBar extends Component{
 						if(first=='Leetcode'){
 							let index=parseInt(selected.split(' ')[1]);
 							this.setState({isHome:false, index: index,
-										   code:<Code content={leetcodes[index][0]} description={statements[index]} name={names[index]} test={Test[index]}/> })
+										   code:<Code content={leetcodes[index][0]} description={statements[index]} name={names[index]} test={Test[index]} index={index} submit={Submit[index]}/> })
 						}
 						else{
 							this.setState({ index: 0,code:null,isHome:true })
@@ -131,7 +133,7 @@ class MySideBar extends Component{
 class Code extends Component {
   constructor() {
     super();
-    this.state = { markdown: '',editor:null,name:"Two Sum",description:"",test:"" };
+    this.state = { markdown: '',editor:null,name:"Two Sum",description:"",test:"",submit:"" };
   }
   componentDidMount() {
     fetch(this.props.content).then(res => res.text()).then(text => {
@@ -144,6 +146,9 @@ class Code extends Component {
 	  
 	fetch(this.props.test).then(res => res.text()).then(text => {
 		this.setState({ test: text})
+	});
+	  fetch(this.props.submit).then(res => res.text()).then(text => {
+		this.setState({ submit: text})
 	});
   }
   componentDidUpdate(previousProps, previousState){
@@ -158,15 +163,17 @@ class Code extends Component {
 		<div>
 			<h2 style={{'width':'100%','margin-left':'45%'}}>{this.state.name}</h2>
 			<div style={{'width':'100%','margin-left':'5%'}} class="code">
-				<div style={{'margin':'5%'}}>
+				<div style={{'margin':'3%'}}>
 					<Markdown 
 						escapeHtml={true}
 						source={this.state.description} 
 					/>
+					<br/><br/>
+					
 				</div>
 
 				<div  style={{'margin':'5%'}}>
-					<Editor code={this.state.markdown} test={this.state.test}/>
+					<Editor code={this.state.markdown} test={this.state.test} submit={this.state.submit}/>
 					<br/>
 				</div>
 			</div>
