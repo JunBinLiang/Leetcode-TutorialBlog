@@ -35,6 +35,9 @@ import p1 from './LeetCode/1.md';
 import sta1 from './problems/1.md';
 import test1 from './test/test1.md';
 import submit1 from './submit/submit1.md';
+import input1p1 from './input/1.1.md';
+import input1p2 from './input/1.2.md';
+import input1p3 from './input/1.3.md';
 
 
 import Markdown from 'react-markdown';
@@ -49,6 +52,7 @@ let names=["Two Sum"];
 let Test=[test1];
 let Submit=[submit1];
 let testcases=[3];
+let inputs=[[input1p1,input1p2,input1p3]];
 
 
 class App extends Component {
@@ -82,7 +86,9 @@ class MySideBar extends Component{
 						if(first=='Leetcode'){
 							let index=parseInt(selected.split(' ')[1]);
 							this.setState({isHome:false, index: index,
-										   code:<Code content={leetcodes[index][0]} description={statements[index]} name={names[index]} test={Test[index]} index={index} submit={Submit[index]} testcase={testcases[index]}/> })
+										   code:<Code content={leetcodes[index][0]} description={statements[index]} name={names[index]} test={Test[index]} index={index} submit={Submit[index]} testcase={testcases[index]}
+										   input={inputs[index]}
+										  /> })
 						}
 						else{
 							this.setState({ index: 0,code:null,isHome:true })
@@ -175,7 +181,7 @@ class Code extends Component {
 				</div>
 
 				<div  style={{'margin':'5%'}}>
-					<Editor testcase={this.props.testcase} code={this.state.markdown} test={this.state.test} submit={this.state.submit}/>
+					<Editor judgecase={this.props.input} testcase={this.props.testcase} code={this.state.markdown} test={this.state.test} submit={this.state.submit}/>
 					<br/>
 				</div>
 			</div>

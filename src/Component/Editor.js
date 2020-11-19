@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,useState } from "react";
 
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-java";
@@ -7,12 +7,12 @@ import "ace-builds/src-noconflict/theme-github";
 import Button from 'react-bootstrap/Button'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FormControl } from 'react-bootstrap';
-
+import Modal from 'react-bootstrap/Modal'
 
 import '../App.css';
 
 import axios from 'axios';
-
+import InputField from './InputField';
 
 
 
@@ -153,17 +153,17 @@ class Editor extends Component{
 	  
 	  for(let i=0;i<this.props.testcase;i++){
 		  if(!this.state.done){
-			  inputs.push(<Button className="btn-secondary" style={{'margin-left':'3%'}}>Test{i}</Button>)
+			  inputs.push(<InputField bstate={1} index={i} judge={this.props.judgecase[i]}/>)
 		  }
 			
 		  else{
 			  console.log((this.state.A));			  
 			 if(this.state.A[i]!=null&&this.state.A[i].length>=1&&this.state.A[i].charAt(0)=='t'){
-				 inputs.push(<Button className="btn-success" style={{'margin-left':'3%'}}>O</Button>)
+				 inputs.push(<InputField bstate={2} index={i} judge={this.props.judgecase[i]}/>)
 			 }
 			 else{
 							 	
-				 inputs.push(<Button className="btn-danger" style={{'margin-left':'3%'}}>X</Button>)
+				 inputs.push(<InputField bstate={3} index={i} judge={this.props.judgecase[i]}/>)
 			 }
 		  }
 		  
@@ -216,7 +216,6 @@ class Editor extends Component{
 		  		<br/>
 		  		{smalltext}
 		  		{textarea}
-		  
 		  		<br/>
 		  		{B}{S}
 		  		</div>
@@ -224,5 +223,8 @@ class Editor extends Component{
 	  
   }
 }
+
+
+
 
 export default Editor;
