@@ -9,7 +9,10 @@ class Solution {
 			A[i]=Integer.parseInt(arr[i+1]);
 		}
 		int target=Integer.parseInt(arr[arr.length-1]);
-		System.out.println(sol.twoSum(A,target));
+		int ans[]=sol.twoSum(A,target);
+		for(int i:ans){
+			System.out.print(i+" ");
+		}
 	}
 }
 
