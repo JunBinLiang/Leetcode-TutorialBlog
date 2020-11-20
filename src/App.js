@@ -170,7 +170,7 @@ class Code extends Component {
     return(
 		<div>
 			<h2 style={{'width':'100%','margin-left':'45%'}}>{this.state.name}</h2>
-			<div style={{'width':'100%','margin-left':'5%'}} class="code">
+			<div style={{'width':'100%','margin-left':'5%'}} className="code">
 				<div style={{'margin':'3%'}}>
 					<Markdown 
 						escapeHtml={true}

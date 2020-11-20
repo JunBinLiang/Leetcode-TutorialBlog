@@ -11,8 +11,10 @@ import Modal from 'react-bootstrap/Modal'
 
 import '../App.css';
 
+import swal from 'sweetalert'
 import axios from 'axios';
 import InputField from './InputField';
+import Congratulation from './Congratulation';
 
 
 
@@ -23,7 +25,16 @@ import InputField from './InputField';
 class Editor extends Component{
   constructor() {
     super();
-    this.state = {mycode:'',status:0,output:'',loading:false,summiting:false,A:[],inputstate:false,myinput:"",done:false };
+    this.state = {mycode:'',
+				  status:0,
+				  output:'',//output in the text area
+				  loading:false,
+				  summiting:false,
+				  A:[],//content of the result
+				  inputstate:false,//at the beginning,input is default state (not O||X)
+				  myinput:"",
+				  correct:false,//if your answer are correct after submit
+				  done:false };
 	this.onchange = this.onchange.bind(this);
 	this.handleCompile = this.handleCompile.bind(this);
 	this.changeOutput = this.changeOutput.bind(this);
@@ -91,10 +102,11 @@ class Editor extends Component{
 		 code:this.state.mycode+this.props.submit
 	 })
       .then(res => {
+		let rightAns=0;
 		let data=res.data;
 		let status=parseInt(data.message.status);
 		let B=data.message.split("\n");
-		
+		let allRight=false;
 		let result=[];
 		let message=[];
 		
@@ -105,6 +117,7 @@ class Editor extends Component{
 		for(let i=B.length-1;i>=0;i--){
 			if(B[i].length==0)continue;
 			if(t>0){
+				if(B[i].charAt(0)=='t')rightAns++;
 				result.push(B[i]);
 				t--;
 			}
@@ -113,6 +126,26 @@ class Editor extends Component{
 			}
 			
 		}
+
+		if(rightAns==this.props.testcase){
+			allRight=true;
+			swal(
+			  "Congratulation!"
+
+			)
+			.then(willDelete => {
+			  if (willDelete) {
+				this.setState({correct:false});
+			  }
+			});
+		}
+		else{
+			swal({
+			  text: "Stupid!",
+			  icon: "warning",
+			  dangerMode: true,
+			})
+		}
 		 
 		this.setState({
 			status:status,
@@ -120,7 +153,8 @@ class Editor extends Component{
 			summiting:false,
 			inputstate:false,
 			done:true,
-			A:result.reverse()
+			A:result.reverse(),
+			correct:allRight
 		});
       });
 	}
@@ -208,9 +242,20 @@ class Editor extends Component{
 		  }
 		  
 	  }
+		  
+	  let congra;
+	  if(this.state.correct){
+		  congra=<Congratulation/>;
+	  }
 	  
+		 
+			  
+		  
 	  return(
 		  		<div>
+		 
+		  			
+		  			{congra}
 		  			{inputs}
 		  			<br/><br/>
 					<AceEditor

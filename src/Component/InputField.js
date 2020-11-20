@@ -17,7 +17,7 @@ class InputField extends Component{
 
   constructor() {
     super();
-    this.state = {show:false,judge:""};
+    this.state = {show:false,judge:""};//judge:the content of test case
 
   }
   componentDidMount(){
