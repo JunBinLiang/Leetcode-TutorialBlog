@@ -58,7 +58,7 @@ import Markdown from 'react-markdown';
 
 let leetcodes=[[p1,""],[p2,""]];
 let statements=[sta1,sta2];
-let names=["Two Sum"];
+let names=["Two Sum","Present To 66"];
 let Test=[test1,test2];
 let Submit=[submit1,submit2];
 let testcases=[3,6];
@@ -185,7 +185,7 @@ class Code extends Component {
     const { markdown } = this.state;
     return(
 		<div>
-			<h2 style={{'width':'100%','margin-left':'45%'}}>{this.state.name}</h2>
+			<h2 style={{'width':'100%','margin-left':'45%'}}>{this.props.name}</h2>
 			<div style={{'width':'100%','margin-left':'5%'}} className="code">
 				<div style={{'margin':'3%'}}>
 					<Markdown 
