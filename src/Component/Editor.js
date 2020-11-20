@@ -141,7 +141,7 @@ class Editor extends Component{
 		}
 		else{
 			swal({
-			  text: "Stupid!",
+			  text: "You are not YOUXIU enough!",
 			  icon: "warning",
 			  dangerMode: true,
 			})
