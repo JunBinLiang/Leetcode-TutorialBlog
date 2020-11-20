@@ -2,7 +2,7 @@
 class Solution {
 	public static void main(String[] args){
 		Main sol=new Main();
-		String arr[]=s.split("\\s+");
+		String arr[]=args[0].split("\\s+");
 		
 		
 		int a=Integer.parseInt(args[0]);
