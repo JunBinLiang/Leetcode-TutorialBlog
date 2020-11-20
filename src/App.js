@@ -40,19 +40,29 @@ import input1p2 from './input/1.2.md';
 import input1p3 from './input/1.3.md';
 
 
+import submit2 from './submit/submit2.md';
+import input2p1 from './input/2.1.md';
+import input2p2 from './input/2.2.md';
+import input2p3 from './input/2.3.md';
+import input2p4 from './input/2.4.md';
+import input2p5 from './input/2.5.md';
+import input2p6 from './input/2.6.md';
+import sta2 from './problems/2.md';
+import p2 from './LeetCode/2.md';
+import test2 from './test/test2.md';
 import Markdown from 'react-markdown';
 
 
 
 
 
-let leetcodes=[[p1,""]];
-let statements=[sta1];
+let leetcodes=[[p1,""],[p2,""]];
+let statements=[sta1,sta2];
 let names=["Two Sum"];
-let Test=[test1];
-let Submit=[submit1];
-let testcases=[3];
-let inputs=[[input1p1,input1p2,input1p3]];
+let Test=[test1,test2];
+let Submit=[submit1,submit2];
+let testcases=[3,6];
+let inputs=[[input1p1,input1p2,input1p3],[input2p1,input2p2,input2p3,input2p4,input2p5,input2p6]];
 
 
 class App extends Component {
@@ -113,6 +123,12 @@ class MySideBar extends Component{
 							<NavItem eventKey="Leetcode 0">
 								<NavText>
 									1. Two sum
+								</NavText>
+							</NavItem>
+
+							<NavItem eventKey="Leetcode 1">
+								<NavText>
+									2. Present To 66
 								</NavText>
 							</NavItem>
 							
