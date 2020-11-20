@@ -160,6 +160,7 @@ class Code extends Component {
     this.state = { markdown: '',editor:null,name:"Two Sum",description:"",test:"",submit:"",testcases:0 };
   }
   componentDidMount() {
+	 
     fetch(this.props.content).then(res => res.text()).then(text => {
 		this.setState({ markdown: text})
 	});
@@ -177,7 +178,20 @@ class Code extends Component {
   }
   componentDidUpdate(previousProps, previousState){
 	  if(previousProps.content!=this.props.content){
-		  fetch(this.props.content).then(res => res.text()).then(text => this.setState({ markdown:text }));
+		 fetch(this.props.content).then(res => res.text()).then(text => {
+		this.setState({ markdown: text})
+		});
+
+		fetch(this.props.description).then(res => res.text()).then(text => {
+			this.setState({ description: text})
+		});
+
+		fetch(this.props.test).then(res => res.text()).then(text => {
+			this.setState({ test: text})
+		});
+		  fetch(this.props.submit).then(res => res.text()).then(text => {
+			this.setState({ submit: text})
+		});
 	  }
 	  
   } 

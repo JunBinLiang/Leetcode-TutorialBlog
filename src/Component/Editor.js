@@ -31,10 +31,11 @@ class Editor extends Component{
 				  loading:false,
 				  summiting:false,
 				  A:[],//content of the result
-				  inputstate:false,//at the beginning,input is default state (not O||X)
+				  inputstate:false,
 				  myinput:"",
 				  correct:false,//if your answer are correct after submit
-				  done:false };
+				  done:false//at the beginning,input is default state (not O||X)
+				 };
 	this.onchange = this.onchange.bind(this);
 	this.handleCompile = this.handleCompile.bind(this);
 	this.changeOutput = this.changeOutput.bind(this);
@@ -45,7 +46,7 @@ class Editor extends Component{
 	
  componentDidUpdate(previousProps, previousState){
 	  if(previousProps.code!=this.props.code){
-		  fetch(this.props.content).then(res => res.text()).then(text => this.setState({ mycode:this.props.code }));
+		  fetch(this.props.content).then(res => res.text()).then(text => this.setState({ mycode:this.props.code,A:[],done:false,output:"" }));
 	  }
 	  
   }
