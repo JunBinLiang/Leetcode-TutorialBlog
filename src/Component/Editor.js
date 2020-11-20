@@ -94,13 +94,33 @@ class Editor extends Component{
 		let data=res.data;
 		let status=parseInt(data.message.status);
 		let B=data.message.split("\n");
+		
+		let result=[];
+		let message=[];
+		
+		let t=this.props.testcase;
+		if(B.length<t){
+			t=0;
+		}
+		for(let i=B.length-1;i>=0;i--){
+			if(B[i].length==0)continue;
+			if(t>0){
+				result.push(B[i]);
+				t--;
+			}
+			else{
+				message.push(B[i]);
+			}
+			
+		}
+		 
 		this.setState({
 			status:status,
-			output:data.message,
+			output:message.reverse().join("\n"),
 			summiting:false,
 			inputstate:false,
 			done:true,
-			A:B
+			A:result.reverse()
 		});
       });
 	}

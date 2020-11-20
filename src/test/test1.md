@@ -3,7 +3,7 @@ class Solution {
 	public static void main(String[] args){
 		Main sol=new Main();
 		String s=args[0];
-		String arr[]=s.split(" ");
+		String arr[]=s.split("\\s+");
 		int A[]=new int[Integer.parseInt(arr[0])];
 		for(int i=0;i<A.length;i++){
 			A[i]=Integer.parseInt(arr[i+1]);

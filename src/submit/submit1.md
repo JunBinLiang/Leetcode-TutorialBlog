@@ -9,10 +9,15 @@ class Solution {
 		int ans1[]=new int[]{0,1};
 		int ans2[]=new int[]{1,2};
 		int ans3[]=new int[]{0,1};
+		List<Boolean>list=new ArrayList<>();
 		try{
-			System.out.println(same(sol.twoSum(A1,9),ans1));
-			System.out.println(same(sol.twoSum(A2,6),ans2));
-			System.out.println(same(sol.twoSum(A3,6),ans3));
+			list.add(same(sol.twoSum(A1,9),ans1));list.add(same(sol.twoSum(A2,6),ans2));
+			list.add(same(sol.twoSum(A3,6),ans3));
+			
+			System.out.println();
+			for(boolean a:list){
+				System.out.println(a);
+			}
 		}
 		catch(Exception e){
 			e.printStackTrace();
