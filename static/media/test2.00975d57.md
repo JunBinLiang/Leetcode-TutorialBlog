@@ -11,7 +11,7 @@ class Solution {
 		int X=Integer.parseInt(arr[3]);
 		
 		
-		int ans=sol.presentTo66(a,b,c,X);
+		int ans=sol.presentFrom66(a,b,c,X);
 		
 		System.out.println("Your ans : "+ans);
 	}
