@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/Leetcode-TutorialBlog/precache-manifest.d0fa8ca1e771971f966f89991db92b7b.js"
+  "/Leetcode-TutorialBlog/precache-manifest.25004b73ea9e41c5557da4b365ae385f.js"
 );
 
 workbox.clientsClaim();
