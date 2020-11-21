@@ -47,4 +47,8 @@
 	display:flex
 }
 
+#textarea{
+	overflow-y:scroll;
+}
+
 

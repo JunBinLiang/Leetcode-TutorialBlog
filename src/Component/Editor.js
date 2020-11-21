@@ -2,11 +2,26 @@ import React, { Component,useState } from "react";
 
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-java";
+import "ace-builds/src-noconflict/ace";
+import "ace-builds/src-noconflict/mode-json";
+
+import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/theme-kuroir";
+import "ace-builds/src-noconflict/theme-twilight";
+import "ace-builds/src-noconflict/theme-xcode";
+import "ace-builds/src-noconflict/theme-textmate";
+import "ace-builds/src-noconflict/theme-solarized_light";
+import "ace-builds/src-noconflict/theme-solarized_dark";
+import "ace-builds/src-noconflict/theme-terminal";
+
+
+
 
 import Button from 'react-bootstrap/Button'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FormControl } from 'react-bootstrap';
+import { FormControl,Dropdown,InputGroup,DropdownButton } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal'
 
 import '../App.css';
@@ -34,14 +49,16 @@ class Editor extends Component{
 				  inputstate:false,
 				  myinput:"",
 				  correct:false,//if your answer are correct after submit
-				  done:false//at the beginning,input is default state (not O||X)
+				  done:false,//at the beginning,input is default state (not O||X)
+				  theme:"solarized_light"
 				 };
 	this.onchange = this.onchange.bind(this);
 	this.handleCompile = this.handleCompile.bind(this);
 	this.changeOutput = this.changeOutput.bind(this);
 	this.changeInput = this.changeInput.bind(this);
 	this.handleSubmit = this.handleSubmit.bind(this);
-	  this.inputstateChange=this.inputstateChange.bind(this);
+	this.inputstateChange=this.inputstateChange.bind(this);
+	this.select = this.select.bind(this);
   }
 	
  componentDidUpdate(previousProps, previousState){
@@ -50,6 +67,14 @@ class Editor extends Component{
 	  }
 	  
   }
+	
+	
+	select(value){
+		this.setState({theme:value});
+	}
+	
+	
+	
 	inputstateChange(){
 		let newstate=!this.state.inputstate;
 		this.setState({inputstate:newstate});
@@ -179,26 +204,28 @@ class Editor extends Component{
 	 }
 
 	  let textarea=	<textarea
+	    			  id="textarea"
 		  			  className="output"
 					  name="code"
 					  type="textarea"
 					  componentClass="textarea"
 					  rows="5"
-		  			  cols="100"
-		  			  width={200}
+		  			  cols="85"
+		  			  width="30%"
 					  value={this.state.output}
 		  			  onChange={this.changeOutput}
 				 />;
 	  
 	  if(this.state.inputstate){
 		  textarea=	<textarea
+		  			  id="textarea"
 		  			  className="output"
 					  name="code"
 					  type="textarea"
 					  componentClass="textarea"
 					  rows="5"
-		  			  cols="100"
-		  			  width={200}
+		  			  cols="85"
+		  			  width="30%"
 					  value={this.state.myinput}
 		  			  onChange={this.changeInput}
 				 />;
@@ -208,7 +235,11 @@ class Editor extends Component{
 	  
 	  for(let i=0;i<this.props.testcase;i++){
 		  if(!this.state.done){
-			  inputs.push(<InputField bstate={1} index={i} judge={this.props.judgecase[i]}/>)
+			 inputs.push(<InputField bstate={1} index={i} judge={this.props.judgecase[i]}/>)
+						  
+			 if(i%6==0&&i!=0){
+				inputs.push(<br/>); inputs.push(<br/>); 
+			 }
 		  }
 			
 		  else{
@@ -220,9 +251,16 @@ class Editor extends Component{
 							 	
 				 inputs.push(<InputField bstate={3} index={i} judge={this.props.judgecase[i]}/>)
 			 }
+			
+			 if(i%6==0&&i!=0){
+				inputs.push(<br/>); inputs.push(<br/>); 
+			 }
 		  }
-		  
+		 
 	  }
+		  
+	
+							 
 	  
 	  if(!this.state.loading){
 		  if(this.state.summiting){
@@ -259,11 +297,31 @@ class Editor extends Component{
 		  			{congra}
 		  			{inputs}
 		  			<br/><br/>
+		  
+					<DropdownButton
+		  			  onSelect={this.select}
+					  as={InputGroup.Prepend}
+					  variant="light"
+					  title={this.state.theme}
+					  id="input-group-dropdown-1"
+					>
+					  <Dropdown.Item eventKey="tomorrow">tomorrow</Dropdown.Item>
+					  <Dropdown.Item eventKey="github">github</Dropdown.Item>
+					  <Dropdown.Item eventKey="monokai">monokai</Dropdown.Item>
+					  <Dropdown.Item eventKey="kuroir">kuroir</Dropdown.Item>
+		  			  <Dropdown.Item eventKey="twilight">twilight</Dropdown.Item>
+					  <Dropdown.Item eventKey="xcode">xcode</Dropdown.Item>
+		  			  <Dropdown.Item eventKey="textmate">textmate</Dropdown.Item>
+					  <Dropdown.Item eventKey="solarized_dark">solarized_dark</Dropdown.Item>
+		  			  <Dropdown.Item eventKey="solarized_light">solarized_light</Dropdown.Item>
+					  <Dropdown.Item eventKey="terminal">terminal</Dropdown.Item>
+					</DropdownButton><br/>
+		  
 					<AceEditor
 					  height={500}
-		  			  width={750}
+		  			  width="75%"
 					  mode="java"
-					  theme="github"
+					  theme={this.state.theme}
 					  name="blah2"
 					  onChange={this.onchange}
 					  fontSize={14}
@@ -281,6 +339,7 @@ class Editor extends Component{
 		  		  {stateButon}
 		  		<br/>
 		  		{smalltext}
+		  		<br/>
 		  		{textarea}
 		  		<br/>
 		  		{B}{S}

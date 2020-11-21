@@ -83,7 +83,7 @@ class MySideBar extends Component{
 	render(){
 		let heading=null;
 		if(this.state.isHome){
-			heading=<h1 style={{'margin-left':'35%'}}>My Coding Platform</h1>;
+			heading=<h1 style={{'marginLeft':'35%'}}>My Coding Platform</h1>;
 			
 		}
 		return(
@@ -199,9 +199,9 @@ class Code extends Component {
     const { markdown } = this.state;
     return(
 		<div>
-			<h2 style={{'width':'100%','margin-left':'45%'}}>{this.props.name}</h2>
-			<div style={{'width':'100%','margin-left':'5%'}} className="code">
-				<div style={{'margin':'3%'}}>
+			<h2 style={{'width':'45%','margin-left':'45%'}}>{this.props.name}</h2>
+			<div style={{'width':'95%','margin-left':'5%'}} className="code">
+				<div style={{'margin':'3%','width':'45%'}}>
 					<Markdown 
 						escapeHtml={true}
 						source={this.state.description} 
@@ -210,7 +210,7 @@ class Code extends Component {
 					
 				</div>
 
-				<div  style={{'margin':'5%'}}>
+				<div  style={{'margin':'3%','width':'45%' }}>
 					<Editor judgecase={this.props.input} testcase={this.props.testcase} code={this.state.markdown} test={this.state.test} submit={this.state.submit}/>
 					<br/>
 				</div>
