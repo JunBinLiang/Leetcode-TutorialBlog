@@ -58,7 +58,7 @@ import Markdown from 'react-markdown';
 
 let leetcodes=[[p1,""],[p2,""]];
 let statements=[sta1,sta2];
-let names=["Two Sum","Present To 66"];
+let names=["Two Sum","Present To Ding"];
 let Test=[test1,test2];
 let Submit=[submit1,submit2];
 let testcases=[3,6];
