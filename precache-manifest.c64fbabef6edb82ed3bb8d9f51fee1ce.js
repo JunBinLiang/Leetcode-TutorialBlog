@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/Leetcode-TutorialBlog/static/media/submit2.663b4402.md"
   },
   {
-    "revision": "354c8d387ee81d09a835",
+    "revision": "5bc016eb718ffbbfdea4",
     "url": "/Leetcode-TutorialBlog/static/css/main.00ccb2f9.chunk.css"
   },
   {
@@ -48,8 +48,8 @@ self.__precacheManifest = [
     "url": "/Leetcode-TutorialBlog/static/media/1.3.c51d0e5e.md"
   },
   {
-    "revision": "354c8d387ee81d09a835",
-    "url": "/Leetcode-TutorialBlog/static/js/main.354c8d38.chunk.js"
+    "revision": "5bc016eb718ffbbfdea4",
+    "url": "/Leetcode-TutorialBlog/static/js/main.5bc016eb.chunk.js"
   },
   {
     "revision": "7b2b7368fe49f2f71c7fa6e922aeb65d",
@@ -92,7 +92,7 @@ self.__precacheManifest = [
     "url": "/Leetcode-TutorialBlog/static/css/1.414ee9e3.chunk.css"
   },
   {
-    "revision": "2701c34cb6297b65fac66007e8afd4f6",
+    "revision": "a9457405363db0def69be686e66c9a8e",
     "url": "/Leetcode-TutorialBlog/index.html"
   }
 ];
