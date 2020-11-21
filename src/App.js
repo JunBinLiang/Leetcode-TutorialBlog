@@ -58,7 +58,7 @@ import Markdown from 'react-markdown';
 
 let leetcodes=[[p1,""],[p2,""]];
 let statements=[sta1,sta2];
-let names=["Two Sum","Present To Ding"];
+let names=["Two Sum","Present From 66"];
 let Test=[test1,test2];
 let Submit=[submit1,submit2];
 let testcases=[3,6];
@@ -128,7 +128,7 @@ class MySideBar extends Component{
 
 							<NavItem eventKey="Leetcode 1">
 								<NavText>
-									2. presentFrom66
+									2. Present From 66
 								</NavText>
 							</NavItem>
 							
