@@ -128,7 +128,7 @@ class MySideBar extends Component{
 
 							<NavItem eventKey="Leetcode 1">
 								<NavText>
-									2. Present To 66
+									2. presentFrom66
 								</NavText>
 							</NavItem>
 							
