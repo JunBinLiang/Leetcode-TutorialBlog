@@ -161,9 +161,16 @@ class Code extends Component {
   }
   componentDidMount() {
 	 
-    fetch(this.props.content).then(res => res.text()).then(text => {
-		this.setState({ markdown: text})
-	});
+    const oldcode = localStorage.getItem(this.props.name)
+	if(oldcode==null){
+		fetch(this.props.content).then(res => res.text()).then(text => {
+		 	this.setState({ markdown: text})
+		});
+	}
+	else{
+		this.setState({ markdown: oldcode})
+	}
+	  
 	  
 	fetch(this.props.description).then(res => res.text()).then(text => {
 		this.setState({ description: text})
@@ -178,9 +185,16 @@ class Code extends Component {
   }
   componentDidUpdate(previousProps, previousState){
 	  if(previousProps.content!=this.props.content){
-		 fetch(this.props.content).then(res => res.text()).then(text => {
-		this.setState({ markdown: text})
-		});
+		const oldcode = localStorage.getItem(this.props.name)
+		if(oldcode==null){
+			fetch(this.props.content).then(res => res.text()).then(text => {
+		 		this.setState({ markdown: text})
+			});
+		}
+		else{
+			this.setState({ markdown: oldcode})
+		}
+		
 
 		fetch(this.props.description).then(res => res.text()).then(text => {
 			this.setState({ description: text})
@@ -211,7 +225,8 @@ class Code extends Component {
 				</div>
 
 				<div  style={{'margin':'3%','width':'45%' }}>
-					<Editor judgecase={this.props.input} testcase={this.props.testcase} code={this.state.markdown} test={this.state.test} submit={this.state.submit}/>
+					<Editor judgecase={this.props.input} testcase={this.props.testcase} code={this.state.markdown} test={this.state.test} submit={this.state.submit} 
+							name={this.props.name}/>
 					<br/>
 				</div>
 			</div>

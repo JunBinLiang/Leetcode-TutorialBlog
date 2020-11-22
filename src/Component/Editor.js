@@ -84,6 +84,7 @@ class Editor extends Component{
 		this.setState({mycode:this.props.code});
 	} 
 	onchange(newvalue){
+		  localStorage.setItem(this.props.name, newvalue);
 		  this.setState({mycode:newvalue});
 	}
 	changeOutput(event){
