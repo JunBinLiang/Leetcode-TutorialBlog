@@ -275,10 +275,10 @@ class Editor extends Component{
 
 	  if(!this.state.summiting){
 		  if(this.state.loading){
-			  S=<Button className="btn-info" style={{'margin':'5%'}}>Submit</Button>;
+			  S=<Button className="btn-info" style={{'marginLeft':'5%'}}>Submit</Button>;
 		  }
 		  else{
-			  S=<Button className="btn-info" style={{'margin':'5%'}} onClick={this.handleSubmit}>Submit</Button>;
+			  S=<Button className="btn-info" style={{'marginLeft':'5%'}} onClick={this.handleSubmit}>Submit</Button>;
 		  }
 		  
 	  }

@@ -25,7 +25,7 @@ import ReactPlayer from "react-player"
 
 import theme from './picture/theme.png';
 
-
+import Home from './Home';
 
 
 
@@ -74,6 +74,10 @@ class Problems extends Component {
     );
   }
 }
+
+
+
+
 //https://reactjsexample.com/react-side-nav-component/
 class MySideBar extends Component{
 	constructor() {
@@ -81,11 +85,8 @@ class MySideBar extends Component{
 		this.state = { index: 0,code:null,isHome:true };
      } 
 	render(){
-		let heading=null;
-		if(this.state.isHome){
-			heading=<h1 style={{'marginLeft':'35%'}}>Choose Your Problems</h1>;
-			
-		}
+		
+
 		return(
 			<div>
 				<SideNav
@@ -105,6 +106,8 @@ class MySideBar extends Component{
 						}
 					}}
 				>
+					
+					
 					<SideNav.Toggle />
 					<SideNav.Nav defaultSelected="home">
 						<NavItem eventKey="home">
@@ -137,11 +140,7 @@ class MySideBar extends Component{
 					</SideNav.Nav>
 				</SideNav>
 				
-				{heading}
-				
-				
 
-				
 				{this.state.code}
 				
 			</div>
