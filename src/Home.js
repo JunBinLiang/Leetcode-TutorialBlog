@@ -1,25 +1,33 @@
 import React,{ Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-
-
 import "./Home.css";
-
+import {withRouter} from 'react-router-dom';
 
 
 
 class Home extends Component {
+	
+	 constructor() {
+    		super();
+			this.handleClick = this.handleClick.bind(this);
+  	 }
+	
+	 handleClick(){
+		  this.props.history.push('/problems');
+	 }
+	
+	
   render() {
     return (
-      <div className="container">
-		<MyCard1/>
-		<MyCard2/>
+      <div>
+		<header>
+			<div class="overlay">
+				<h1>Welcome To 66 Code</h1>
+				<h3>Prepare Your Coding Interview</h3>
+				<br/>
+				<button onClick={this.handleClick}>Go To Code</button>
+			</div>
+		</header>		  
+
       </div>
     );
   }
@@ -28,73 +36,7 @@ class Home extends Component {
 
 
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
-});
-
-function MyCard1() {
-  const classes = useStyles();
-
-  return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardContent>
-		  <CardMedia
-			  component="img"
-			  alt="Home"
-			  height="140"
-			  image="/static/images/cards/contemplative-reptile.jpg"
-			  title="Home"
-			/>
-          <Typography gutterBottom variant="h5" component="h2">
-            Home
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Home Page
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Go!
-        </Button>
-      </CardActions>
-    </Card>
-  );
-}
-
-function MyCard2() {
-  const classes = useStyles();
-
-  return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardContent>
-		  <CardMedia
-			  component="img"
-			  alt="Problems"
-			  height="140"
-			  image="/static/images/cards/contemplative-reptile.jpg"
-			  title="Problems"
-			/>
-          <Typography gutterBottom variant="h5" component="h2">
-            Problems
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Solve Problems
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Go!
-        </Button>
-      </CardActions>
-    </Card>
-  );
-}
 
 
-export default Home;
+
+export default withRouter(Home);
