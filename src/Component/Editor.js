@@ -33,7 +33,8 @@ import Congratulation from './Congratulation';
 
 
 
-//https://frozen-atoll-01566.herokuapp.com/api/run`
+let url1="https://frozen-atoll-01566.herokuapp.com/api/`"
+let url2="http://localhost:8080/api/"
 
 
 let hash=new Map();
@@ -201,7 +202,7 @@ class Editor extends Component{
 	  
 	  
 	  let B=<Button className="outline-primary" ><i class="fa fa-refresh fa-spin"></i></Button>;
-	  let S=<Button className="btn-info" style={{'margin':'5%'}} ><i class="fa fa-refresh fa-spin"></i></Button>;
+	  let S=<Button className="btn-info" style={{'marginLeft':'5%'}} ><i class="fa fa-refresh fa-spin"></i></Button>;
 	  let stateButon="";
       let smalltext="";
 	  
@@ -254,8 +255,7 @@ class Editor extends Component{
 			 }
 		  }
 			
-		  else{
-			  console.log((this.state.A));			  
+		  else{		  
 			 if(this.state.A[i]!=null&&this.state.A[i].length>=1&&this.state.A[i].charAt(0)=='t'){
 				 inputs.push(<InputField bstate={2} index={i} judge={this.props.judgecase[i]}/>)
 			 }
