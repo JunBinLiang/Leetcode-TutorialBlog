@@ -26,6 +26,15 @@ class InputField extends Component{
 	});
   }
 	
+ componentDidUpdate(previousProps, previousState){
+	  if(previousProps.judge!=this.props.judge){
+		fetch(this.props.judge).then(res => res.text()).then(text => {
+			this.setState({ judge: text})
+		});
+	  }
+	  
+  }
+	
   render(){
 	 let button=<Button onClick={() => {this.setState({show:true})}}>this</Button>
 	 

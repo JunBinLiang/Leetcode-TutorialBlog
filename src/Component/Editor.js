@@ -36,6 +36,8 @@ import Congratulation from './Congratulation';
 //https://frozen-atoll-01566.herokuapp.com/api/run`
 
 
+let hash=new Map();
+hash["java"]=0;
 
 class Editor extends Component{
   constructor() {
@@ -50,7 +52,8 @@ class Editor extends Component{
 				  myinput:"",
 				  correct:false,//if your answer are correct after submit
 				  done:false,//at the beginning,input is default state (not O||X)
-				  theme:"solarized_light"
+				  theme:"solarized_light",
+				  mode:"java"
 				 };
 	this.onchange = this.onchange.bind(this);
 	this.handleCompile = this.handleCompile.bind(this);
@@ -59,6 +62,7 @@ class Editor extends Component{
 	this.handleSubmit = this.handleSubmit.bind(this);
 	this.inputstateChange=this.inputstateChange.bind(this);
 	this.select = this.select.bind(this);
+	this.selectLan = this.selectLan.bind(this);
   }
 	
  componentDidUpdate(previousProps, previousState){
@@ -67,6 +71,10 @@ class Editor extends Component{
 	  }
 	  
   }
+	
+	selectLan(value){
+		this.setState({mode:value});
+	}
 	
 	
 	select(value){
@@ -102,7 +110,7 @@ class Editor extends Component{
 	 this.setState({loading:true});
 		
 	 axios.post(`https://frozen-atoll-01566.herokuapp.com/api/run`, {
-		 lang:'java',
+		 lang:this.state.mode,
 		 code:this.state.mycode+this.props.test,
 		 input:this.state.myinput
 	 })
@@ -125,7 +133,7 @@ class Editor extends Component{
     };
 	 this.setState({summiting:true});
 	 axios.post(`https://frozen-atoll-01566.herokuapp.com/api/submit`, {
-		 lang:'java',
+		 lang:this.state.mode,
 		 code:this.state.mycode+this.props.submit
 	 })
       .then(res => {
@@ -190,6 +198,8 @@ class Editor extends Component{
 	
 	
   render(){
+	  
+	  
 	  let B=<Button className="outline-primary" ><i class="fa fa-refresh fa-spin"></i></Button>;
 	  let S=<Button className="btn-info" style={{'margin':'5%'}} ><i class="fa fa-refresh fa-spin"></i></Button>;
 	  let stateButon="";
@@ -233,7 +243,8 @@ class Editor extends Component{
 	  }	
 					  
 	  let inputs=[];
-	  
+
+		
 	  for(let i=0;i<this.props.testcase;i++){
 		  if(!this.state.done){
 			 inputs.push(<InputField bstate={1} index={i} judge={this.props.judgecase[i]}/>)
@@ -260,7 +271,7 @@ class Editor extends Component{
 		 
 	  }
 		  
-	
+		
 							 
 	  
 	  if(!this.state.loading){
@@ -299,6 +310,7 @@ class Editor extends Component{
 		  			{inputs}
 		  			<br/><br/>
 		  
+		  			<div style={{'display':'flex'}}>
 					<DropdownButton
 		  			  onSelect={this.select}
 					  as={InputGroup.Prepend}
@@ -316,12 +328,25 @@ class Editor extends Component{
 					  <Dropdown.Item eventKey="solarized_dark">solarized_dark</Dropdown.Item>
 		  			  <Dropdown.Item eventKey="solarized_light">solarized_light</Dropdown.Item>
 					  <Dropdown.Item eventKey="terminal">terminal</Dropdown.Item>
-					</DropdownButton><br/>
+					</DropdownButton>
+		  
+		  
+		  			<DropdownButton style={{'marginLeft':'5%'}}
+		  			  onSelect={this.selectLan}
+					  as={InputGroup.Prepend}
+					  variant="light"
+					  title={this.state.mode}
+					  id="input-group-dropdown-2"
+					>
+					  <Dropdown.Item eventKey="java">Java</Dropdown.Item>
+					</DropdownButton>
+		  			</div>
+		  
 		  
 					<AceEditor
 					  height={500}
 		  			  width="75%"
-					  mode="java"
+					  mode={this.state.mode}
 					  theme={this.state.theme}
 					  name="blah2"
 					  onChange={this.onchange}
