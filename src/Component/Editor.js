@@ -345,7 +345,7 @@ class Editor extends Component{
 		  
 					<AceEditor
 					  height={500}
-		  			  width="75%"
+		  			  width={700}
 					  mode={this.state.mode}
 					  theme={this.state.theme}
 					  name="blah2"
