@@ -67,6 +67,10 @@ import test3 from './test/test3.md';
 import Markdown from 'react-markdown';
 
 
+import SplitterLayout from 'react-splitter-layout';
+import 'react-splitter-layout/lib/index.css';
+
+
 
 
 
@@ -237,20 +241,20 @@ class Code extends Component {
     return(
 		<div>
 			<h2 style={{'width':'45%','margin-left':'45%'}}>{this.props.name}</h2>
-			<div style={{'width':'95%','margin-left':'5%'}} className="code">
+			<div style={{'width':'95%','margin-left':'5%'}} >
 				<div style={{'margin':'3%','width':'45%'}}>
-					<Markdown 
-						escapeHtml={true}
-						source={this.state.description} 
-					/>
-					<br/><br/>
-					
-				</div>
-
-				<div  style={{'margin':'3%','width':'45%' }}>
-					<Editor judgecase={this.props.input} testcase={this.props.testcase} code={this.state.markdown} test={this.state.test} submit={this.state.submit} 
-							name={this.props.name}/>
-					<br/>
+					<SplitterLayout>
+						<Markdown 
+							escapeHtml={true}
+							source={this.state.description} 
+						/>
+		
+						<div  style={{'margin':'3%','width':'100%' }}>
+							<Editor judgecase={this.props.input} testcase={this.props.testcase} code={this.state.markdown} test={this.state.test} submit={this.state.submit} 
+									name={this.props.name}/>
+							<br/>
+						</div>
+					</SplitterLayout>
 				</div>
 			</div>
 			
