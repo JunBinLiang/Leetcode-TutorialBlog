@@ -7,7 +7,7 @@ import Confetti from 'react-confetti'
 export default () => {
   return (
     <Confetti
-      width="100%"
+      width={500}
       height={500}
     />
   )
