@@ -2,6 +2,7 @@ import React,{ Component } from 'react';
 import "./Home.css";
 import {withRouter} from 'react-router-dom';
 
+import Menu from './Component/Menu';
 
 
 class Home extends Component {
@@ -26,6 +27,8 @@ class Home extends Component {
 				<br/>
 				<button onClick={this.handleClick}>Go To Code</button>
 			</div>
+			<br/><br/>
+			<Menu/>
 		</header>		  
 
       </div>
