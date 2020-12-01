@@ -12,7 +12,7 @@ class Home extends Component {
   	 }
 	
 	 handleClick(){
-		  this.props.history.push('/problems');
+		  this.props.history.push(process.env.PUBLIC_URL+'/problems');
 	 }
 	
 	
