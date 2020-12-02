@@ -6,16 +6,31 @@ import {NavLink } from "react-router-dom";
 import {withRouter} from 'react-router-dom';
 
 class MyNavbar extends Component{
-
+	constructor() {
+    		super();
+			this.handleClick1 = this.handleClick1.bind(this);
+			this.handleClick2 = this.handleClick2.bind(this);
+			this.handleClick3 = this.handleClick3.bind(this);
+  	 }
+	
+	 handleClick1(){
+		  this.props.history.push(process.env.PUBLIC_URL+'/');
+	 }
+	handleClick2(){
+		  this.props.history.push(process.env.PUBLIC_URL+'/problems');
+	 }
+	handleClick3(){
+		  this.props.history.push(process.env.PUBLIC_URL+'/about');
+	 }
 	
   render(){
 	 return (
 		<>
 		  <Navbar bg="dark" variant="dark">
 			<Nav className="mr-auto">
-			  <Nav.Link onClick={()=>{this.props.history.push(process.env.PUBLIC_URL+'/');}}>Home</Nav.Link>
-			  <Nav.Link onClick={()=>{this.props.history.push(process.env.PUBLIC_URL+'/problems');}}>Problems</Nav.Link>
-		 	  <Nav.Link onClick={()=>{this.props.history.push(process.env.PUBLIC_URL+'/about');}}>About Us</Nav.Link>
+			  <Nav.Link onClick={this.handleClick1}>Home</Nav.Link>
+			  <Nav.Link onClick={this.handleClick2}>Problems</Nav.Link>
+		 	  <Nav.Link onClick={this.handleClick3}>About Us</Nav.Link>
 			</Nav>
 		  </Navbar>
 		</>
