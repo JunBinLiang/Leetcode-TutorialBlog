@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "0d3f9e590e03d421f7c9dd4bb9d55491",
-    "url": "/Leetcode-TutorialBlog/static/media/2.4.0d3f9e59.md"
+    "revision": "b377abd1403dabc0255d7a5b554b1bd3",
+    "url": "/Leetcode-TutorialBlog/static/media/2.5.b377abd1.md"
   },
   {
-    "revision": "ab39c8b5d2928b277cc1",
-    "url": "/Leetcode-TutorialBlog/static/css/main.2249876f.chunk.css"
+    "revision": "e4186f2e9b2e8ff41cd6",
+    "url": "/Leetcode-TutorialBlog/static/css/main.8c570c31.chunk.css"
   },
   {
     "revision": "77c2d2ac713890e23b6e99997abed6d0",
     "url": "/Leetcode-TutorialBlog/static/media/theme.77c2d2ac.png"
   },
   {
-    "revision": "247e80f172fb3e3a14d6",
-    "url": "/Leetcode-TutorialBlog/static/js/1.247e80f1.chunk.js"
+    "revision": "8f839c0c4c7b4b4ee81a",
+    "url": "/Leetcode-TutorialBlog/static/js/1.8f839c0c.chunk.js"
   },
   {
     "revision": "5c7629b2c3ee51934bc7",
@@ -68,12 +68,12 @@ self.__precacheManifest = [
     "url": "/Leetcode-TutorialBlog/static/media/2.3.fa332d27.md"
   },
   {
-    "revision": "ab39c8b5d2928b277cc1",
-    "url": "/Leetcode-TutorialBlog/static/js/main.ab39c8b5.chunk.js"
+    "revision": "0d3f9e590e03d421f7c9dd4bb9d55491",
+    "url": "/Leetcode-TutorialBlog/static/media/2.4.0d3f9e59.md"
   },
   {
-    "revision": "b377abd1403dabc0255d7a5b554b1bd3",
-    "url": "/Leetcode-TutorialBlog/static/media/2.5.b377abd1.md"
+    "revision": "e4186f2e9b2e8ff41cd6",
+    "url": "/Leetcode-TutorialBlog/static/js/main.e4186f2e.chunk.js"
   },
   {
     "revision": "22c0eae38309e3473718d87ea6574733",
@@ -132,11 +132,15 @@ self.__precacheManifest = [
     "url": "/Leetcode-TutorialBlog/static/media/test3.c0f5c902.md"
   },
   {
-    "revision": "247e80f172fb3e3a14d6",
-    "url": "/Leetcode-TutorialBlog/static/css/1.737d599e.chunk.css"
+    "revision": "ab533aed095e172d114bfab405cd5acb",
+    "url": "/Leetcode-TutorialBlog/static/media/founder.ab533aed.jpg"
   },
   {
-    "revision": "d313e1d95b52891db9bd1a304a18db5e",
+    "revision": "8f839c0c4c7b4b4ee81a",
+    "url": "/Leetcode-TutorialBlog/static/css/1.3ed11742.chunk.css"
+  },
+  {
+    "revision": "66ea4fe7744d82fc0a496865dfcb3675",
     "url": "/Leetcode-TutorialBlog/index.html"
   }
 ];
