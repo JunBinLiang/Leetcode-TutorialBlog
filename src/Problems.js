@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import { Route, Switch, NavLink,BrowserRouter as Router } from "react-router-dom";
 import renderHTML from 'react-render-html';
 import ReactMarkdown from 'react-markdown';
@@ -93,14 +94,16 @@ class Problems extends Component {
   	 }
 	
 	 handleClick1(i){
+		  this.props.mode1();
 		  this.setState({
-			  main:false,
 			  categoryIndex:i
 		  })
 	 }	
 	
 	 solve(i){
-		 this.setState({practiceMode:true,index:i})
+		 this.props.mode2();
+		 this.setState({index:i})
+		 
 	 }
 	
   render() {
@@ -201,7 +204,7 @@ class Problems extends Component {
 		</FadeIn>
 		 </div>;
 
-		if(!this.state.main){
+		if(this.props.mode==1){
 			problemcategory="";
 			let plist=category[this.state.categoryIndex]
 			
@@ -218,7 +221,7 @@ class Problems extends Component {
 	  
     return (
       	<div className="div">
-			{this.state.practiceMode?
+			{this.props.mode==2?
 				<Code content={leetcodes[index][0]} description={statements[index]} name={names[index]} 
 					  test={Test[index]} index={index} submit={Submit[index]} testcase={testcases[index]}input={inputs[index]}/>
 		
@@ -397,9 +400,20 @@ class Code extends Component {
   }
 }
 
+const mapStateToProps = state => {
+    return {
+        mode:state.mode
+    };
+};
 
+const mapDispatchToProps = dispatch => {
+    return {
+        mode1: () => dispatch({type: 'mode1'}),
+		mode2: () => dispatch({type: 'mode2'})
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Problems));
 
-export default withRouter(Problems);
 
 
 

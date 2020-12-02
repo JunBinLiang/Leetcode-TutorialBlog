@@ -1,7 +1,6 @@
 import React,{ Component } from 'react';
 import "./Home.css";
 import {withRouter} from 'react-router-dom';
-
 import Menu from './Component/Menu';
 
 

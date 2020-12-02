@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button'
 import {NavLink } from "react-router-dom";
 import {withRouter} from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
 class MyNavbar extends Component{
 	constructor() {
     		super();
@@ -17,6 +19,7 @@ class MyNavbar extends Component{
 		  this.props.history.push(process.env.PUBLIC_URL+'/');
 	 }
 	handleClick2(){
+		  this.props.resetMode();
 		  this.props.history.push(process.env.PUBLIC_URL+'/problems');
 	 }
 	handleClick3(){
@@ -41,4 +44,16 @@ class MyNavbar extends Component{
 
 }
 
-export default withRouter(MyNavbar);
+const mapStateToProps = state => {
+    return {
+       
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        resetMode: () => dispatch({type: 'reset'})
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MyNavbar));

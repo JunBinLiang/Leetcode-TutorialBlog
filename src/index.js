@@ -3,13 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import MyNavbar from './Component/MyNavbar';
 import { BrowserRouter,HashRouter } from "react-router-dom";
 
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './store/reducer';
+
+const store = createStore(reducer);
+
 ReactDOM.render(
+		
 		<BrowserRouter>
-			<MyNavbar/>
-			<App />
+			<Provider store={store}>
+				<App />
+			</Provider>
 		</BrowserRouter>,
 		
   document.querySelector('#root')
