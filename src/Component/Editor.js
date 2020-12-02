@@ -17,7 +17,8 @@ import "ace-builds/src-noconflict/theme-solarized_dark";
 import "ace-builds/src-noconflict/theme-terminal";
 
 
-
+import SplitterLayout from 'react-splitter-layout';
+import 'react-splitter-layout/lib/index.css';
 
 import Button from 'react-bootstrap/Button'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -304,72 +305,79 @@ class Editor extends Component{
 		  
 	  return(
 		  		<div>
-		 
-		  			
-		  			{congra}
-		  			{inputs}
-		  			<br/><br/>
-		  
-		  			<div style={{'display':'flex'}}>
-					<DropdownButton
-		  			  onSelect={this.select}
-					  as={InputGroup.Prepend}
-					  variant="light"
-					  title={this.state.theme}
-					  id="input-group-dropdown-1"
-					>
-					  <Dropdown.Item eventKey="tomorrow">tomorrow</Dropdown.Item>
-					  <Dropdown.Item eventKey="github">github</Dropdown.Item>
-					  <Dropdown.Item eventKey="monokai">monokai</Dropdown.Item>
-					  <Dropdown.Item eventKey="kuroir">kuroir</Dropdown.Item>
-		  			  <Dropdown.Item eventKey="twilight">twilight</Dropdown.Item>
-					  <Dropdown.Item eventKey="xcode">xcode</Dropdown.Item>
-		  			  <Dropdown.Item eventKey="textmate">textmate</Dropdown.Item>
-					  <Dropdown.Item eventKey="solarized_dark">solarized_dark</Dropdown.Item>
-		  			  <Dropdown.Item eventKey="solarized_light">solarized_light</Dropdown.Item>
-					  <Dropdown.Item eventKey="terminal">terminal</Dropdown.Item>
-					</DropdownButton>
-		  
-		  
-		  			<DropdownButton style={{'marginLeft':'5%'}}
-		  			  onSelect={this.selectLan}
-					  as={InputGroup.Prepend}
-					  variant="light"
-					  title={this.state.mode}
-					  id="input-group-dropdown-2"
-					>
-					  <Dropdown.Item eventKey="java">Java</Dropdown.Item>
-					</DropdownButton>
+		 		<SplitterLayout vertical={true} primaryMinSize={75} percentage={true} primaryMinSize={60}>
+		  			<div>
+						{congra}
+						{inputs}
+						<br/>
+
+						<div style={{'display':'flex'}}>
+						<DropdownButton
+		  				  style={{'marginLeft':'1%'}}
+						  onSelect={this.select}
+						  as={InputGroup.Prepend}
+						  variant="light"
+						  title={this.state.theme}
+						  id="input-group-dropdown-1"
+		  				  
+						>
+						  <Dropdown.Item eventKey="tomorrow">tomorrow</Dropdown.Item>
+						  <Dropdown.Item eventKey="github">github</Dropdown.Item>
+						  <Dropdown.Item eventKey="monokai">monokai</Dropdown.Item>
+						  <Dropdown.Item eventKey="kuroir">kuroir</Dropdown.Item>
+						  <Dropdown.Item eventKey="twilight">twilight</Dropdown.Item>
+						  <Dropdown.Item eventKey="xcode">xcode</Dropdown.Item>
+						  <Dropdown.Item eventKey="textmate">textmate</Dropdown.Item>
+						  <Dropdown.Item eventKey="solarized_dark">solarized_dark</Dropdown.Item>
+						  <Dropdown.Item eventKey="solarized_light">solarized_light</Dropdown.Item>
+						  <Dropdown.Item eventKey="terminal">terminal</Dropdown.Item>
+						</DropdownButton>
+
+						<DropdownButton style={{'marginLeft':'1%'}}
+						  onSelect={this.selectLan}
+						  as={InputGroup.Prepend}
+						  variant="light"
+						  title={this.state.mode}
+						  id="input-group-dropdown-2"
+		  				  marginBottom={10}
+						>
+						  <Dropdown.Item eventKey="java" >Java</Dropdown.Item>
+						</DropdownButton>
+						</div>
+
+
+						<AceEditor
+						  height={1000}
+						  width={900}
+						  mode={this.state.mode}
+						  theme={this.state.theme}
+						  name="blah2"
+						  onChange={this.onchange}
+						  fontSize={14}
+						  showPrintMargin={true}
+						  showGutter={true}
+						  highlightActiveLine={true}
+						  value={this.state.mycode}
+						  setOptions={{
+						  enableBasicAutocompletion: true,
+						  enableLiveAutocompletion: true,
+						  enableSnippets: false,
+						  showLineNumbers: true,
+						  tabSize: 2,
+					  }}/>
 		  			</div>
 		  
-		  
-					<AceEditor
-					  height={500}
-		  			  width={700}
-					  mode={this.state.mode}
-					  theme={this.state.theme}
-					  name="blah2"
-					  onChange={this.onchange}
-					  fontSize={14}
-					  showPrintMargin={true}
-					  showGutter={true}
-					  highlightActiveLine={true}
-					  value={this.state.mycode}
-					  setOptions={{
-					  enableBasicAutocompletion: true,
-					  enableLiveAutocompletion: true,
-					  enableSnippets: false,
-					  showLineNumbers: true,
-					  tabSize: 2,
-				  }}/>
-		  		  {stateButon}
-		  		<br/>
-		  		{smalltext}
-		  		<br/>
-		  		{textarea}
-		  		<br/>
-		  		{B}{S}
+		  		<div>
+					{stateButon}
+					<br/>
+					{smalltext}
+					<br/>
+					{textarea}
+					<br/>
+					{B}{S}
 		  		</div>
+		  		</SplitterLayout>
+		  	</div>
 	  );
 	  
   }

@@ -378,15 +378,18 @@ class Code extends Component {
     const { markdown } = this.state;
     return(
 		<div>
-			<h2 style={{'width':'45%','margin-left':'45%'}}>{this.props.name}</h2>
+			
 			<div style={{'width':'95%','margin-left':'5%'}} >
 				<div style={{'margin':'3%','width':'45%'}}>
 					<SplitterLayout>
+						<div>
+						<h2 style={{'width':'45%','margin-left':'45%'}}>{this.props.name}</h2>
 						<Markdown 
 							escapeHtml={true}
 							source={this.state.description} 
 						/>
-						<div  style={{'margin':'3%','width':'100%' }}>
+						</div>
+						<div  style={{'width':'100%' }}>
 							<Editor judgecase={this.props.input} testcase={this.props.testcase} code={this.state.markdown} test={this.state.test} submit={this.state.submit} 
 									name={this.props.name}/>
 							<br/>

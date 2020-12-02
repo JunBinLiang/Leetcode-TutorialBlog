@@ -39,13 +39,13 @@ class InputField extends Component{
 	 let button=<Button onClick={() => {this.setState({show:true})}}>this</Button>
 	 
 	 if(this.props.bstate==1){
-		 button=<Button  onClick={() => {this.setState({show:true})}} className="btn-secondary" style={{'margin-left':'3%'}}>Test{this.props.index}</Button>
+		 button=<Button  onClick={() => {this.setState({show:true})}} className="btn-secondary" style={{'marginLeft':'3%','marginBottom':'10px'}}>Test{this.props.index}</Button>
 	 }
 	 if(this.props.bstate==2){
-		 button=<Button onClick={() => {this.setState({show:true})}} className="btn-success" style={{'margin-left':'3%'}}>O</Button>
+		 button=<Button onClick={() => {this.setState({show:true})}} className="btn-success" style={{'marginLeft':'3%','marginBottom':'10px'}}>O</Button>
 	 }
 	 if(this.props.bstate==3){
-		 button=<Button onClick={() => {this.setState({show:true})}} className="btn-danger" style={{'margin-left':'3%'}}>X</Button>
+		 button=<Button onClick={() => {this.setState({show:true})}} className="btn-danger" style={{'marginLeft':'3%','marginBottom':'10px'}}>X</Button>
 	 }
 
 	 return (
