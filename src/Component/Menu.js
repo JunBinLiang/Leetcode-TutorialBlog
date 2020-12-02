@@ -19,10 +19,8 @@ class Menu extends Component{
   render(){
 	 return (
 		<div className="wrapper">
-		  <h1>Our Service : </h1>
 		  
 		  <div className="cols">
-		 
 			  <div className="col" onClick={this.handleClick1} >
 				<div className="container">
 				  <div className="front" >
