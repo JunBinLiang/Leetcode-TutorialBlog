@@ -17,14 +17,13 @@ import Editor from './Component/Editor';
 
 
 import ReactPlayer from "react-player"
+import FadeIn from 'react-fade-in';
 
 
 
 
-
-
+import './Component/Menu.css';
 import theme from './picture/theme.png';
-
 import Home from './Home';
 
 
@@ -69,8 +68,7 @@ import Markdown from 'react-markdown';
 
 import SplitterLayout from 'react-splitter-layout';
 import 'react-splitter-layout/lib/index.css';
-
-
+import ListGroup from 'react-bootstrap/ListGroup'
 
 
 
@@ -81,14 +79,152 @@ let Test=[test1,test2,test3];
 let Submit=[submit1,submit2,submit3];
 let testcases=[3,6,6];
 let inputs=[[input1p1,input1p2,input1p3],[input2p1,input2p2,input2p3,input2p4,input2p5,input2p6],[input3p1,input3p2,input3p3,input3p4,input3p5,input3p6]];
+let category=[[0],[0],[0],[0],[0],[1,2]];
 
 
 class Problems extends Component {
+	
+	 constructor() {
+    		super();
+			this.handleClick1 = this.handleClick1.bind(this);
+		 	this.solve = this.solve.bind(this);
+		 	this.state ={main:true,categoryIndex:0,practiceMode:false,index:0};
+		 	
+  	 }
+	
+	 handleClick1(i){
+		  this.setState({
+			  main:false,
+			  categoryIndex:i
+		  })
+	 }	
+	
+	 solve(i){
+		 this.setState({practiceMode:true,index:i})
+	 }
+	
   render() {
+	let problemlist;
+	let problemcategory=<div className="wrapper">
+		  <h1>Our Topics :</h1>
+		<FadeIn>
+		  <div className="cols">
+			  <div className="col" onClick={()=>{this.handleClick1(0)}} >
+				<div className="container">
+				  <div className="front" >
+					<div className="inner">
+					  <p>Arrays</p>
+					</div>
+				  </div>
+				  <div className="back">
+					<div className="inner">
+					  <p></p>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  <div className="col" onClick={()=>{this.handleClick1(1)}}>
+				<div className="container">
+				  <div className="front">
+					<div className="inner">
+					  <p>List</p>
+					</div>
+				  </div>
+				  <div className="back">
+					<div className="inner">
+					  <p></p>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  <div className="col" onClick={()=>{this.handleClick1(2)}}>
+				<div className="container">
+				  <div className="front" >
+					<div className="inner">
+					  <p>Tree</p>
+					</div>
+				  </div>
+				  <div className="back">
+					<div className="inner">
+					  <p></p>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		
+		
+			<div className="cols">
+			  <div className="col" onClick={()=>{this.handleClick1(3)}} >
+				<div className="container">
+				  <div className="front" >
+					<div className="inner">
+					  <p>DFS</p>
+					</div>
+				  </div>
+				  <div className="back">
+					<div className="inner">
+					  <p></p>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  <div className="col" onClick={()=>{this.handleClick1(4)}}>
+				<div className="container">
+				  <div className="front">
+					<div className="inner">
+					  <p>BFS</p>
+					</div>
+				  </div>
+				  <div className="back">
+					<div className="inner">
+					  <p></p>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  <div className="col" onClick={()=>{this.handleClick1(5)}}>
+				<div className="container">
+				  <div className="front" >
+					<div className="inner">
+					  <p>Math</p>
+					</div>
+				  </div>
+				  <div className="back">
+					<div className="inner">
+					  <p></p>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		</FadeIn>
+		 </div>;
+
+		if(!this.state.main){
+			problemcategory="";
+			let plist=category[this.state.categoryIndex]
+			
+			problemlist=
+			<div style={{'width':'75%'}}>
+			<FadeIn>
+				{plist.map((i) => (
+          			<ListGroup.Item action variant="primary" key={i} style={{'margin':'2%'}} onClick={()=>{this.solve(i)}}>{i+1} . {names[i]}</ListGroup.Item>
+        		))}	
+			</FadeIn>
+		  </div>
+		}
+		let index=this.state.index;
+	  
     return (
-      <div>
-		<MySideBar/>
-      </div>
+      	<div className="div">
+			{this.state.practiceMode?
+				<Code content={leetcodes[index][0]} description={statements[index]} name={names[index]} 
+					  test={Test[index]} index={index} submit={Submit[index]} testcase={testcases[index]}input={inputs[index]}/>
+		
+			
+			:[problemcategory,problemlist]}
+		</div>
     );
   }
 }
@@ -246,7 +382,6 @@ class Code extends Component {
 							escapeHtml={true}
 							source={this.state.description} 
 						/>
-		
 						<div  style={{'margin':'3%','width':'100%' }}>
 							<Editor judgecase={this.props.input} testcase={this.props.testcase} code={this.state.markdown} test={this.state.test} submit={this.state.submit} 
 									name={this.props.name}/>
