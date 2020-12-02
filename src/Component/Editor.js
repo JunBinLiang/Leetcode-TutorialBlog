@@ -4,7 +4,6 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/ace";
 import "ace-builds/src-noconflict/mode-json";
-
 import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-monokai";
@@ -22,11 +21,14 @@ import 'react-splitter-layout/lib/index.css';
 
 import Button from 'react-bootstrap/Button'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FormControl,Dropdown,InputGroup,DropdownButton } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal'
 
-import '../App.css';
 
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
+
+
+import '../App.css';
 import swal from 'sweetalert'
 import axios from 'axios';
 import InputField from './InputField';
@@ -40,6 +42,13 @@ let url2="http://localhost:8080/api/"
 
 let hash=new Map();
 hash["java"]=0;
+
+
+const options1 = ["tomorrow","github","monokai","kuroir","twilight","xcode","textmate","solarized_light","solarized_dark","terminal"];
+
+const options2 = [
+  "java"
+];
 
 class Editor extends Component{
   constructor() {
@@ -74,13 +83,13 @@ class Editor extends Component{
 	  
   }
 	
-	selectLan(value){
-		this.setState({mode:value});
+	selectLan(obj){
+		this.setState({mode:obj.value});
 	}
 	
 	
-	select(value){
-		this.setState({theme:value});
+	select(obj){
+		this.setState({theme:obj.value});
 	}
 	
 	
@@ -312,37 +321,10 @@ class Editor extends Component{
 						<br/>
 
 						<div style={{'display':'flex'}}>
-						<DropdownButton
-		  				  style={{'marginLeft':'1%'}}
-						  onSelect={this.select}
-						  as={InputGroup.Prepend}
-						  variant="light"
-						  title={this.state.theme}
-						  id="input-group-dropdown-1"
-		  				  
-						>
-						  <Dropdown.Item eventKey="tomorrow">tomorrow</Dropdown.Item>
-						  <Dropdown.Item eventKey="github">github</Dropdown.Item>
-						  <Dropdown.Item eventKey="monokai">monokai</Dropdown.Item>
-						  <Dropdown.Item eventKey="kuroir">kuroir</Dropdown.Item>
-						  <Dropdown.Item eventKey="twilight">twilight</Dropdown.Item>
-						  <Dropdown.Item eventKey="xcode">xcode</Dropdown.Item>
-						  <Dropdown.Item eventKey="textmate">textmate</Dropdown.Item>
-						  <Dropdown.Item eventKey="solarized_dark">solarized_dark</Dropdown.Item>
-						  <Dropdown.Item eventKey="solarized_light">solarized_light</Dropdown.Item>
-						  <Dropdown.Item eventKey="terminal">terminal</Dropdown.Item>
-						</DropdownButton>
-
-						<DropdownButton style={{'marginLeft':'1%'}}
-						  onSelect={this.selectLan}
-						  as={InputGroup.Prepend}
-						  variant="light"
-						  title={this.state.mode}
-						  id="input-group-dropdown-2"
-		  				  marginBottom={10}
-						>
-						  <Dropdown.Item eventKey="java" >Java</Dropdown.Item>
-						</DropdownButton>
+		  					<Dropdown options={options1} onChange={this.select} value={this.state.theme}/>
+		  					<Dropdown options={options2} onChange={this.selectLan} value={this.state.mode}/>
+							
+		  
 						</div>
 
 
