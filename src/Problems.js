@@ -107,6 +107,7 @@ class Problems extends Component {
 	 }
 	
   render() {
+	  console.log(this.props.mode);
 	let problemlist;
 	let problemcategory=<div className="wrapper">
 		  <h1>Our Topics :</h1>
