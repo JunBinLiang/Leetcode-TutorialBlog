@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch, NavLink,BrowserRouter as Router } from "react-router-dom";
 import renderHTML from 'react-render-html';
 import ReactMarkdown from 'react-markdown';
-
+import {withRouter} from 'react-router-dom';
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
@@ -114,8 +114,6 @@ class MySideBar extends Component{
 			
 						if(first=='Leetcode'){
 							let index=parseInt(selected.split(' ')[1]);
-							
-							
 							this.setState({isHome:false, index: index,
 										   code:<Code content={leetcodes[index][0]} description={statements[index]} name={names[index]} test={Test[index]} index={index} submit={Submit[index]} testcase={testcases[index]}
 										   input={inputs[index]}
@@ -266,7 +264,7 @@ class Code extends Component {
 
 
 
-export default Problems;
+export default withRouter(Problems);
 
 
 
