@@ -15,13 +15,13 @@ import "ace-builds/src-noconflict/theme-solarized_light";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 import "ace-builds/src-noconflict/theme-terminal";
 
-
+import FadeIn from 'react-fade-in';
 import SplitterLayout from 'react-splitter-layout';
 import 'react-splitter-layout/lib/index.css';
 
 import Button from 'react-bootstrap/Button'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 import Dropdown from 'react-dropdown'
@@ -59,7 +59,7 @@ class Editor extends Component{
 				  loading:false,
 				  summiting:false,
 				  A:[],//content of the result
-				  inputstate:false,
+				  inputstate:true,
 				  myinput:"",
 				  correct:false,//if your answer are correct after submit
 				  done:false,//at the beginning,input is default state (not O||X)
@@ -217,15 +217,13 @@ class Editor extends Component{
       let smalltext="";
 	  
 	 if(this.state.inputstate){
-		 stateButon=<Button className="btn-success " style={{'margin':'5%'}} onClick={this.inputstateChange}>My output</Button>;
-		 smalltext="Input Your Data please!"
+		 stateButon=<Button className="btn-success " onClick={this.inputstateChange}>My output</Button>;
 	 }
 	 else{
-		 stateButon=<Button className="btn-success" style={{'margin':'5%'}} onClick={this.inputstateChange} >Input</Button>;
-	     smalltext="Here is Your Output!"
+		 stateButon=<Button className="btn-success"  onClick={this.inputstateChange} >Input</Button>;
 	 }
 
-	  let textarea=	<textarea
+	  let textarea=	<FadeIn><textarea
 	    			  id="textarea"
 		  			  className="output"
 					  name="code"
@@ -236,10 +234,10 @@ class Editor extends Component{
 		  			  width="30%"
 					  value={this.state.output}
 		  			  onChange={this.changeOutput}
-				 />;
+				 /></FadeIn>;
 	  
 	  if(this.state.inputstate){
-		  textarea=	<textarea
+		  textarea=	<FadeIn><textarea
 		  			  id="textarea"
 		  			  className="output"
 					  name="code"
@@ -248,9 +246,10 @@ class Editor extends Component{
 					  rows="5"
 		  			  cols="85"
 		  			  width="30%"
+		  			  style={{'backgroundColor':'black','color':'white'}}
 					  value={this.state.myinput}
 		  			  onChange={this.changeInput}
-				 />;
+				 /></FadeIn>;
 	  }	
 					  
 	  let inputs=[];
@@ -347,13 +346,12 @@ class Editor extends Component{
 						  showLineNumbers: true,
 						  tabSize: 2,
 					  }}/>
-		  			</div>
+		  		  </div>
 		  
 		  		<div>
-					{stateButon}
-					<br/>
-					{smalltext}
-					<br/>
+					<button style={{'margin':'5px','backgroundColor':'pink'}} onClick={()=>{this.setState({inputstate:true})}}>Test</button>
+		  			<button style={{'margin':'5px','backgroundColor':'pink'}} onClick={()=>{this.setState({inputstate:false})}}>Output</button>
+		  			<hr style={{'height':'2px','borderWidth':'0','color':'grey','background-color':'grey'}}/>
 					{textarea}
 					<br/>
 					{B}{S}
