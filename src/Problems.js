@@ -82,6 +82,10 @@ let testcases=[3,6,6];
 let inputs=[[input1p1,input1p2,input1p3],[input2p1,input2p2,input2p3,input2p4,input2p5,input2p6],[input3p1,input3p2,input3p3,input3p4,input3p5,input3p6]];
 let category=[[0],[0],[0],[0],[0],[1,2]];
 
+let difficulty=[0,1,2];
+
+let stars=["\u2B50","\u2B50\u2B50","\u2B50\u2B50\u2B50"]
+
 
 class Problems extends Component {
 	
@@ -212,7 +216,7 @@ class Problems extends Component {
 			<div style={{'width':'75%'}}>
 			<FadeIn>
 				{plist.map((i) => (
-          			<ListGroup.Item action variant="primary" key={i} style={{'margin':'2%'}} onClick={()=>{this.solve(i)}}>{i+1} . {names[i]}</ListGroup.Item>
+          			<ListGroup.Item action variant="primary" key={i} style={{'margin':'2%'}} onClick={()=>{this.solve(i)}}>{i+1} . {names[i]} {stars[difficulty[i]]}</ListGroup.Item>
         		))}	
 			</FadeIn>
 		  </div>
