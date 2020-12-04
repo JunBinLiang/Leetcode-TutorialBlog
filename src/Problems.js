@@ -107,7 +107,6 @@ class Problems extends Component {
 	 }
 	
   render() {
-	  console.log(this.props.mode);
 	let problemlist;
 	let problemcategory=<div className="wrapper">
 		  <h1>Our Topics :</h1>
@@ -383,7 +382,7 @@ class Code extends Component {
 				<div style={{'margin':'3%','width':'45%'}}>
 					<SplitterLayout>
 						<div>
-						<h2 style={{'width':'45%','margin-left':'45%'}}>{this.props.name}</h2>
+						<h2 style={{'width':'45%','margin-left':'45%',}}>{this.props.name}</h2>
 						<Markdown 
 							escapeHtml={true}
 							source={this.state.description} 

@@ -1,0 +1,6 @@
+.depressed{
+   text-shadow: -1px -1px 0px #777, -1px -1px 0px #777;
+   box-shadow: inset 1px 1px 3px #222;
+   margin: 3px -1px -1px 3px; /* T R B L */
+   transform: translateY(1px);
+}

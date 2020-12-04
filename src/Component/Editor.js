@@ -29,6 +29,7 @@ import 'react-dropdown/style.css'
 
 
 import '../App.css';
+import './Editor.css';
 import swal from 'sweetalert'
 import axios from 'axios';
 import InputField from './InputField';
@@ -76,6 +77,7 @@ class Editor extends Component{
 	this.selectLan = this.selectLan.bind(this);
   }
 	
+	
  componentDidUpdate(previousProps, previousState){
 	  if(previousProps.code!=this.props.code){
 		  fetch(this.props.content).then(res => res.text()).then(text => this.setState({ mycode:this.props.code,A:[],done:false,output:"" }));
@@ -100,7 +102,10 @@ class Editor extends Component{
 	}
 	
 	componentDidMount(){
-		this.setState({mycode:this.props.code});
+		 fetch(this.props.judgecase[0]).then(res => res.text()).then(text => {
+			this.setState({mycode:this.props.code,myinput:text});
+		});
+		
 	} 
 	onchange(newvalue){
 		  localStorage.setItem(this.props.name, newvalue);
@@ -349,8 +354,8 @@ class Editor extends Component{
 		  		  </div>
 		  
 		  		<div>
-					<button style={{'margin':'5px','backgroundColor':'pink'}} onClick={()=>{this.setState({inputstate:true})}}>Test</button>
-		  			<button style={{'margin':'5px','backgroundColor':'pink'}} onClick={()=>{this.setState({inputstate:false})}}>Output</button>
+					<button className={(this.state.inputstate ? 'depressed' : '')} style={{'margin':'5px','backgroundColor':'pink'}} onClick={()=>{this.setState({inputstate:true})}}>Test</button>
+		  			<button className={(!this.state.inputstate ? 'depressed' : '')} style={{'margin':'5px','backgroundColor':'pink'}} onClick={()=>{this.setState({inputstate:false})}}>Output</button>
 		  			<hr style={{'height':'2px','borderWidth':'0','color':'grey','background-color':'grey'}}/>
 					{textarea}
 					<br/>
