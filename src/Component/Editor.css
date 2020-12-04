@@ -4,3 +4,29 @@
    margin: 3px -1px -1px 3px; /* T R B L */
    transform: translateY(1px);
 }
+
+
+
+*{
+	font-family: sans-serif;
+}
+
+
+textarea{
+	overflow-y:scroll;
+	padding: 6px;
+	resize: none;
+	border: 2px solid #c0c0c0;
+	border-radius: 4px;
+	transition: .4s;
+	outline: none;
+}
+
+textarea:hover{
+	border: 3px solid #a0a0a0;
+}
+
+textarea:focus{
+	border: 2px solid #6600ff;
+}
+

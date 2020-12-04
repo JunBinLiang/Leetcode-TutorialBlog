@@ -384,7 +384,7 @@ class Code extends Component {
 			
 			<div style={{'width':'95%','margin-left':'5%'}} >
 				<div style={{'margin':'3%','width':'45%'}}>
-					<SplitterLayout>
+					<SplitterLayout primaryMinSize={35} percentage={true}>
 						<div>
 						<h2 style={{'width':'45%','margin-left':'45%',}}>{this.props.name}</h2>
 						<Markdown 

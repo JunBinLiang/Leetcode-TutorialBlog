@@ -234,11 +234,12 @@ class Editor extends Component{
 					  name="code"
 					  type="textarea"
 					  componentClass="textarea"
-					  rows="5"
-		  			  cols="85"
+					  rows="10"
+		  			  cols="150"
 		  			  width="30%"
 					  value={this.state.output}
 		  			  onChange={this.changeOutput}
+					  style={{'backgroundColor':'#e6ffff'}}
 				 /></FadeIn>;
 	  
 	  if(this.state.inputstate){
@@ -248,8 +249,8 @@ class Editor extends Component{
 					  name="code"
 					  type="textarea"
 					  componentClass="textarea"
-					  rows="5"
-		  			  cols="85"
+					  rows="10"
+		  			  cols="150"
 		  			  width="30%"
 		  			  style={{'backgroundColor':'black','color':'white'}}
 					  value={this.state.myinput}
@@ -334,7 +335,7 @@ class Editor extends Component{
 
 						<AceEditor
 						  height={1000}
-						  width={900}
+						  width={1200}
 						  mode={this.state.mode}
 						  theme={this.state.theme}
 						  name="blah2"
