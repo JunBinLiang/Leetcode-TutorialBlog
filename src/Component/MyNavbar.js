@@ -27,13 +27,16 @@ class MyNavbar extends Component{
 	googleResponse(response){	
 		 console.log(response)//id_token
 		
-		
 		 axios.post(`http://localhost:8080/login`, {
-			 code:response.tokenId,
-			 
+			 code:response.tokenId,	 
 		 })
 		 .then(res => {
-			
+			 console.log(res);
+			 let token=res.data.token;
+			 let profile=res.data.user;
+			 localStorage.setItem("token", token);
+			 console.log(token);
+			 console.log(profile);
 		 });
 	}
 	
@@ -89,7 +92,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        resetMode: () => dispatch({type: 'reset'})
+        resetMode: () => dispatch({type: 'reset'}),
+		loginSuccess: () => dispatch({type: 'login'})
     };
 };
 

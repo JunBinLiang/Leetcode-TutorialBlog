@@ -5,10 +5,21 @@ import Team from './Component/Team';
 import Vedio from './Component/Vedio';
 import { Route, Switch, NavLink,BrowserRouter } from "react-router-dom";
 import MyNavbar from './Component/MyNavbar';
+import { connect } from 'react-redux';
 
 class App extends Component {
+	
+  componentDidMount(){
+	  let token=localStorage.getItem("token");
+	  if(token!==null){
+		  this.props.setToken(token);
+	  }
+  }	
+	
   render() {
-    return (
+	console.log("reducer token",this.props.token)  
+   
+	  return (
       <div>
 		<MyNavbar/>
 		<Switch>
@@ -21,7 +32,20 @@ class App extends Component {
     );
   }
 }
-export default App;
+
+const mapStateToProps = state => {
+    return {
+		token:state.token
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+		setToken: (token) => dispatch({type: 'setToken', val: token}),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 
 
