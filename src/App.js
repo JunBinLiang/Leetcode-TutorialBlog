@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Problems from './Problems';
 import Home from './Home';
 import Team from './Component/Team';
-import Vedio from './Component/Vedio';
+import Video from './Component/Video';
 import { Route, Switch, NavLink,BrowserRouter } from "react-router-dom";
 import MyNavbar from './Component/MyNavbar';
 import { connect } from 'react-redux';
@@ -24,7 +24,7 @@ class App extends Component {
 		<MyNavbar/>
 		<Switch>
 		  <Route exact path={process.env.PUBLIC_URL+'/'} component={Home} />
-		  <Route exact path={process.env.PUBLIC_URL+'/course'} component={Vedio} />
+		  <Route exact path={process.env.PUBLIC_URL+'/course'} component={Video} />
 		  <Route exact path={process.env.PUBLIC_URL+'/problems'} component={Problems} />
 		  <Route exact path={process.env.PUBLIC_URL+'/about'} component={Team} />
 		</Switch>
