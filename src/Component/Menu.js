@@ -10,10 +10,15 @@ class Menu extends Component{
   	 constructor() {
     		super();
 			this.handleClick1 = this.handleClick1.bind(this);
+		 	this.handleClick2 = this.handleClick2.bind(this);
   	 }
 	
 	 handleClick1(){
 		  this.props.history.push(process.env.PUBLIC_URL+'/problems');
+	 }
+	
+	 handleClick2(){
+		  this.props.history.push(process.env.PUBLIC_URL+'/course');
 	 }
 	
   render(){
@@ -49,7 +54,7 @@ class Menu extends Component{
 				  </div>
 				</div>
 			  </div>
-			  <div className="col">
+			  <div className="col" onClick={this.handleClick2}>
 				<div className="container">
 				  <div className="front" >
 					<div className="inner">

@@ -23,7 +23,7 @@ import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
+import DarkModeToggle from "react-dark-mode-toggle";
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 
@@ -328,7 +328,6 @@ class Editor extends Component{
 						<div style={{'display':'flex'}}>
 		  					<Dropdown options={options1} onChange={this.select} value={this.state.theme}/>
 		  					<Dropdown options={options2} onChange={this.selectLan} value={this.state.mode}/>
-							
 		  
 						</div>
 

@@ -11,9 +11,11 @@ class Home extends Component {
 			this.handleClick = this.handleClick.bind(this);
   	 }
 	
-	 handleClick(){
+	 handleClick(path){
 		  this.props.history.push(process.env.PUBLIC_URL+'/problems');
 	 }
+	
+	
 	
 	
   render() {
@@ -24,11 +26,13 @@ class Home extends Component {
 				<h1>Welcome To 66 Code</h1>
 				<h3>Prepare Your Coding Interview</h3>
 				<br/>
-				<button onClick={this.handleClick}>Go To Code</button>
+				<button onClick={this.handleClick}>About 66 Code</button>
 			</div>
 			<br/><br/>
 			<Menu/>
-		</header>		  
+		</header>	
+		<br/><hr style={{'height':'2px','borderWidth':'0','color':'grey','background-color':'grey'}}/>
+		
 
       </div>
     );

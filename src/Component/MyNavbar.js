@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 import {NavLink } from "react-router-dom";
 import {withRouter} from 'react-router-dom';
 
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import config from '../config.json';
@@ -23,8 +24,17 @@ class MyNavbar extends Component{
 		
 	}
 	
-	googleResponse(response){
-		console.log(response);
+	googleResponse(response){	
+		 console.log(response)//id_token
+		
+		
+		 axios.post(`http://localhost:8080/login`, {
+			 code:response.tokenId,
+			 
+		 })
+		 .then(res => {
+			
+		 });
 	}
 	
 	 handleClick1(){

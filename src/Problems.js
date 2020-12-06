@@ -65,7 +65,7 @@ import p3 from './LeetCode/3.md';
 import test3 from './test/test3.md';
 
 import Markdown from 'react-markdown';
-
+import DarkModeToggle from "react-dark-mode-toggle";
 
 import SplitterLayout from 'react-splitter-layout';
 import 'react-splitter-layout/lib/index.css';
@@ -324,8 +324,17 @@ class MySideBar extends Component{
 class Code extends Component {
   constructor() {
     super();
-    this.state = { markdown: '',editor:null,name:"Two Sum",description:"",test:"",submit:"",testcases:0 };
+    this.state = { markdown: '',editor:null,name:"Two Sum",description:"",test:"",submit:"",testcases:0,darktheme:false };
+	this.darkmode=this.darkmode.bind(this);
   }
+	
+  darkmode(){
+	  let old=this.state.darktheme;
+	  console.log(old)
+	  this.setState({darktheme:!old})
+  }	
+
+	
   componentDidMount() {
 	
 	  
@@ -380,13 +389,15 @@ class Code extends Component {
   render() {
     const { markdown } = this.state;
     return(
-		<div>
+		<div >
 			
 			<div style={{'width':'95%','margin-left':'5%'}} >
 				<div style={{'margin':'3%','width':'45%'}}>
 					<SplitterLayout primaryMinSize={35} percentage={true}>
 						<div>
-						<h2 style={{'width':'45%','margin-left':'45%',}}>{this.props.name}</h2>
+						<h2 style={{'width':'45%','margin-left':'45%',}}>
+							{" "}{this.props.name}
+						</h2>
 						<Markdown 
 							escapeHtml={true}
 							source={this.state.description} 
