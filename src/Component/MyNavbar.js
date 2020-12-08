@@ -32,6 +32,10 @@ class MyNavbar extends Component{
 		
 	}
 	
+	componentDidUpdate(){
+		console.log('nav ',this.props.isAuthenticated)
+	}
+	
 	googleResponse(response){	
 		 console.log(response)//id_token
 		
@@ -62,6 +66,7 @@ class MyNavbar extends Component{
 	 }
 	
   render(){
+	  
 	  let loginB=null;
 	  let logoutB=null;
 	  if(!this.props.isAuthenticated){
