@@ -2,6 +2,7 @@ import React, { Component,useState } from "react";
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
+
 import {NavLink } from "react-router-dom";
 import {withRouter} from 'react-router-dom';
 
@@ -9,6 +10,12 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import config from '../config.json';
+
+import 'antd/dist/antd.css';
+import { Menu } from 'antd';
+import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+const { SubMenu } = Menu;
+
 
 class MyNavbar extends Component{
 	constructor() {
@@ -87,12 +94,24 @@ class MyNavbar extends Component{
              />
 	  }
 	  else{
-		  logoutB=<Nav.Link onClick={this.logout} style={{'color':'white','marginRight':'50px'}}>Logout</Nav.Link>
+		  logoutB=
+				<Menu
+					style={{ width: 150 }}
+					defaultSelectedKeys={['1']}
+					defaultOpenKeys={['sub1']}
+					
+				  >
+				  <SubMenu key="sub4" icon={<SettingOutlined />} title="66Bro">
+					  <Menu.Item >Setting</Menu.Item>
+					  <Menu.Item onClick={this.logout}>Logout</Menu.Item>
+					</SubMenu>
+				  </Menu>
 	  }
 	  
 	  
 	 return (
 		<>
+		 
 		  <Navbar bg="dark" variant="dark">
 			<Nav className="mr-auto">
 			  <Nav.Link onClick={this.handleClick1}>Home</Nav.Link>
@@ -101,6 +120,7 @@ class MyNavbar extends Component{
 			</Nav>
 		 	 {loginB}
 		 	 {logoutB}
+		 
 		  </Navbar>
 		</>
 	  );
