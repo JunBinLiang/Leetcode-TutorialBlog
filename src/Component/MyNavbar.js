@@ -18,16 +18,24 @@ class MyNavbar extends Component{
 			this.handleClick3 = this.handleClick3.bind(this);
 			this.googleResponse=this.googleResponse.bind(this);
 			this.onFailure=this.onFailure.bind(this);
+			this.logout=this.logout.bind(this);
   	 }
 	
 	onFailure(){
 		
 	}
 	
+	logout(){//empty the token
+		localStorage.setItem("token", "");
+		console.log("logout")
+		this.props.logout();
+		
+	}
+	
 	googleResponse(response){	
 		 console.log(response)//id_token
 		
-		 axios.post(`http://localhost:8080/login`, {
+		 axios.post(`https://frozen-atoll-01566.herokuapp.com/login`, {
 			 code:response.tokenId,	 
 		 })
 		 .then(res => {
@@ -35,6 +43,8 @@ class MyNavbar extends Component{
 			 let token=res.data.token;
 			 let profile=res.data.user;
 			 localStorage.setItem("token", token);
+			 this.props.setToken(token);
+			 this.props.loginSuccess();
 			 console.log(token);
 			 console.log(profile);
 		 });
@@ -52,17 +62,12 @@ class MyNavbar extends Component{
 	 }
 	
   render(){
-	 return (
-		<>
-		  <Navbar bg="dark" variant="dark">
-			<Nav className="mr-auto">
-			  <Nav.Link onClick={this.handleClick1}>Home</Nav.Link>
-			  <Nav.Link onClick={this.handleClick2}>Problems</Nav.Link>
-		 	  <Nav.Link onClick={this.handleClick3}>About Us</Nav.Link>
-			</Nav>
-		 	 <GoogleLogin
+	  let loginB=null;
+	  let logoutB=null;
+	  if(!this.props.isAuthenticated){
+		  loginB=<GoogleLogin
 		 		  render={renderProps => (
-		 			<Nav.Link onClick={renderProps.onClick} style={{'color':'white'}}>Login</Nav.Link>
+		 			<Nav.Link onClick={renderProps.onClick} style={{'color':'white','marginRight':'50px'}}>Login</Nav.Link>
 				  	
 				  )}
                   clientId={config.GOOGLE_CLIENT_ID}
@@ -75,6 +80,22 @@ class MyNavbar extends Component{
               	 }}
 		 		  
              />
+	  }
+	  else{
+		  logoutB=<Nav.Link onClick={this.logout} style={{'color':'white','marginRight':'50px'}}>Logout</Nav.Link>
+	  }
+	  
+	  
+	 return (
+		<>
+		  <Navbar bg="dark" variant="dark">
+			<Nav className="mr-auto">
+			  <Nav.Link onClick={this.handleClick1}>Home</Nav.Link>
+			  <Nav.Link onClick={this.handleClick2}>Problems</Nav.Link>
+		 	  <Nav.Link onClick={this.handleClick3}>About Us</Nav.Link>
+			</Nav>
+		 	 {loginB}
+		 	 {logoutB}
 		  </Navbar>
 		</>
 	  );
@@ -86,14 +107,16 @@ class MyNavbar extends Component{
 
 const mapStateToProps = state => {
     return {
-       
+       isAuthenticated:state.isAuthenticated
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         resetMode: () => dispatch({type: 'reset'}),
-		loginSuccess: () => dispatch({type: 'login'})
+		loginSuccess: () => dispatch({type: 'login'}),
+		setToken: (token) => dispatch({type: 'setToken',val:token}),
+		logout: () => dispatch({type: 'logout'})
     };
 };
 

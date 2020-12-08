@@ -6,6 +6,7 @@ import Video from './Component/Video';
 import { Route, Switch, NavLink,BrowserRouter } from "react-router-dom";
 import MyNavbar from './Component/MyNavbar';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class App extends Component {
 	
@@ -14,10 +15,26 @@ class App extends Component {
 	  if(token!==null){
 		  this.props.setToken(token);
 	  }
+	  
+	  
+	  const config = {
+    	headers: { Authorization: `Bearer ${token}` }
+	  }
+	  axios.post(`https://frozen-atoll-01566.herokuapp.com/userInfor`, {},config)
+      .then(res => {//user information will be added later,first lunch
+		  if(res.status===200){
+			  console.log('authenticate');
+			  this.props.login();
+		  }
+		  
+      }).catch(err=>{
+		  console.log('not authenticate');
+	  });
+	  console.log('au ',this.props.isAuthenticated);
   }	
 	
   render() {
-	console.log("reducer token",this.props.token)  
+	 
    
 	  return (
       <div>
@@ -35,13 +52,16 @@ class App extends Component {
 
 const mapStateToProps = state => {
     return {
-		token:state.token
+		token:state.token,
+		isAuthenticated:state.isAuthenticated
+		
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
 		setToken: (token) => dispatch({type: 'setToken', val: token}),
+		login: (token) => dispatch({type: 'login'}),
     }
 };
 

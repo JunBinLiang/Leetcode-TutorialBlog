@@ -72,7 +72,6 @@ const VideoListItem = (props) => {
 
 
 const VideoDetail = ({video}) => {
-    console.log(video)
     if(!video){
         return(
             <div>loading!!</div>

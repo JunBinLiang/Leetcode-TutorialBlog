@@ -5,7 +5,6 @@
 }
 
 const reducer = (state = initialState, action) => {
-	console.log(action.val)
 	if (action.type === 'reset') {
         return {
             mode: 0
@@ -31,6 +30,12 @@ const reducer = (state = initialState, action) => {
 	if (action.type === 'setToken') {
         return {
             token: action.val
+        }
+    }
+	if (action.type === 'logout') {
+        return {
+            token: "",
+			isAuthenticated: false
         }
     }
 	
