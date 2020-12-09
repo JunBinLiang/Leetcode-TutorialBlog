@@ -12,13 +12,13 @@ class Footer extends Component{
 			this.handleClick3 = this.handleClick3.bind(this);
   	 }
 	 handleClick1(){
-		  this.props.history.push(process.env.PUBLIC_URL+'/about');
+		  this.props.history.push('/about');
 	 }
 	handleClick2(){
-		  this.props.history.push(process.env.PUBLIC_URL+'/problems');
+		  this.props.history.push('/problems');
 	 }
 	handleClick3(){
-		  this.props.history.push(process.env.PUBLIC_URL+'/course');
+		  this.props.history.push('/course');
 	 }
 	
 	

@@ -14,11 +14,11 @@ class Menu extends Component{
   	 }
 	
 	 handleClick1(){
-		  this.props.history.push(process.env.PUBLIC_URL+'/problems');
+		  this.props.history.push('/problems');
 	 }
 	
 	 handleClick2(){
-		  this.props.history.push(process.env.PUBLIC_URL+'/course');
+		  this.props.history.push('/course');
 	 }
 	
   render(){

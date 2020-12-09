@@ -44,10 +44,10 @@ class App extends Component {
 			<MyNavbar/>
 		</HashRouter>
 		<HashRouter>
-		  <Route exact path={process.env.PUBLIC_URL+'/'} component={Home} />
-		  <Route exact path={process.env.PUBLIC_URL+'/course'} component={Video} />
-		  <Route exact path={process.env.PUBLIC_URL+'/problems'} component={Problems} />
-		  <Route exact path={process.env.PUBLIC_URL+'/about'} component={Team} />
+		  <Route exact path={'/'} component={Home} />
+		  <Route exact path={'/course'} component={Video} />
+		  <Route exact path={'/problems'} component={Problems} />
+		  <Route exact path={'/about'} component={Team} />
 		</HashRouter>
       </div>
     );

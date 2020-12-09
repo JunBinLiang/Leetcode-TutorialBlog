@@ -62,14 +62,14 @@ class MyNavbar extends Component{
 	}
 	
 	 handleClick1(){
-		  this.props.history.push(process.env.PUBLIC_URL+'/');
+		  this.props.history.push('/');
 	 }
 	handleClick2(){
 		  this.props.resetMode();
-		  this.props.history.push(process.env.PUBLIC_URL+'/problems');
+		  this.props.history.push('/problems');
 	 }
 	handleClick3(){
-		  this.props.history.push(process.env.PUBLIC_URL+'/about');
+		  this.props.history.push('/about');
 	 }
 	
   render(){
