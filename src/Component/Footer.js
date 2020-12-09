@@ -30,8 +30,8 @@ class Footer extends Component{
 				<div className="row">
 				  <div className="col-sm-12 col-md-6">
 					<h6>About</h6>
-					<p className="text-justify">66 Code is the platform helping software engineer to prepare for their coding interview. Currently, it supports 
-		 				3 services. More services will be expanded in the upcoming future
+					<p className="text-justify">66 Code is the platform for helping software engineer to prepare for their coding interview. Currently, it supports 
+		 				3 services. More services will be added in the upcoming future
 		 			</p>
 				  </div>
 
@@ -57,7 +57,7 @@ class Footer extends Component{
 				<div className="row">
 				  <div className="col-md-8 col-sm-6 col-xs-12">
 					<p className="copyright-text">Copyright &copy; 2020 All Rights Reserved by 
-				 <a href="#">66 Brother</a>.
+				 <a href="#"> 66 Brother</a>.
 					</p>
 				  </div>
 
