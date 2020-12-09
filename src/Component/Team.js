@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import junbin from "../picture/founder.jpg"
+import Footer from "./Footer"
 
 class Team extends Component{
 
@@ -30,7 +31,7 @@ class Team extends Component{
 			  </div>
 
 			</section>
-
+		 	<Footer/>
 		</>
 	  );
 	  
