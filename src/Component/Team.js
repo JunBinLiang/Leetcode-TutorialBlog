@@ -30,7 +30,7 @@ class Team extends Component{
 				</div>
 			  </div>
 
-			</section>
+			</section><br/><br/><br/>
 		 	<Footer/>
 		</>
 	  );

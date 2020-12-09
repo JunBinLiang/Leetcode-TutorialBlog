@@ -25,7 +25,7 @@ class Footer extends Component{
   render(){
 	 return (
 		<>
-			<footer className="site-footer">
+			<footer className="site-footer" >
 			  <div className="container">
 				<div className="row">
 				  <div className="col-sm-12 col-md-6">
