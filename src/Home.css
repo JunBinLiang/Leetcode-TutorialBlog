@@ -32,16 +32,16 @@ h3, p {
 	margin-bottom: 30px;
 }
 
-.homeButton {
+button {
 	border: none;
 	outline: none;
 	padding: 10px 20px;
 	border-radius: 50px;
 	color: #333;
-	background: #fff;
 	margin-bottom: 50px;
 	box-shadow: 0 3px 20px 0 #0000003b;
 }
-.homeButton:hover{
+button:hover{
 	cursor: pointer;
 }
+
