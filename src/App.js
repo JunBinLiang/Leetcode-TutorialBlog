@@ -3,7 +3,7 @@ import Problems from './Problems';
 import Home from './Home';
 import Team from './Component/Team';
 import Video from './Component/Video';
-import { Route, Switch, NavLink,BrowserRouter } from "react-router-dom";
+import { Route, Switch, NavLink,BrowserRouter ,HashRouter} from "react-router-dom";
 import MyNavbar from './Component/MyNavbar';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -40,13 +40,15 @@ class App extends Component {
    
 	  return (
       <div>
-		<MyNavbar/>
-		<Switch>
+		<HashRouter>
+			<MyNavbar/>
+		</HashRouter>
+		<HashRouter>
 		  <Route exact path={process.env.PUBLIC_URL+'/'} component={Home} />
 		  <Route exact path={process.env.PUBLIC_URL+'/course'} component={Video} />
 		  <Route exact path={process.env.PUBLIC_URL+'/problems'} component={Problems} />
 		  <Route exact path={process.env.PUBLIC_URL+'/about'} component={Team} />
-		</Switch>
+		</HashRouter>
       </div>
     );
   }
