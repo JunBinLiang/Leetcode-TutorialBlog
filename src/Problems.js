@@ -64,9 +64,10 @@ import sta3 from './problems/3.md';
 import p3 from './LeetCode/3.md';
 import test3 from './test/test3.md';
 
-import Markdown from 'react-markdown';
+
 import DarkModeToggle from "react-dark-mode-toggle";
 
+import Markdown from 'react-markdown';
 import SplitterLayout from 'react-splitter-layout';
 import 'react-splitter-layout/lib/index.css';
 import ListGroup from 'react-bootstrap/ListGroup'
@@ -81,9 +82,7 @@ let Submit=[submit1,submit2,submit3];
 let testcases=[3,6,6];
 let inputs=[[input1p1,input1p2,input1p3],[input2p1,input2p2,input2p3,input2p4,input2p5,input2p6],[input3p1,input3p2,input3p3,input3p4,input3p5,input3p6]];
 let category=[[0],[0],[0],[0],[0],[1,2]];
-
 let difficulty=[0,1,2];
-
 let stars=["\u2B50","\u2B50\u2B50","\u2B50\u2B50\u2B50"]
 
 
@@ -107,6 +106,8 @@ class Problems extends Component {
 	 solve(i){
 		 this.props.mode2();
 		 this.setState({index:i})
+		 
+		 this.props.history.push('/problems/'+i);
 		 
 	 }
 	
@@ -166,7 +167,7 @@ class Problems extends Component {
 				<div className="container">
 				  <div className="front" >
 					<div className="inner">
-					  <p>DFS</p>
+					  <p>Graph</p>
 					</div>
 				  </div>
 				  <div className="back">
@@ -180,7 +181,7 @@ class Problems extends Component {
 				<div className="container">
 				  <div className="front">
 					<div className="inner">
-					  <p>BFS</p>
+					  <p>DP</p>
 					</div>
 				  </div>
 				  <div className="back">
@@ -225,12 +226,8 @@ class Problems extends Component {
 	  
     return (
       	<div className="div">
-			{this.props.mode==2?
-				<Code content={leetcodes[index][0]} description={statements[index]} name={names[index]} 
-					  test={Test[index]} index={index} submit={Submit[index]} testcase={testcases[index]}input={inputs[index]}/>
-		
-			
-			:[problemcategory,problemlist]}
+			{problemcategory}
+			{problemlist}
 		</div>
     );
   }
@@ -238,6 +235,16 @@ class Problems extends Component {
 
 
 
+
+
+
+
+
+
+
+
+
+/*
 
 //https://reactjsexample.com/react-side-nav-component/
 class MySideBar extends Component{
@@ -315,7 +322,7 @@ class MySideBar extends Component{
 		);
 	}
 }
-
+*/
 
 
 
@@ -336,7 +343,6 @@ class Code extends Component {
 
 	
   componentDidMount() {
-	
 	  
     const oldcode = localStorage.getItem(this.props.name)
 	if(oldcode==null){
@@ -360,6 +366,7 @@ class Code extends Component {
 		this.setState({ submit: text})
 	});
   }
+	
   componentDidUpdate(previousProps, previousState){
 	  if(previousProps.content!=this.props.content){
 		const oldcode = localStorage.getItem(this.props.name)

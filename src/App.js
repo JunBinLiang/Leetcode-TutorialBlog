@@ -3,6 +3,7 @@ import Problems from './Problems';
 import Home from './Home';
 import Team from './Component/Team';
 import Video from './Component/Video';
+import Compile from './Component/Compile';
 import { Route, Switch, NavLink,BrowserRouter ,HashRouter} from "react-router-dom";
 import MyNavbar from './Component/MyNavbar';
 import { connect } from 'react-redux';
@@ -47,6 +48,7 @@ class App extends Component {
 		  <Route exact path={'/'} component={Home} />
 		  <Route exact path={'/course'} component={Video} />
 		  <Route exact path={'/problems'} component={Problems} />
+		  <Route  path="/problems/:id" component={Compile} />
 		  <Route exact path={'/about'} component={Team} />
 		</HashRouter>
       </div>
