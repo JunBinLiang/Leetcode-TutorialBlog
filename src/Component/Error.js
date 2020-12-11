@@ -13,18 +13,11 @@ class Error extends Component {
   render(){
 	return(
 		<div>
-			<body>
-			  <section id="not-found">
-				<div className="circles">
-				  <p>404<br/>
-				   <small>PAGE NOT FOUND</small>
-				  </p>
-				  <span className="circle big"></span>
-				  <span className="circle med"></span>
-				  <span className="circle small"></span>
-				</div>
-			  </section>
-			</body>
+			<section className="error-container">
+			  <span className="four"><span className="screen-reader-text">4</span></span>
+			  <span className="zero"><span className="screen-reader-text">0</span></span>
+			  <span className="four"><span className="screen-reader-text">4</span></span>
+			</section>
 		</div>
 
 	)
