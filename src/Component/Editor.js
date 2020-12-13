@@ -1,4 +1,5 @@
 import React, { Component,useState } from "react";
+import * as ProblemSet from '../ProblemSet.js';
 
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-java";
@@ -15,12 +16,15 @@ import "ace-builds/src-noconflict/theme-solarized_light";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 import "ace-builds/src-noconflict/theme-terminal";
 
+
 import FadeIn from 'react-fade-in';
 import SplitterLayout from 'react-splitter-layout';
 import 'react-splitter-layout/lib/index.css';
 
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
+import ModalBody from 'react-bootstrap/ModalBody'
+import ModalFooter from 'react-bootstrap/ModalFooter'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import DarkModeToggle from "react-dark-mode-toggle";
@@ -34,7 +38,6 @@ import swal from 'sweetalert'
 import axios from 'axios';
 import InputField from './InputField';
 import Congratulation from './Congratulation';
-
 
 
 let url1="https://frozen-atoll-01566.herokuapp.com/api/`"
@@ -65,7 +68,8 @@ class Editor extends Component{
 				  correct:false,//if your answer are correct after submit
 				  done:false,//at the beginning,input is default state (not O||X)
 				  theme:"solarized_light",
-				  mode:"java"
+				  mode:"java",
+				  resetPopup:false
 				 };
 	this.onchange = this.onchange.bind(this);
 	this.handleCompile = this.handleCompile.bind(this);
@@ -75,8 +79,19 @@ class Editor extends Component{
 	this.inputstateChange=this.inputstateChange.bind(this);
 	this.select = this.select.bind(this);
 	this.selectLan = this.selectLan.bind(this);
+	this.toDeault = this.toDeault.bind(this);
+	  
   }
 	
+	
+  toDeault(){
+	  let index=this.props.index;
+	  fetch(ProblemSet.leetcodes[index][0]).then(res => res.text()).then(text => {
+		    //also clean and reset the local storage
+		    localStorage.setItem(ProblemSet.names[index],text)
+		 	this.setState({ resetPopup:false,mycode: text})
+	  });
+  }	
 	
  componentDidUpdate(previousProps, previousState){
 	  if(previousProps.code!=this.props.code){
@@ -215,6 +230,7 @@ class Editor extends Component{
 	
   render(){
 	  
+	  let resetB=<Button className="outline-primary" style={{'marginLeft':'10px'}} onClick={()=>{this.setState({resetPopup:true});}}><i class="fa fa-refresh"></i></Button>;
 	  
 	  let B=<Button className="outline-primary" ><i class="fa fa-refresh fa-spin"></i></Button>;
 	  let S=<Button className="btn-info" style={{'marginLeft':'5%'}} ><i class="fa fa-refresh fa-spin"></i></Button>;
@@ -319,16 +335,19 @@ class Editor extends Component{
 		  
 	  return(
 		  		<div>
+		  
 		 		<SplitterLayout vertical={true} primaryMinSize={75} percentage={true} primaryMinSize={60}>
 		  			<div>
 						{congra}
 						{inputs}
+		  
+		  			
 						<br/>
 
 						<div style={{'display':'flex'}}>
 		  					<Dropdown options={options1} onChange={this.select} value={this.state.theme}/>
 		  					<Dropdown options={options2} onChange={this.selectLan} value={this.state.mode}/>
-		  
+		  					{resetB}
 						</div>
 
 
@@ -362,6 +381,19 @@ class Editor extends Component{
 					{B}{S}
 		  		</div>
 		  		</SplitterLayout>
+
+			  <Modal show={this.state.resetPopup} >
+				<Modal.Body>Do you want to reset the code to default?</Modal.Body>
+				 <Modal.Footer>
+				  <Button variant="secondary" onClick={()=>{this.setState({resetPopup:false});}}>
+					No
+				  </Button>
+				  <Button variant="primary" onClick={this.toDeault} >
+					Yes
+				  </Button>
+				</Modal.Footer>
+			  </Modal>
+				
 		  	</div>
 	  );
 	  

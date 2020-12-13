@@ -106,7 +106,7 @@ componentDidUpdate(previousProps, previousState){
 						/>
 						</div>
 						<div  style={{'width':'100%' }}>
-							<Editor judgecase={ProblemSet.inputs[id]} testcase={ProblemSet.testcases[id]} code={this.state.markdown} test={this.state.test} submit={this.state.submit} name={ProblemSet.names[id]}/>
+							<Editor judgecase={ProblemSet.inputs[id]} testcase={ProblemSet.testcases[id]} code={this.state.markdown} test={this.state.test} submit={this.state.submit} name={ProblemSet.names[id]} index={id}/>
 							<br/>
 						</div>
 					</SplitterLayout>
