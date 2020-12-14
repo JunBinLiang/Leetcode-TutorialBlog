@@ -30,3 +30,10 @@ textarea:focus{
 	border: 2px solid #6600ff;
 }
 
+.ace_editor, .ace_editor *{
+font-family: "Monaco", "Menlo", "Ubuntu Mono", "Droid Sans Mono", "Consolas", monospace !important;
+font-size: 12px !important;
+font-weight: 400 !important;
+letter-spacing: 0 !important;
+}
+

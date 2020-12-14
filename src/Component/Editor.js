@@ -358,7 +358,7 @@ class Editor extends Component{
 						  theme={this.state.theme}
 						  name="blah2"
 						  onChange={this.onchange}
-						  fontSize={14}
+						  fontSize={16}
 						  showPrintMargin={true}
 						  showGutter={true}
 						  highlightActiveLine={true}
@@ -368,7 +368,7 @@ class Editor extends Component{
 						  enableLiveAutocompletion: true,
 						  enableSnippets: false,
 						  showLineNumbers: true,
-						  tabSize: 2,
+						  tabSize: 4,
 					  }}/>
 		  		  </div>
 		  
