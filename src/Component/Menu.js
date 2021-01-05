@@ -21,6 +21,7 @@ class Menu extends Component{
 		  this.props.history.push('/course');
 	 }
 	
+	
   render(){
 	 return (
 		<div className="wrapper">
