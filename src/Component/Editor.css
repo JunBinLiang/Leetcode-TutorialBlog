@@ -1,39 +1,37 @@
-.depressed{
-   text-shadow: -1px -1px 0px #777, -1px -1px 0px #777;
-   box-shadow: inset 1px 1px 3px #222;
-   margin: 3px -1px -1px 3px; /* T R B L */
-   transform: translateY(1px);
+.depressed {
+  text-shadow: -1px -1px 0px #777, -1px -1px 0px #777;
+  box-shadow: inset 1px 1px 3px #222;
+  margin: 3px -1px -1px 3px; /* T R B L */
+  transform: translateY(1px);
 }
 
-
-
-*{
-	font-family: sans-serif;
+* {
+  font-family: sans-serif;
 }
 
-
-textarea{
-	overflow-y:scroll;
-	padding: 6px;
-	resize: none;
-	border: 2px solid #c0c0c0;
-	border-radius: 4px;
-	transition: .4s;
-	outline: none;
+textarea {
+  overflow-y: scroll;
+  padding: 6px;
+  resize: none;
+  border: 2px solid #c0c0c0;
+  border-radius: 4px;
+  transition: 0.4s;
+  outline: none;
 }
 
-textarea:hover{
-	border: 3px solid #a0a0a0;
+textarea:hover {
+  border: 3px solid #a0a0a0;
 }
 
-textarea:focus{
-	border: 2px solid #6600ff;
+textarea:focus {
+  border: 2px solid #6600ff;
 }
 
-.ace_editor, .ace_editor *{
-font-family: "Monaco", "Menlo", "Ubuntu Mono", "Droid Sans Mono", "Consolas", monospace !important;
-font-size: 16px !important;
-font-weight: 400 !important;
-letter-spacing: 0 !important;
+.ace_editor,
+.ace_editor * {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", "Droid Sans Mono", "Consolas",
+    monospace !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
 }
-
