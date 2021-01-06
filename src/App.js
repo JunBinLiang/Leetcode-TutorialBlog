@@ -48,15 +48,19 @@ class App extends Component {
         <HashRouter>
           <MyNavbar />
         </HashRouter>
-        <HashRouter>
+        
+		<HashRouter>
+		 <Switch>
           <Route exact path={"/"} component={Home} />
           <Route exact path={"/course"} component={Video} />
           <Route exact path={"/problems"} component={Problems} />
-          <Route path="/problems/:id" component={Compile} />
+          <Route exact path="/problems/:id" component={Compile} />
           <Route exact path={"/about"} component={Team} />
-          <Route path="/profile/:id" component={Profile} />;
-          <Route exact path={"/404"} component={Error} />;
+          <Route exact path="/profile/:id" component={Profile} />;
+          <Route component={Error} />;
+		 </Switch>
         </HashRouter>
+		
       </div>
     );
   }
