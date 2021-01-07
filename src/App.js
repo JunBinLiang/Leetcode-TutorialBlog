@@ -5,7 +5,8 @@ import Team from "./Component/Team";
 import Video from "./Component/Video";
 import Compile from "./Component/Compile";
 import Profile from "./Component/Profile.js";
-import Error from "./Component/Error.js";
+import Error from "./Component/Error";
+import Calendar from "./Component/Calendar";
 import {
   Route,
   Switch,
@@ -48,19 +49,19 @@ class App extends Component {
         <HashRouter>
           <MyNavbar />
         </HashRouter>
-        
-		<HashRouter>
-		 <Switch>
-          <Route exact path={"/"} component={Home} />
-          <Route exact path={"/course"} component={Video} />
-          <Route exact path={"/problems"} component={Problems} />
-          <Route exact path="/problems/:id" component={Compile} />
-          <Route exact path={"/about"} component={Team} />
-          <Route exact path="/profile/:id" component={Profile} />;
-          <Route component={Error} />;
-		 </Switch>
+
+        <HashRouter>
+          <Switch>
+            <Route exact path={"/"} component={Home} />
+            <Route exact path={"/course"} component={Video} />
+            <Route exact path={"/problems"} component={Problems} />
+            <Route exact path="/problems/:id" component={Compile} />
+            <Route exact path={"/about"} component={Team} />
+            <Route exact path="/profile/:id" component={Profile} />
+            <Route exact path={"/calendar"} component={Calendar} />
+            <Route component={Error} />;
+          </Switch>
         </HashRouter>
-		
       </div>
     );
   }

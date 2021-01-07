@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import { data } from "./data.js";
+import { data } from "./data/userData";
 import { withRouter } from "react-router-dom";
 
 import "./Profiles.css";
@@ -17,31 +17,29 @@ class Profile extends Component {
       address: "",
     };
   }
-  
-	componentDidUpdate(previousProps, previousState) {
-		if (previousProps.match.params.id != this.props.match.params.id){
-			let id = this.props.match.params.id;
-			const userInfo = data.filter((person) => person.id == id)[0];
-			console.log(userInfo);
-			if (userInfo === undefined) {
-			  this.props.history.push("/404");
-			  return;
-			}
-			this.setState({
-			  id: userInfo.id,
-			  name: userInfo.name,
-			  email: userInfo.email,
-			  phone: userInfo.phone,
-			  mobile: userInfo.mobile,
-			  img: userInfo.img,
-			  address: userInfo.address,
-			});
 
-		}
-
+  componentDidUpdate(previousProps, previousState) {
+    if (previousProps.match.params.id != this.props.match.params.id) {
+      let id = this.props.match.params.id;
+      const userInfo = data.filter((person) => person.id == id)[0];
+      console.log(userInfo);
+      if (userInfo === undefined) {
+        this.props.history.push("/404");
+        return;
+      }
+      this.setState({
+        id: userInfo.id,
+        name: userInfo.name,
+        email: userInfo.email,
+        phone: userInfo.phone,
+        mobile: userInfo.mobile,
+        img: userInfo.img,
+        address: userInfo.address,
+      });
+    }
   }
-	
-	componentDidMount() {
+
+  componentDidMount() {
     let id = this.props.match.params.id;
     const userInfo = data.filter((person) => person.id == id)[0];
     console.log(userInfo);
