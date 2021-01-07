@@ -262,9 +262,9 @@ class Profile extends Component {
                     <div className="card-body">
                       <h6 className="d-flex align-items-center mb-3">
                         <i className="material-icons text-info mr-2">
-                          assignment
+                          Progress :
                         </i>
-                        Project Status
+                        
                       </h6>
                       <small>Web Design</small>
                       <div className="progress mb-3" style={{ height: "5px" }}>
@@ -327,7 +327,7 @@ class Profile extends Component {
                 <div className="col-sm-6 mb-3">
                   <div className="card h-100">
                     <div className="card-body">
-                      <PieChart />
+                      <PieChart percent={30} />
                     </div>
                   </div>
                 </div>

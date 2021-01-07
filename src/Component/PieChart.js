@@ -21,7 +21,7 @@ class PieChart extends React.Component {
           style={{ fontSize: 50 }}
           x={200}
           y={200}
-          text="20%"
+          text={this.props.percent+"%"}
         />
       </svg>
     );
