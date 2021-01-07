@@ -6,7 +6,7 @@ import Video from "./Component/Video";
 import Compile from "./Component/Compile";
 import Profile from "./Component/Profile.js";
 import Error from "./Component/Error";
-import Calendar from "./Component/Calendar";
+
 import {
   Route,
   Switch,
@@ -58,7 +58,6 @@ class App extends Component {
             <Route exact path="/problems/:id" component={Compile} />
             <Route exact path={"/about"} component={Team} />
             <Route exact path="/profile/:id" component={Profile} />
-            <Route exact path={"/calendar"} component={Calendar} />
             <Route component={Error} />;
           </Switch>
         </HashRouter>
