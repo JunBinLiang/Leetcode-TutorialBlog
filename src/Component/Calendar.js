@@ -9,18 +9,18 @@ class Calendar extends Component {
 
   render() {
     return (
-      <div style={{ height: "1000px", width: "10000px" }} className="container">
+      <div style={{ height: "250px", width: "10000px" }} className="container">
         <ResponsiveCalendar
           data={data}
-          from="2015-03-01"
-          to="2016-07-12"
+          from="2015-01-02"
+          to="2015-12-01"
           emptyColor="#eeeeee"
           colors={["#61cdbb", "#97e3d5", "#e8c1a0", "#f47560"]}
-          margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
           yearSpacing={40}
           monthBorderColor="#ffffff"
           dayBorderWidth={2}
           dayBorderColor="#ffffff"
+		  margin={{ top: 0, right: 40, bottom: 40, left: 40 }}
           legends={[
             {
               anchor: "bottom-right",
