@@ -11,17 +11,20 @@ class PieChart extends React.Component {
           labelComponent={<span />}
           width={400}
           height={400}
-          data={[{ key: "", y: 20 }, { key: "", y: 100 - 20 }]}
+          data={[
+            { key: "", y: this.props.percent },
+            { key: "", y: 100 - this.props.percent },
+          ]}
           innerRadius={130}
           labelRadius={100}
-          colorScale={["#19B3A6", "#EEEEEE"]}
+          colorScale={["#884dff", "#EEEEEE"]}
         />
         <VictoryLabel
           textAnchor="middle"
-          style={{ fontSize: 50 }}
+          style={[{ fontSize: 50 }]}
           x={200}
           y={200}
-          text={this.props.percent+"%"}
+          text={this.props.percent + "%"}
         />
       </svg>
     );

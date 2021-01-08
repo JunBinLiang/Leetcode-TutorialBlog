@@ -6,6 +6,7 @@ import PieChart from "./PieChart";
 import "./Profiles.css";
 
 import Calender from "./Calendar";
+const TOTAL_PROBLEM = 200;
 
 class Profile extends Component {
   constructor() {
@@ -29,15 +30,6 @@ class Profile extends Component {
         this.props.history.push("/404");
         return;
       }
-      this.setState({
-        id: userInfo.id,
-        name: userInfo.name,
-        email: userInfo.email,
-        phone: userInfo.phone,
-        mobile: userInfo.mobile,
-        img: userInfo.img,
-        address: userInfo.address,
-      });
     }
   }
 
@@ -57,6 +49,7 @@ class Profile extends Component {
       mobile: userInfo.mobile,
       img: userInfo.img,
       address: userInfo.address,
+      problemSolved: userInfo.problemSolved,
     });
   }
 
@@ -264,7 +257,6 @@ class Profile extends Component {
                         <i className="material-icons text-info mr-2">
                           Progress :
                         </i>
-                        
                       </h6>
                       <small>Web Design</small>
                       <div className="progress mb-3" style={{ height: "5px" }}>
@@ -327,7 +319,25 @@ class Profile extends Component {
                 <div className="col-sm-6 mb-3">
                   <div className="card h-100">
                     <div className="card-body">
-                      <PieChart percent={30} />
+                      <i className="material-icons text-info mr-2">
+                        Problem Solved : <br />
+                      </i>
+                      <span
+                        style={{
+                          fontSize: "50px",
+                          fontWeight: "200",
+                        }}
+                      >
+                        {this.state.problemSolved}
+                      </span>
+
+                      <div style={{ width: "60%", float: "right" }}>
+                        <PieChart
+                          percent={
+                            (this.state.problemSolved / TOTAL_PROBLEM) * 100
+                          }
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

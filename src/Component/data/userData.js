@@ -8,6 +8,7 @@ export const data = [
     phone: "123-234-2322",
     mobile: "222-222-2222",
     address: "New York, NY",
+    problemSolved: 40,
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ export const data = [
     phone: "222-234-2322",
     mobile: "000-222-2222",
     address: "New York, NY",
+    problemSolved: 10,
   },
   {
     id: 3,
@@ -28,5 +30,6 @@ export const data = [
     phone: "555-234-2322",
     mobile: "777-022-2222",
     address: "New York, NY",
+    problemSolved: 5,
   },
 ];
