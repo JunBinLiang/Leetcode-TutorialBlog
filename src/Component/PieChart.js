@@ -17,7 +17,7 @@ class PieChart extends React.Component {
           ]}
           innerRadius={130}
           labelRadius={100}
-          colorScale={["#8e29ce", "#EEEEEE"]}
+          colorScale={["#884dff", "#EEEEEE"]}
         />
         <VictoryLabel
           textAnchor="middle"

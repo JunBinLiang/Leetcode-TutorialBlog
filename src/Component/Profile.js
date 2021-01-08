@@ -322,14 +322,22 @@ class Profile extends Component {
                       <i className="material-icons text-info mr-2">
                         Problem Solved : <br />
                       </i>
-                      <span style={{ fontSize: "30px", fontWeight: "300" }}>
+                      <span
+                        style={{
+                          fontSize: "50px",
+                          fontWeight: "200",
+                        }}
+                      >
                         {this.state.problemSolved}
                       </span>
-                      <PieChart
-                        percent={
-                          (this.state.problemSolved / TOTAL_PROBLEM) * 100
-                        }
-                      />
+
+                      <div style={{ width: "60%", float: "right" }}>
+                        <PieChart
+                          percent={
+                            (this.state.problemSolved / TOTAL_PROBLEM) * 100
+                          }
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

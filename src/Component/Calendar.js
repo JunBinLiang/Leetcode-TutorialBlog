@@ -14,7 +14,7 @@ const Calendar = ({ id }) => {
         from="2015-01-02"
         to="2015-12-01"
         emptyColor="#eeeeee"
-        colors={["#61cdbb", "#97e3d5", "#e8c1a0", "#f47560"]}
+        colors={["#e0b3ff", "#aa80ff", "#6666ff", "#f47560"]}
         yearSpacing={40}
         monthBorderColor="#ffffff"
         dayBorderWidth={2}
