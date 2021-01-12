@@ -28,7 +28,7 @@ import input3p6 from "./input/3.6.md";
 import sta3 from "./problems/3.md";
 import p3 from "./LeetCode/3.md";
 import test3 from "./test/test3.md";
-import solution1 from "./Component/ProblemPage/solutions/example.md";
+import solution1 from "./solutions/example.md";
 let leetcodes = [[p1, p1cpp], [p2], [p3]];
 let statements = [sta1, sta2, sta3];
 let names = ["Two Sum", "Present From 66", "Eating Chocolate"];
