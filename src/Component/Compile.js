@@ -6,6 +6,9 @@ import Markdown from "react-markdown";
 import SplitterLayout from "react-splitter-layout";
 import Error from "./Error";
 
+//css
+import "../problems.css";
+
 //<Code content={leetcodes[index][0]} description={statements[index]} name={names[index]}
 //test={Test[index]} index={index} submit={Submit[index]} testcase={testcases[index]}input={inputs[index]}/>
 
@@ -111,11 +114,18 @@ class Compile extends Component {
           <div style={{ margin: "3%", width: "45%" }}>
             <SplitterLayout primaryMinSize={35} percentage={true}>
               <div>
-                <h2 style={{ width: "45%", "margin-left": "45%" }}>
+                <h2
+                  className="problemTitle"
+                  style={{ width: "45%", "margin-left": "30%" }}
+                >
                   {" "}
                   {ProblemSet.names[id]}
                 </h2>
-                <Markdown escapeHtml={true} source={this.state.description} />
+                <Markdown
+                  className="testing"
+                  escapeHtml={true}
+                  source={this.state.description}
+                />
               </div>
               <div style={{ width: "100%" }}>
                 <Editor

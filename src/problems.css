@@ -1,0 +1,25 @@
+pre {
+  font: "Times New Roman", Times, serif;
+  background-color: rgb(241, 240, 240);
+  margin-left: 0.5%;
+  padding-left: 0.5%;
+  margin-right: 10%;
+}
+p {
+  font: "Times New Roman", Times, serif;
+  margin-right: 10%;
+  margin-left: 0.5%;
+  padding-left: 0.5%;
+}
+
+.problemTitle {
+  padding: 10px 20px;
+  font: normal 50px / normal "Times New Roman", Times, serif;
+  color: rgb(0, 0, 0);
+  text-overflow: clip;
+  text-shadow: -1px -1px 0 rgb(206, 206, 206);
+}
+.testing h5 {
+  font: 15px "Times New Roman", Times, serif;
+  font-weight: 600;
+}
