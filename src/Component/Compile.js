@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import * as ProblemSet from "../ProblemSet.js";
 
+import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Editor from "./Editor";
 import Markdown from "react-markdown";
 import SplitterLayout from "react-splitter-layout";
 import Error from "./Error";
+import Home from "../Home";
+import NavBar from "./NavBar";
 
 //css
 import "../problems.css";
@@ -110,6 +113,7 @@ class Compile extends Component {
 
     return (
       <div>
+        <NavBar className="ProblemSolution" id={this.state.id} />
         <div style={{ width: "95%", "margin-left": "5%" }}>
           <div style={{ margin: "3%", width: "45%" }}>
             <SplitterLayout primaryMinSize={35} percentage={true}>
