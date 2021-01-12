@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import * as ProblemSet from "../ProblemSet.js";
 
+import Tabs from "./ProblemPage/Tabs";
+import "./ProblemPage/tab.css";
+import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Editor from "./Editor";
 import Markdown from "react-markdown";
 import SplitterLayout from "react-splitter-layout";
 import Error from "./Error";
+import Home from "../Home";
 
 //css
-import "../problems.css";
+import "./ProblemPage/problems.css";
 
 //<Code content={leetcodes[index][0]} description={statements[index]} name={names[index]}
 //test={Test[index]} index={index} submit={Submit[index]} testcase={testcases[index]}input={inputs[index]}/>
@@ -23,6 +27,7 @@ class Compile extends Component {
       test: "",
       submit: "",
       testcases: 0,
+      solution: "",
     };
   }
 
@@ -58,6 +63,11 @@ class Compile extends Component {
       .then((res) => res.text())
       .then((text) => {
         this.setState({ submit: text });
+      });
+    fetch(ProblemSet.solution[id])
+      .then((res) => res.text())
+      .then((text) => {
+        this.setState({ solution: text });
       });
   }
 
@@ -113,20 +123,41 @@ class Compile extends Component {
         <div style={{ width: "95%", "margin-left": "5%" }}>
           <div style={{ margin: "3%", width: "45%" }}>
             <SplitterLayout primaryMinSize={35} percentage={true}>
-              <div>
-                <h2
-                  className="problemTitle"
-                  style={{ width: "45%", "margin-left": "30%" }}
-                >
-                  {" "}
-                  {ProblemSet.names[id]}
-                </h2>
-                <Markdown
-                  className="testing"
-                  escapeHtml={true}
-                  source={this.state.description}
-                />
-              </div>
+              <Tabs>
+                <div label="Problem">
+                  <div>
+                    <h2
+                      className="problemTitle"
+                      style={{ width: "45%", "margin-left": "30%" }}
+                    >
+                      {" "}
+                      {ProblemSet.names[id]}
+                    </h2>
+                    <Markdown
+                      className="problemStatement"
+                      escapeHtml={true}
+                      source={this.state.description}
+                    />
+                  </div>
+                </div>
+                <div label="Solution">
+                  <div>
+                    <h2
+                      className="problemTitle"
+                      style={{ width: "45%", "margin-left": "30%" }}
+                    >
+                      {" "}
+                      {ProblemSet.names[id]}
+                    </h2>
+                    <Markdown
+                      className="problemSolution"
+                      escapeHtml={true}
+                      source={this.state.solution}
+                    />
+                  </div>
+                </div>
+              </Tabs>
+
               <div style={{ width: "100%" }}>
                 <Editor
                   judgecase={ProblemSet.inputs[id]}
