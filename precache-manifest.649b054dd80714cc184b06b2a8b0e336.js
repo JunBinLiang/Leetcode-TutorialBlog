@@ -140,7 +140,7 @@ self.__precacheManifest = [
     "url": "/Leetcode-TutorialBlog/static/css/1.b11e9342.chunk.css"
   },
   {
-    "revision": "7418711682ad1eed3e217b852f65a228",
+    "revision": "a792dc643b61bcdbdade5f676c9c8099",
     "url": "/Leetcode-TutorialBlog/index.html"
   }
 ];
