@@ -248,7 +248,7 @@ class Problems extends Component {
       let plist = category[this.state.categoryIndex];
 
       problemlist = (
-        <div style={{ width: "75%" }}>
+        <div className="container" style={{ width: "75%" }}>
           <FadeIn>
             {plist.map((i) => (
               <ListGroup.Item

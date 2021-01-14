@@ -29,15 +29,26 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-        <header>
-          <div class="overlay">
-            <h1>Welcome To 66 Code</h1>
-            <h3>Prepare Your Coding Interview</h3>
-            <br />
-          </div>
-          <br />
-          <br />
+      <>
+        <div className="bigger-wrapper">
+          <section className="header">
+            <div className="wrapper">
+              <h1 className="gamma lato thin uppercase ls-xlarge">
+                Welcome To
+                <br />
+                <span className="open-sans tera ls-xlarge bold">66 Code</span>
+                <br />
+                <span className="epsilon ls-medium">
+                  Prepare Your Coding Interview
+                </span>
+              </h1>
+
+              <button className="learn-more" onClick={this.open}>
+                Learn More
+              </button>
+            </div>
+            <Menu />
+          </section>
 
           <React.Fragment>
             <ModalVideo
@@ -46,16 +57,11 @@ class Home extends Component {
               videoId="B7xai5u_tnk"
               onClose={() => this.setState({ open: false })}
             />
-            <button className="homeButton" onClick={this.open}>
-              About 66 Code
-            </button>
           </React.Fragment>
+        </div>
 
-          <Menu />
-        </header>
-        <br />
         <Footer />
-      </div>
+      </>
     );
   }
 }
