@@ -72,7 +72,7 @@ class Editor extends Component {
       myinput: "",
       correct: false, //if your answer are correct after submit
       done: false, //at the beginning,input is default state (not O||X)
-      theme: "solarized_light",
+      theme: "terminal",
       mode: "java",
       resetPopup: false,
     };
@@ -284,7 +284,6 @@ class Editor extends Component {
           width="30%"
           value={this.state.output}
           onChange={this.changeOutput}
-          style={{ backgroundColor: "#e6ffff" }}
         />
       </FadeIn>
     );
@@ -396,11 +395,13 @@ class Editor extends Component {
 
             <div style={{ display: "flex" }}>
               <Dropdown
+                className="theme"
                 options={options1}
                 onChange={this.select}
                 value={this.state.theme}
               />
               <Dropdown
+                className="theme"
                 options={options2}
                 onChange={this.selectLan}
                 value={this.state.mode}
@@ -432,8 +433,7 @@ class Editor extends Component {
 
           <div>
             <button
-              className={this.state.inputstate ? "depressed" : ""}
-              style={{ margin: "5px", backgroundColor: "pink" }}
+              className={this.state.inputstate ? "depressed" : "beforePress"}
               onClick={() => {
                 this.setState({ inputstate: true });
               }}
@@ -441,22 +441,13 @@ class Editor extends Component {
               Test
             </button>
             <button
-              className={!this.state.inputstate ? "depressed" : ""}
-              style={{ margin: "5px", backgroundColor: "pink" }}
+              className={!this.state.inputstate ? "depressed" : "beforePress"}
               onClick={() => {
                 this.setState({ inputstate: false });
               }}
             >
               Output
             </button>
-            <hr
-              style={{
-                height: "2px",
-                borderWidth: "0",
-                color: "grey",
-                "background-color": "grey",
-              }}
-            />
             {textarea}
             <br />
             {B}

@@ -1,0 +1,18 @@
+.margin {
+  margin-right: 8%;
+}
+
+.notes {
+  background: linear-gradient(
+    180deg,
+    rgb(250, 238, 173) 0%,
+    rgba(187, 235, 255, 1) 20%,
+    rgba(170, 220, 241, 1) 75%,
+    rgba(195, 229, 244, 1) 100%
+  );
+  padding-top: 2%;
+  margin-top: 3%;
+  font-family: "Kalam", cursive;
+  font-size: 1rem;
+  padding-left: 2%;
+}

@@ -8,7 +8,7 @@ import Editor from "./Editor";
 import Markdown from "react-markdown";
 import SplitterLayout from "react-splitter-layout";
 import Error from "./Error";
-import Home from "../Home";
+import MarkdownEditor from "./ProblemPage/notesEditor";
 
 //css
 import "./ProblemPage/problems.css";
@@ -120,7 +120,7 @@ class Compile extends Component {
 
     return (
       <div>
-        <div style={{ width: "95%", "margin-left": "5%" }}>
+        <div style={{ width: "95%", "margin-left": "3%" }}>
           <div style={{ margin: "3%", width: "45%" }}>
             <SplitterLayout primaryMinSize={35} percentage={true}>
               <Tabs>
@@ -155,6 +155,9 @@ class Compile extends Component {
                       source={this.state.solution}
                     />
                   </div>
+                </div>
+                <div label="Notes" className="notes">
+                  <MarkdownEditor />
                 </div>
               </Tabs>
 

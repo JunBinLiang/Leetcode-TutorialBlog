@@ -5,9 +5,13 @@
 
 .tab-list-item {
   display: inline-block;
+  cursor: pointer;
   list-style: none;
   margin-bottom: -1px;
   padding: 0.5rem 0.75rem;
+}
+.tab-list-item:hover {
+  background-color: rgb(198, 198, 236);
 }
 
 .tab-list-active {

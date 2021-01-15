@@ -30,10 +30,9 @@ import Editor from "./Component/Editor";
 import ReactPlayer from "react-player";
 import FadeIn from "react-fade-in";
 
-import "./Component/menu.css";
+import "./Component/Menu.css";
 import theme from "./picture/theme.png";
 import Home from "./Home";
-
 
 import Markdown from "react-markdown";
 import SplitterLayout from "react-splitter-layout";
@@ -41,8 +40,6 @@ import "react-splitter-layout/lib/index.css";
 import ListGroup from "react-bootstrap/ListGroup";
 
 import * as ProblemSet from "./ProblemSet.js";
-
-
 
 class Problems extends Component {
   constructor() {
@@ -56,10 +53,10 @@ class Problems extends Component {
       index: 0,
     };
   }
-	
-	componentDidMount(){
-		this.props.mode2();//reset the state to the beginning
-	}
+
+  componentDidMount() {
+    this.props.mode2(); //reset the state to the beginning
+  }
 
   handleClick1(i) {
     this.props.mode1();
@@ -220,7 +217,8 @@ class Problems extends Component {
                   this.solve(i);
                 }}
               >
-                {i + 1} . {ProblemSet.names[i]} {ProblemSet.stars[ProblemSet.difficulty[i]]}
+                {i + 1} . {ProblemSet.names[i]}{" "}
+                {ProblemSet.stars[ProblemSet.difficulty[i]]}
               </ListGroup.Item>
             ))}
           </FadeIn>
