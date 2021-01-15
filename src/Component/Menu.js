@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
-import "./Menu.css";
+import "./menu.css";
 
 class Menu extends Component {
   constructor() {
