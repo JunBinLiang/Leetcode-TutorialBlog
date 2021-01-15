@@ -433,8 +433,7 @@ class Editor extends Component {
 
           <div>
             <button
-              className={this.state.inputstate ? "depressed" : ""}
-              style={{ margin: "5px", backgroundColor: "rgb(198, 198, 236)" }}
+              className={this.state.inputstate ? "depressed" : "beforePress"}
               onClick={() => {
                 this.setState({ inputstate: true });
               }}
@@ -442,22 +441,13 @@ class Editor extends Component {
               Test
             </button>
             <button
-              className={!this.state.inputstate ? "depressed" : ""}
-              style={{ margin: "5px", backgroundColor: "rgb(198, 198, 236)" }}
+              className={!this.state.inputstate ? "depressed" : "beforePress"}
               onClick={() => {
                 this.setState({ inputstate: false });
               }}
             >
               Output
             </button>
-            <hr
-              style={{
-                height: "2px",
-                borderWidth: "0",
-                color: "white",
-                "background-color": "black",
-              }}
-            />
             {textarea}
             <br />
             {B}

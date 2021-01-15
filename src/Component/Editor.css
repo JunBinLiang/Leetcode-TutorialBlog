@@ -1,7 +1,12 @@
 .depressed {
   box-shadow: inset 1px 1px 3px #222;
-  margin: 3px -1px -1px 3px; /* T R B L */
-  transform: translateY(1px);
+  border: none;
+  background-color: rgb(160, 160, 236);
+  margin: 5px;
+}
+.beforePress {
+  background-color: rgb(194, 194, 221);
+  margin: 5px;
 }
 
 .theme {
@@ -21,7 +26,13 @@ textarea {
   transition: 0.4s;
   outline: none;
 }
-
+.outline-primary {
+  background-color: rgb(79, 79, 219);
+  border: rgb(79, 79, 219);
+}
+.outline-primary:hover {
+  background-color: rgb(65, 39, 179);
+}
 textarea:hover {
   border: 3px solid #a0a0a0;
 }

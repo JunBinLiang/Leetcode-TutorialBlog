@@ -120,7 +120,7 @@ class Compile extends Component {
 
     return (
       <div>
-        <div style={{ width: "95%", "margin-left": "5%" }}>
+        <div style={{ width: "95%", "margin-left": "3%" }}>
           <div style={{ margin: "3%", width: "45%" }}>
             <SplitterLayout primaryMinSize={35} percentage={true}>
               <Tabs>
@@ -156,7 +156,7 @@ class Compile extends Component {
                     />
                   </div>
                 </div>
-                <div label="Notes">
+                <div label="Notes" className="notes">
                   <MarkdownEditor />
                 </div>
               </Tabs>
