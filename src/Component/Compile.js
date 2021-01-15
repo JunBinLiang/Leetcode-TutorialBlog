@@ -8,7 +8,7 @@ import Editor from "./Editor";
 import Markdown from "react-markdown";
 import SplitterLayout from "react-splitter-layout";
 import Error from "./Error";
-import MarkdownEditor from "./ProblemPage/notesEditor";
+import NoteEditor from "./ProblemPage/NotesEditor";
 
 //css
 import "./ProblemPage/problems.css";
@@ -157,7 +157,7 @@ class Compile extends Component {
                   </div>
                 </div>
                 <div label="Notes" className="notes">
-                  <MarkdownEditor />
+                  <NoteEditor/>
                 </div>
               </Tabs>
 
