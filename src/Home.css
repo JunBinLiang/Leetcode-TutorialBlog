@@ -50,3 +50,116 @@ button {
 button:hover {
   cursor: pointer;
 }
+
+/* ============================================*/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 900px;
+}
+/* header {
+  background: url("http://www.autodatz.com/wp-content/uploads/2017/05/Old-Car-Wallpapers-Hd-36-with-Old-Car-Wallpapers-Hd.jpg");
+  text-align: center;
+  width: 100%;
+  height: auto;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 85% 85% / 30%;
+}
+header .overlay {
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  color: #fff;
+  text-shadow: 1px 1px 1px #333;
+  background-image: linear-gradient(135deg, #9f05ff69 10%, #fd5e086b 100%);
+} */
+
+/* h1 {
+  font-family: "Dancing Script", cursive;
+  font-size: 80px;
+  margin-bottom: 30px;
+} */
+
+h3,
+p {
+  font-family: "Open Sans", sans-serif;
+  margin-bottom: 30px;
+}
+
+/* ======= button  ======== */
+
+/* button {
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  color: #333;
+  margin-bottom: 50px;
+  box-shadow: 0 3px 20px 0 #0000003b;
+}
+button:hover {
+  cursor: pointer;
+} */
+
+/***********/
+
+.h1 {
+  line-height: 1;
+  margin-top: 0;
+  display: inline-block;
+  position: relative;
+}
+
+.tera {
+  font-size: 6.5rem; /* 117 / 18 = 6.5 */
+  margin-bottom: 0.25385rem;
+}
+
+.gamma {
+  font-size: 2rem; /* 36 / 18 = 2 */
+  margin-bottom: 0.825rem;
+  /* color: rgb(255, 255, 255); */
+}
+
+.epsilon {
+  font-size: 1.16667rem; /* 21 / 18 = 1.1667 */
+  margin-bottom: 1.41429rem;
+}
+
+/* ==== Typefaces  ==== */
+
+.open-sans {
+  font-family: "Open Sans";
+  /* color: rgb(255, 251, 251); */
+}
+
+/* ==== Weights, styles, letterspacing, etc. ==== */
+
+.ls-medium {
+  letter-spacing: 4px;
+}
+
+.ls-xlarge {
+  letter-spacing: 12px;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+
+.bigger-wrapper {
+  background-image: linear-gradient(135deg, #4d3adf69 10%, #f7cd756b 100%);
+}
+/* ==== General styles ==== */
+
+.wrapper {
+  padding-top: 8%;
+  max-width: 60rem;
+  margin: 0 auto;
+  text-align: center;
+}
