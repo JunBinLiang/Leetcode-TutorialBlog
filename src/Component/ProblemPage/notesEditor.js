@@ -4,16 +4,7 @@ import MDEditor from "@uiw/react-md-editor";
 import "@uiw/react-md-editor/dist/markdown-editor.css";
 import "./NotesEditor.css";
 
-const mkdStr = `
-# Notes To Self
-**bold text:** 
-1. item
-- item
-- item
-\`\`\`javascript
-console.log("Hello World);
-\`\`\`
-`;
+const mkdStr = ``;
 
 class NotesEditor extends Component {
   constructor() {
@@ -30,7 +21,7 @@ class NotesEditor extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    this.scrollToBottom();
+    //this.scrollToBottom();
   }
 
   scrollToBottom() {
@@ -46,14 +37,14 @@ class NotesEditor extends Component {
         <div className="itemconfiguration margin" ref={`thing`} > 
           <MDEditor.Markdown
             source={this.state.value}
-            style={{ minHeight: "350px" }}
+            style={{ minHeight: "500px" }}
             className="notes"
           />
         </div>
 
         <br/>
         <MDEditor
-          height={300}
+          height={250}
           value={this.state.value}
           onChange={this.change}
           className="margin"
