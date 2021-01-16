@@ -1,30 +1,26 @@
 .margin {
-  margin-right: 8%;
+  margin-right: 5%;
 }
-
+.h1 {
+  font-size: 30px;
+}
 .notes {
   background: linear-gradient(
     180deg,
-    rgb(250, 238, 173) 0%,
-    rgba(187, 235, 255, 1) 20%,
-    rgba(170, 220, 241, 1) 75%,
-    rgba(195, 229, 244, 1) 100%
+    rgb(173, 247, 250) 0%,
+    rgb(187, 205, 255) 40%,
+    rgb(187, 205, 255) 75%,
+    rgb(187, 205, 255) 100%
   );
   padding-top: 2%;
   margin-top: 3%;
   font-family: "Kalam", cursive;
   font-size: 1rem;
-  padding-left: 2%;
+  padding-left: 5%;
 }
-
- .itemconfiguration
-    {
-        height: 400px;
-        overflow:scroll;
-		overscroll-behavior-y: contain;
-		scroll-snap-type: y proximity;
-        float: left;
-        position: relative;
-        margin-left: -5px;
-		width:100%;
-    }
+.itemconfiguration {
+  height: 400px;
+  overflow: scroll;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y proximity;
+}

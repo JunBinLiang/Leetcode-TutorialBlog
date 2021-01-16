@@ -29,6 +29,7 @@ textarea {
 .outline-primary {
   background-color: rgb(79, 79, 219);
   border: rgb(79, 79, 219);
+  color: black;
 }
 .outline-primary:hover {
   background-color: rgb(65, 39, 179);
