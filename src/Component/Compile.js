@@ -157,7 +157,7 @@ class Compile extends Component {
                   </div>
                 </div>
                 <div label="Notes" className="notes">
-                  <NoteEditor/>
+                  <NoteEditor />
                 </div>
               </Tabs>
 
