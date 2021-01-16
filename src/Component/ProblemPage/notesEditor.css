@@ -23,4 +23,5 @@
   overflow: scroll;
   overscroll-behavior-y: contain;
   scroll-snap-type: y proximity;
+  scroll-snap-align: end;
 }
