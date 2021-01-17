@@ -3,10 +3,12 @@
   border: none;
   background-color: rgb(160, 160, 236);
   margin: 5px;
+  color: black;
 }
 .beforePress {
   background-color: rgb(194, 194, 221);
   margin: 5px;
+  color: black;
 }
 
 .theme {

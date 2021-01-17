@@ -64,7 +64,6 @@ h1 {
   border-radius: 10px;
   color: #fff;
   font-size: 20px;
-  /* font-size: 1.5rem; */
 }
 
 .back {
@@ -73,7 +72,52 @@ h1 {
   background: -o-linear-gradient(45deg, #cedce7 0%, #596a72 100%);
   background: linear-gradient(45deg, #cedce7 0%, #596a72 100%);
 }
+.block {
+  color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  font-size: 30px;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-animation: scaledown 1s linear;
+  -moz-animation: scaledown 1s linear;
+  animation: scaledown 1s linear;
+  transform-origin: 50% 50%;
+  animation-fill-mode: forwards;
+  height: 250px;
+  width: 250px;
+  background-color: #c0b5f3;
+  line-height: 250px;
+}
+.block:hover {
+  z-index: 100;
+  background-color: #9e9dcf;
+  -webkit-animation: scale 0.5s linear;
+  -moz-animation: scale 0.5s linear;
+  animation: scale 0.5s linear;
+  transform-origin: 50% 50%;
+  animation-fill-mode: forwards;
+}
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+    -webkit-box-shadow: 10px 10px 60px 10px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 10px 10px 60px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px 10px 60px 10px rgba(0, 0, 0, 0.1);
+  }
+}
 
+@keyframes scaledown {
+  0% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 .front:after {
   position: absolute;
   top: 0;
