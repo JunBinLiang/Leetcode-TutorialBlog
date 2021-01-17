@@ -75,7 +75,7 @@ class Problems extends Component {
     let problemlist;
     let problemcategory = (
       <div className="wrapper">
-        <h1>Our Topics :</h1>
+        <h1 className="open-sans">Our Topics :</h1>
         <FadeIn>
           <div className="cols">
             <div
@@ -85,16 +85,19 @@ class Problems extends Component {
               }}
             >
               <div className="container">
-                <div className="front">
+                <div className="block">
+                  <p>Arrays</p>
+                </div>
+                {/* <div className="front open-sans">
                   <div className="inner">
                     <p>Arrays</p>
                   </div>
-                </div>
-                <div className="back">
+                </div> */}
+                {/* <div className="back">
                   <div className="inner">
                     <p></p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div
@@ -104,15 +107,8 @@ class Problems extends Component {
               }}
             >
               <div className="container">
-                <div className="front">
-                  <div className="inner">
-                    <p>List</p>
-                  </div>
-                </div>
-                <div className="back">
-                  <div className="inner">
-                    <p></p>
-                  </div>
+                <div className="block">
+                  <p>Lists</p>
                 </div>
               </div>
             </div>
@@ -123,15 +119,8 @@ class Problems extends Component {
               }}
             >
               <div className="container">
-                <div className="front">
-                  <div className="inner">
-                    <p>Tree</p>
-                  </div>
-                </div>
-                <div className="back">
-                  <div className="inner">
-                    <p></p>
-                  </div>
+                <div className="block">
+                  <p>Trees</p>
                 </div>
               </div>
             </div>
@@ -145,15 +134,8 @@ class Problems extends Component {
               }}
             >
               <div className="container">
-                <div className="front">
-                  <div className="inner">
-                    <p>Graph</p>
-                  </div>
-                </div>
-                <div className="back">
-                  <div className="inner">
-                    <p></p>
-                  </div>
+                <div className="block">
+                  <p>Graphs</p>
                 </div>
               </div>
             </div>
@@ -164,15 +146,8 @@ class Problems extends Component {
               }}
             >
               <div className="container">
-                <div className="front">
-                  <div className="inner">
-                    <p>DP</p>
-                  </div>
-                </div>
-                <div className="back">
-                  <div className="inner">
-                    <p></p>
-                  </div>
+                <div className="block">
+                  <p>DP</p>
                 </div>
               </div>
             </div>
@@ -183,15 +158,8 @@ class Problems extends Component {
               }}
             >
               <div className="container">
-                <div className="front">
-                  <div className="inner">
-                    <p>Math</p>
-                  </div>
-                </div>
-                <div className="back">
-                  <div className="inner">
-                    <p></p>
-                  </div>
+                <div className="block">
+                  <p>Math</p>
                 </div>
               </div>
             </div>
