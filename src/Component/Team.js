@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 import junbin from "../picture/founder.jpg";
+import weiting from "../picture/weiting.jpg";
 import Footer from "./Footer";
 
 class Team extends Component {
@@ -19,7 +20,7 @@ class Team extends Component {
                 <div>
                   <img
                     src={junbin}
-                    style={{ height: "25%", width: "25%", borderRadius: "40%" }}
+                    style={{ height: "200px", width: "200px", borderRadius: "40%" }}
                   />
                 </div>
               </div>
@@ -28,7 +29,24 @@ class Team extends Component {
                 <strong>Founder and Software Engineer</strong>
               </h6>
             </div>
+
+            <div class="col-md-4 mb-md-0 mb-5">
+              <div class="avatar mx-auto">
+                <div>
+                  <img
+                    src={weiting}
+                    style={{ height: "200px", width: "200px", borderRadius: "40%" }}
+                  />
+                </div>
+              </div>
+              <h4 class="font-weight-bold dark-grey-text my-4">Weiting Lin</h4>
+              <h6 class="text-uppercase grey-text mb-3">
+                <strong>Software Engineer</strong>
+              </h6>
+            </div>
           </div>
+
+          
         </section>
         <br />
         <br />
