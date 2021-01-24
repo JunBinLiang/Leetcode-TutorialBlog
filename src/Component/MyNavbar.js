@@ -12,6 +12,8 @@ import { GoogleLogin } from "react-google-login";
 import config from "../config.json";
 
 import "antd/dist/antd.css";
+import "./MyNavBar.css";
+
 import { Menu } from "antd";
 import {
   AppstoreOutlined,
@@ -49,6 +51,7 @@ class MyNavbar extends Component {
 
     axios
       .post(`https://frozen-atoll-01566.herokuapp.com/login`, {
+        // .post("http://localhost:8080/login", {
         code: response.tokenId,
       })
       .then((res) => {
@@ -100,11 +103,7 @@ class MyNavbar extends Component {
       );
     } else {
       logoutB = (
-        <Menu
-          style={{ width: 150 }}
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
-        >
+        <Menu defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]}>
           <SubMenu key="sub4" icon={<SettingOutlined />} title="66Bro">
             <Menu.Item>Setting</Menu.Item>
             <Menu.Item onClick={this.logout}>Logout</Menu.Item>
@@ -120,7 +119,9 @@ class MyNavbar extends Component {
             <Nav.Link onClick={this.handleClick1}>Home</Nav.Link>
             <Nav.Link onClick={this.handleClick2}>Problems</Nav.Link>
             <Nav.Link onClick={this.handleClick3}>About Us</Nav.Link>
+            <div id="indicator"></div>
           </Nav>
+
           {loginB}
           {logoutB}
         </Navbar>
