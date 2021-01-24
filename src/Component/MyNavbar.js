@@ -20,6 +20,10 @@ import {
 } from "@ant-design/icons";
 const { SubMenu } = Menu;
 
+
+let local="http://localhost:8080/";
+let heroku="https://frozen-atoll-01566.herokuapp.com/api/";
+
 class MyNavbar extends Component {
   constructor() {
     super();
@@ -48,7 +52,7 @@ class MyNavbar extends Component {
     console.log(response); //id_token
 
     axios
-      .post(`https://frozen-atoll-01566.herokuapp.com/login`, {
+      .post(local+`login`, {
         code: response.tokenId,
       })
       .then((res) => {
