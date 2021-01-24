@@ -52,7 +52,7 @@ class MyNavbar extends Component {
     console.log(response); //id_token
 
     axios
-      .post(local+`login`, {
+      .post(heroku+`login`, {
         code: response.tokenId,
       })
       .then((res) => {

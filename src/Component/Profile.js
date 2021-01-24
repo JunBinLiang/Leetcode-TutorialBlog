@@ -27,7 +27,7 @@ class Profile extends Component {
     if (previousProps.match.params.id != this.props.match.params.id) {
       let email = this.props.match.params.id;
       axios
-        .post(local+`userInfor`, {
+        .post(heroku+`userInfor`, {
           email: email,
         })
         .then((res) => {
@@ -47,7 +47,7 @@ class Profile extends Component {
     
     let email = this.props.match.params.id;
     axios
-      .post(local+`userInfor`, {
+      .post(heroku+`userInfor`, {
         email: email,
       })
       .then((res) => {
