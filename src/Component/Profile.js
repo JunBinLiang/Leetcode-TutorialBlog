@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import { data } from "./data/userData.js";
 import { withRouter } from "react-router-dom";
+import axios from "axios";
 import PieChart from "./PieChart";
 
 import "./Profiles.css";
@@ -8,49 +9,57 @@ import "./Profiles.css";
 import Calender from "./Calendar";
 const TOTAL_PROBLEM = 200;
 
+
+let local="http://localhost:8080/";
+let heroku="https://frozen-atoll-01566.herokuapp.com/";
+
 class Profile extends Component {
   constructor() {
     super();
     this.state = {
-      id: 0,
       name: "",
       email: "",
-      mobile: "",
-      phone: "",
       img: "",
-      address: "",
     };
   }
 
   componentDidUpdate(previousProps, previousState) {
     if (previousProps.match.params.id != this.props.match.params.id) {
-      let id = this.props.match.params.id;
-      const userInfo = data.filter((person) => person.id == id)[0];
-      if (userInfo === undefined) {
-        this.props.history.push("/404");
-        return;
-      }
+      let email = this.props.match.params.id;
+      axios
+        .post(heroku+`userInfor`, {
+          email: email,
+        })
+        .then((res) => {
+          console.log(res);
+          this.setState({
+            name: res.data.user.name,
+            email: res.data.user.email,
+            img: res.data.user.pic,
+          });
+        }).catch((err)=>{
+          this.props.history.push("/404");
+        })
     }
   }
 
   componentDidMount() {
-    let id = this.props.match.params.id;
-    const userInfo = data.filter((person) => person.id == id)[0];
-
-    if (userInfo === undefined) {
-      this.props.history.push("/404");
-      return;
-    }
-    this.setState({
-      id: userInfo.id,
-      name: userInfo.name,
-      email: userInfo.email,
-      phone: userInfo.phone,
-      mobile: userInfo.mobile,
-      img: userInfo.img,
-      address: userInfo.address,
-      problemSolved: userInfo.problemSolved,
-    });
+    
+    let email = this.props.match.params.id;
+    axios
+      .post(heroku+`userInfor`, {
+        email: email,
+      })
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          name: res.data.user.name,
+          email: res.data.user.email,
+          img: res.data.user.pic,
+        });
+      }).catch((err)=>{
+        this.props.history.push("/404");
+      })
   }
 
   render() {
@@ -72,9 +81,6 @@ class Profile extends Component {
                       <h4>{this.state.name}</h4>
                       <p className="text-secondary mb-1">
                         Founder and Software Engineer
-                      </p>
-                      <p className="text-muted font-size-sm">
-                        {this.state.address}
                       </p>
                       <button className="btn btn-primary">Follow</button>
                       <button className="btn btn-outline-primary">
@@ -221,32 +227,6 @@ class Profile extends Component {
                     </div>
                   </div>
                   <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <h6 className="mb-0">Phone</h6>
-                    </div>
-                    <div className="col-sm-9 text-secondary">
-                      {this.state.phone}
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <h6 className="mb-0">Mobile</h6>
-                    </div>
-                    <div className="col-sm-9 text-secondary">
-                      {this.state.mobile}
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <h6 className="mb-0">Address</h6>
-                    </div>
-                    <div className="col-sm-9 text-secondary">
-                      {this.state.address}
-                    </div>
-                  </div>
                 </div>
               </div>
               <div className="row gutters-sm">
