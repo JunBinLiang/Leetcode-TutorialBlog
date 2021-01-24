@@ -11,7 +11,7 @@ const TOTAL_PROBLEM = 200;
 
 
 let local="http://localhost:8080/";
-let heroku="https://frozen-atoll-01566.herokuapp.com/api/";
+let heroku="https://frozen-atoll-01566.herokuapp.com/";
 
 class Profile extends Component {
   constructor() {
