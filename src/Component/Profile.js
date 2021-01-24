@@ -9,9 +9,8 @@ import "./Profiles.css";
 import Calender from "./Calendar";
 const TOTAL_PROBLEM = 200;
 
-
-let local="http://localhost:8080/";
-let heroku="https://frozen-atoll-01566.herokuapp.com/";
+let local = "http://localhost:8080/";
+let heroku = "https://frozen-atoll-01566.herokuapp.com/";
 
 class Profile extends Component {
   constructor() {
@@ -27,7 +26,7 @@ class Profile extends Component {
     if (previousProps.match.params.id != this.props.match.params.id) {
       let email = this.props.match.params.id;
       axios
-        .post(heroku+`userInfor`, {
+        .post(heroku + `userInfor`, {
           email: email,
         })
         .then((res) => {
@@ -37,17 +36,17 @@ class Profile extends Component {
             email: res.data.user.email,
             img: res.data.user.pic,
           });
-        }).catch((err)=>{
-          this.props.history.push("/404");
         })
+        .catch((err) => {
+          this.props.history.push("/404");
+        });
     }
   }
 
   componentDidMount() {
-    
     let email = this.props.match.params.id;
     axios
-      .post(heroku+`userInfor`, {
+      .post(heroku + `userInfor`, {
         email: email,
       })
       .then((res) => {
@@ -57,9 +56,10 @@ class Profile extends Component {
           email: res.data.user.email,
           img: res.data.user.pic,
         });
-      }).catch((err)=>{
-        this.props.history.push("/404");
       })
+      .catch((err) => {
+        this.props.history.push("/404");
+      });
   }
 
   render() {

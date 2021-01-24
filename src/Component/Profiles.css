@@ -23,6 +23,36 @@ body {
   border-radius: 0.25rem;
 }
 
+.btn-primary {
+  background-color: rgb(102, 35, 226);
+  border: 1px rgb(102, 35, 226);
+}
+.gutters-sm {
+  margin-top: 20px;
+}
+.row {
+  margin-top: 5px;
+}
+.btn-outline-primary {
+  margin-left: 5px;
+  color: rgb(102, 35, 226);
+  border: 1px rgb(102, 35, 226);
+}
+.bg-primary {
+  background-color: rgb(100, 55, 226) !important;
+}
+.text-info {
+  font-size: 18px;
+  color: #f1ac17 !important;
+}
+.btn-outline-primary:hover {
+  color: white;
+  background-color: rgb(102, 35, 226);
+  border: rgb(102, 35, 226);
+}
+.list-group-item:hover {
+  background-color: #cec5f0;
+}
 .card-body {
   flex: 1 1 auto;
   min-height: 1px;
