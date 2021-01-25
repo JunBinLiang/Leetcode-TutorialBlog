@@ -1,7 +1,8 @@
  const initialState = {
     mode: 0,
 	isAuthenticated:false,
-	token:""
+    token:"",
+    email:""
 }
 
 const reducer = (state = initialState, action) => {
@@ -11,6 +12,7 @@ const reducer = (state = initialState, action) => {
             mode: 0
         }
     }
+    
 	if (action.type === 'mode1') {
         return {
 			...state,
@@ -35,6 +37,12 @@ const reducer = (state = initialState, action) => {
         return {
 			...state,
             token: action.val
+        }
+    }
+    if (action.type === 'setEmail') {
+        return {
+			...state,
+            email: action.val
         }
     }
 	if (action.type === 'logout') {

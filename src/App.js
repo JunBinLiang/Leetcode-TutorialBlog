@@ -18,6 +18,10 @@ import MyNavbar from "./Component/MyNavbar";
 import { connect } from "react-redux";
 import axios from "axios";
 
+let local="http://localhost:8080/";
+let heroku="https://frozen-atoll-01566.herokuapp.com/";
+
+
 class App extends Component {
   componentDidMount() {
     let token = localStorage.getItem("token");
@@ -26,24 +30,26 @@ class App extends Component {
     }
 
     const config = {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `${token}` },
     };
     axios
-      .post(`https://frozen-atoll-01566.herokuapp.com/userInfor`, {}, config)
+      .post(local+`autologin`, {}, config)
       .then((res) => {
         //user information will be added later,first lunch
         if (res.status === 200) {
           console.log("authenticate");
+          let email=res.data.user.email;
           this.props.login();
+          this.props.setEmail(email);
         }
       })
       .catch((err) => {
         console.log("not authenticate");
       });
-    console.log("au ", this.props.isAuthenticated);
   }
 
   render() {
+    console.log("au ", this.props.email);
     return (
       <div>
         <HashRouter>
@@ -70,12 +76,14 @@ const mapStateToProps = (state) => {
   return {
     token: state.token,
     isAuthenticated: state.isAuthenticated,
+    email: state.email,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setToken: (token) => dispatch({ type: "setToken", val: token }),
+    setEmail: (email) => dispatch({ type: "setEmail", val: email }),
     login: (token) => dispatch({ type: "login" }),
   };
 };

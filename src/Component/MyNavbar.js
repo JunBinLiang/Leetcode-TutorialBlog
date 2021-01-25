@@ -53,8 +53,8 @@ class MyNavbar extends Component {
     console.log(response); //id_token
 
     axios
-      .post(`https://frozen-atoll-01566.herokuapp.com/login`, {
-        // .post("http://localhost:8080/login", {
+      //.post(`https://frozen-atoll-01566.herokuapp.com/login`, {
+         .post("http://localhost:8080/login", {
 
         code: response.tokenId,
       })
