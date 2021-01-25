@@ -33,7 +33,7 @@ class App extends Component {
       headers: { Authorization: `${token}` },
     };
     axios
-      .post(local+`autologin`, {}, config)
+      .post(heroku+`autologin`, {}, config)
       .then((res) => {
         //user information will be added later,first lunch
         if (res.status === 200) {
