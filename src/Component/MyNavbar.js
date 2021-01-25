@@ -34,6 +34,13 @@ class MyNavbar extends Component {
     this.googleResponse = this.googleResponse.bind(this);
     this.onFailure = this.onFailure.bind(this);
     this.logout = this.logout.bind(this);
+    this.myProfile = this.myProfile.bind(this);
+  }
+
+  myProfile(){
+    let email=this.props.email;
+    let url=email.split("@")[0];
+    this.props.history.push("/profile/"+url);
   }
 
   onFailure() {}
@@ -62,8 +69,11 @@ class MyNavbar extends Component {
         console.log(res);
         let token = res.data.token;
         let profile = res.data.user;
+        let email=profile.email;
+
         localStorage.setItem("token", token);
         this.props.setToken(token);
+        this.props.setEmail(email);
         this.props.loginSuccess();
         console.log(token);
         console.log(profile);
@@ -109,7 +119,7 @@ class MyNavbar extends Component {
       logoutB = (
         <Menu defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]}>
           <SubMenu key="sub4" icon={<SettingOutlined />} title="66Bro">
-            <Menu.Item>Setting</Menu.Item>
+            <Menu.Item onClick={this.myProfile}>Profile</Menu.Item>
             <Menu.Item onClick={this.logout}>Logout</Menu.Item>
           </SubMenu>
         </Menu>
@@ -137,6 +147,7 @@ class MyNavbar extends Component {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.isAuthenticated,
+    email:state.email
   };
 };
 
@@ -146,6 +157,7 @@ const mapDispatchToProps = (dispatch) => {
     loginSuccess: () => dispatch({ type: "login" }),
     setToken: (token) => dispatch({ type: "setToken", val: token }),
     logout: () => dispatch({ type: "logout" }),
+    setEmail: (email) => dispatch({ type: "setEmail", val: email })
   };
 };
 
