@@ -48,7 +48,7 @@ h1 {
 .back {
   background-size: cover;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  border-radius: 50%;
   background-position: center;
   -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
   transition: -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
@@ -61,9 +61,33 @@ h1 {
   text-align: center;
   min-height: 280px;
   height: auto;
-  border-radius: 10px;
-  color: #fff;
+  border-radius: 50%;
+  background-image: radial-gradient(
+    circle at 50% 120%,
+    #323232,
+    #0a0a0a 80%,
+    #000000 100%
+  );
+
   font-size: 20px;
+  color: white;
+}
+.front:before {
+  content: "";
+  position: absolute;
+  background: radial-gradient(
+    circle at 50% 120%,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0) 70%
+  );
+  border-radius: 50%;
+  bottom: 2.5%;
+  left: 5%;
+  opacity: 0.6;
+  height: 100%;
+  width: 90%;
+  filter: blur(5px);
+  z-index: 2;
 }
 
 .back {
@@ -72,10 +96,10 @@ h1 {
   background: -o-linear-gradient(45deg, #cedce7 0%, #596a72 100%);
   background: linear-gradient(45deg, #cedce7 0%, #596a72 100%);
 }
+
 .block {
-  color: #fff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  border-radius: 50%;
   font-size: 30px;
   text-align: center;
   vertical-align: middle;
@@ -86,12 +110,12 @@ h1 {
   animation-fill-mode: forwards;
   height: 250px;
   width: 250px;
-  background-color: #c0b5f3;
+
   line-height: 250px;
 }
 .block:hover {
   z-index: 100;
-  background-color: #9e9dcf;
+
   -webkit-animation: scale 0.5s linear;
   -moz-animation: scale 0.5s linear;
   animation: scale 0.5s linear;
@@ -128,10 +152,10 @@ h1 {
   content: "";
   display: block;
   opacity: 1;
-  background-color: rgba(120, 129, 131, 0.815);
+  /* background-color: rgba(63, 74, 122, 0.966); */
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: 10px;
+  border-radius: 50%;
 }
 .container:hover .front,
 .container:hover .back {
@@ -193,7 +217,11 @@ h1 {
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
-
+.wrapper1 {
+  max-width: 80%;
+  margin: 0 auto;
+  margin-top: 40px;
+}
 .front .inner p {
   font-size: 25px;
   text-align: center;
@@ -203,10 +231,10 @@ h1 {
 
 .front .inner p:after {
   content: "";
-  width: 4rem;
+  width: 10rem;
   height: 2px;
   position: absolute;
-  background: #c6d4df;
+  background: linear-gradient(130deg, yellow, red);
   display: block;
   left: 0;
   right: 0;
