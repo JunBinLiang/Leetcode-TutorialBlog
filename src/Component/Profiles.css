@@ -1,13 +1,11 @@
-body {
-  margin-top: 20px;
-  color: #1a202c;
-  text-align: left;
-  background-color: #e2e8f0;
-}
 .main-body {
-  padding: 15px;
+  padding: 40px;
+}
+.profilePage {
+  background-color: rgb(243, 243, 243);
 }
 .card {
+  margin: 10px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
@@ -21,11 +19,39 @@ body {
   background-clip: border-box;
   border: 0 solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  box-shadow: -12px -12px 12px 0 rgba(255, 255, 255, 0.6),
+    12px 12px 12px 0 rgba(0, 0, 0, 0.03);
+}
+.skills {
+  text-align: left;
+  padding: 10px;
+}
+
+.skills ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.inline {
+  flex: 0 0 100%;
+  position: relative;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.skills ul li {
+  border: 1px solid #0099ff;
+  box-shadow: rgba(46, 195, 240, 0.4) 5px 5px, rgba(46, 179, 240, 0.3) 10px 10px;
+  border-radius: 2px;
+  display: inline-block;
+  font-size: 12px;
+  margin: 0 7px 7px 0;
+  padding: 7px;
 }
 
 .btn-primary {
-  background-color: rgb(102, 35, 226);
-  border: 1px rgb(102, 35, 226);
+  background-color: rgb(79, 182, 223);
+  border: 1px rgb(79, 182, 223);
 }
 .gutters-sm {
   margin-top: 20px;
@@ -35,23 +61,23 @@ body {
 }
 .btn-outline-primary {
   margin-left: 5px;
-  color: rgb(102, 35, 226);
-  border: 1px rgb(102, 35, 226);
+  color: rgb(35, 124, 226);
+  border: 1px rgb(35, 134, 226);
 }
 .bg-primary {
-  background-color: rgb(100, 55, 226) !important;
+  background-color: rgb(83, 75, 192) !important;
 }
 .text-info {
   font-size: 18px;
-  color: #f1ac17 !important;
+  color: #17bef1 !important;
 }
 .btn-outline-primary:hover {
   color: white;
-  background-color: rgb(102, 35, 226);
-  border: rgb(102, 35, 226);
+  background-color: rgb(75, 103, 226);
+  border: rgb(75, 103, 226);
 }
 .list-group-item:hover {
-  background-color: #cec5f0;
+  background-color: #c5d3f0;
 }
 .card-body {
   flex: 1 1 auto;

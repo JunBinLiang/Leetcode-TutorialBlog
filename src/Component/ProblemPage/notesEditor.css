@@ -4,19 +4,39 @@
 .h1 {
   font-size: 30px;
 }
+
 .notes {
-  background: linear-gradient(
-    180deg,
-    rgb(173, 247, 250) 0%,
-    rgb(187, 205, 255) 40%,
-    rgb(187, 205, 255) 75%,
-    rgb(187, 205, 255) 100%
-  );
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin: 26px auto 0;
+  padding: 24px;
+  position: relative;
+  width: 90%;
   padding-top: 2%;
-  margin-top: 3%;
   font-family: "Kalam", cursive;
   font-size: 1rem;
-  padding-left: 5%;
+}
+.notes:before,
+.notes:after {
+  content: "";
+  height: 98%;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+.notes:before {
+  background: #fafafa;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  left: -5px;
+  top: 4px;
+  transform: rotate(-2.5deg);
+}
+.notes:after {
+  background: #f6f6f6;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  right: -3px;
+  top: 1px;
+  transform: rotate(1.4deg);
 }
 .itemconfiguration {
   height: 500px;
