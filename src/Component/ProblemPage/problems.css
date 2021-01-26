@@ -163,3 +163,17 @@ svg {
   transition: 0.5s;
   box-shadow: -20px 20px 10px rgba(0, 0, 0, 0.5);
 }
+
+
+del,
+strike {
+  text-decoration: none;
+  line-height: 1.4;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.63em, transparent), color-stop(0.63em, #ff0000), color-stop(0.7em, #ff0000), color-stop(0.7em, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(top, transparent 0em, transparent 0.63em, #ff0000 0.63em, #ff0000 0.7em, transparent 0.7em, transparent 1.4em);
+  background-image: -o-linear-gradient(top, transparent 0em, transparent 0.63em, #ff0000 0.63em, #ff0000 0.7em, transparent 0.7em, transparent 1.4em);
+  background-image: linear-gradient(to bottom, transparent 0em, transparent 0.63em, #ff0000 0.63em, #ff0000 0.7em, transparent 0.7em, transparent 1.4em);
+  -webkit-background-size: 1.4em 1.4em;
+  background-size: 1.4em 1.4em;
+  background-repeat: repeat;
+}

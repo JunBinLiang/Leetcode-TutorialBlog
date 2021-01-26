@@ -61,7 +61,7 @@ class Problems extends Component {
   handleClick1(i) {
     this.props.mode1();
     this.setState({
-      categoryIndex: i,
+      categoryIndex: i-1,
     });
   }
 
@@ -187,6 +187,7 @@ class Problems extends Component {
     if (this.props.mode == 1) {
       problemcategory = "";
       let plist = ProblemSet.category[this.state.categoryIndex];
+      console.log(this.props.solved);
 
       problemlist = (
         <div className="container" style={{ width: "75%" }}>
@@ -202,10 +203,11 @@ class Problems extends Component {
                   this.solve(i);
                 }}
               >
-                {i + 1} . {ProblemSet.names[i]}{" "}
-                {ProblemSet.stars[ProblemSet.difficulty[i]]}
+                {i + 1}. {this.props.solved[i] ? <strike> {ProblemSet.names[i]}</strike> : ProblemSet.names[i]} 
+
+                {' '+ ProblemSet.stars[ProblemSet.difficulty[i]]}
                 
-                {this.props.solved[i] ? 'solved' : 'not solved'}
+                
 
               </ListGroup.Item>
             ))}
