@@ -31,7 +31,7 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
 import "../App.css";
-import "./Editor.css";
+import "./Editor.scss";
 import swal from "sweetalert";
 import axios from "axios";
 import InputField from "./InputField";
@@ -347,7 +347,10 @@ class Editor extends Component {
         B = <Button className="outline-primary">Compile</Button>;
       } else {
         B = (
-          <Button className="outline-primary" onClick={this.handleCompile}>
+          <Button
+            className="outline-primary compile"
+            onClick={this.handleCompile}
+          >
             Compile
           </Button>
         );

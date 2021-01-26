@@ -53,10 +53,12 @@ class InputField extends Component {
           onClick={() => {
             this.setState({ show: true });
           }}
-          className="btn-secondary"
+          className=" color"
+          data-toggle="modal"
+          data-target="#myModal"
           style={{ marginLeft: "3%", marginBottom: "10px" }}
         >
-          Test{this.props.index}
+          Test {this.props.index}
         </Button>
       );
     }
@@ -90,6 +92,22 @@ class InputField extends Component {
     return (
       <>
         {button}
+        {/* <div
+          class="modal"
+          id="modal"
+          size="sm"
+          show={this.state.show}
+          onHide={() => {
+            this.setState({ show: false });
+          }}
+        >
+          <h2> Test {this.props.index}</h2>
+          <div class="content">{this.state.judge}</div>
+          <div class="actions">
+            <button class="toggle-button">OK</button>
+          </div>
+        </div> */}
+
         <Modal
           size="sm"
           show={this.state.show}
@@ -98,12 +116,20 @@ class InputField extends Component {
           }}
           aria-labelledby="example-modal-sizes-title-sm"
         >
-          <Modal.Header closeButton>
-            <Modal.Title id="example-modal-sizes-title-sm">
-              Test {this.props.index}
-            </Modal.Title>
+          <Modal.Header>
+            <Modal.Title>Test {this.props.index}</Modal.Title>
           </Modal.Header>
           <Modal.Body>{this.state.judge}</Modal.Body>
+          <div className="actions">
+            <button
+              className="okbtn"
+              onClick={() => {
+                this.setState({ show: false });
+              }}
+            >
+              OK
+            </button>
+          </div>
         </Modal>
       </>
     );

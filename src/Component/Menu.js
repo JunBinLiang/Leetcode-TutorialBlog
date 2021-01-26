@@ -20,7 +20,7 @@ class Menu extends Component {
 
   render() {
     return (
-      <div className="wrapper">
+      <div className=" wrapper1">
         <div className="cols">
           <div className="col" onClick={this.handleClick1}>
             <div className="container">
