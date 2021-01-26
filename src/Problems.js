@@ -190,6 +190,7 @@ class Problems extends Component {
 
       problemlist = (
         <div className="container" style={{ width: "75%" }}>
+          <h1 className="problemTitle"> Problems</h1>
           <FadeIn>
             {plist.map((i) => (
               <ListGroup.Item
