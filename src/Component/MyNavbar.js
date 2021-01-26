@@ -66,7 +66,7 @@ class MyNavbar extends Component {
         code: response.tokenId,
       })
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         let token = res.data.token;
         let profile = res.data.user;
         let email=profile.email;
@@ -74,9 +74,10 @@ class MyNavbar extends Component {
         localStorage.setItem("token", token);
         this.props.setToken(token);
         this.props.setEmail(email);
+        this.props.setSolved(profile.solved);
         this.props.loginSuccess();
-        console.log(token);
-        console.log(profile);
+        //console.log(token);
+        //console.log(profile);
       });
   }
 
@@ -92,6 +93,7 @@ class MyNavbar extends Component {
   }
 
   render() {
+    console.log(this.props.solved);
     let loginB = null;
     let logoutB = null;
     if (!this.props.isAuthenticated) {
@@ -147,7 +149,8 @@ class MyNavbar extends Component {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.isAuthenticated,
-    email:state.email
+    email:state.email,
+    solved:state.solved
   };
 };
 
@@ -157,6 +160,7 @@ const mapDispatchToProps = (dispatch) => {
     loginSuccess: () => dispatch({ type: "login" }),
     setToken: (token) => dispatch({ type: "setToken", val: token }),
     logout: () => dispatch({ type: "logout" }),
+    setSolved: (solved) => dispatch({ type: "setSolved", val: solved }),
     setEmail: (email) => dispatch({ type: "setEmail", val: email })
   };
 };

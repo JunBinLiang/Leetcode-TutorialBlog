@@ -41,6 +41,7 @@ class App extends Component {
           let email=res.data.user.email;
           this.props.login();
           this.props.setEmail(email);
+          this.props.setSolved(res.data.user.solved)
         }
       })
       .catch((err) => {
@@ -49,7 +50,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("au ", this.props.email);
+    console.log("au ", this.props.solved);
     return (
       <div>
         <HashRouter>
@@ -77,6 +78,7 @@ const mapStateToProps = (state) => {
     token: state.token,
     isAuthenticated: state.isAuthenticated,
     email: state.email,
+    solved:state.solved
   };
 };
 
@@ -84,6 +86,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setToken: (token) => dispatch({ type: "setToken", val: token }),
     setEmail: (email) => dispatch({ type: "setEmail", val: email }),
+    setSolved: (solved) => dispatch({ type: "setSolved", val: solved }),
     login: (token) => dispatch({ type: "login" }),
   };
 };

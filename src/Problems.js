@@ -187,6 +187,9 @@ class Problems extends Component {
               >
                 {i + 1} . {ProblemSet.names[i]}{" "}
                 {ProblemSet.stars[ProblemSet.difficulty[i]]}
+                
+                {this.props.solved[i] ? 'solved' : 'not solved'}
+
               </ListGroup.Item>
             ))}
           </FadeIn>
@@ -403,6 +406,7 @@ class Code extends Component {
 const mapStateToProps = (state) => {
   return {
     mode: state.mode,
+    solved: state.solved,
   };
 };
 

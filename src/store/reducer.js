@@ -2,7 +2,8 @@
     mode: 0,
 	isAuthenticated:false,
     token:"",
-    email:""
+    email:"",
+    solved:[]
 }
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +20,7 @@ const reducer = (state = initialState, action) => {
             mode: 1
         }
     }
+
 	if (action.type === 'mode2') {
         return {
 			...state,
@@ -50,6 +52,13 @@ const reducer = (state = initialState, action) => {
 			...state,
             token: "",
 			isAuthenticated: false
+        }
+    }
+
+    if (action.type === 'setSolved') {
+        return {
+			...state,
+            solved:[...action.val]
         }
     }
 	
