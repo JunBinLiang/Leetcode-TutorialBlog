@@ -64,7 +64,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container profilePage">
         <div className="main-body">
           <div className="row gutters-sm">
             <div className="col-md-4 mb-3">
@@ -226,7 +226,24 @@ class Profile extends Component {
                       {this.state.email}
                     </div>
                   </div>
+
                   <hr />
+                  <div className="row">
+                    <div className=" inline">
+                      <h6 className="mb-0">Skills</h6>
+                      <div class="skills mb-0">
+                        <ul>
+                          <li>UI / UX</li>
+                          <li>Front End Development</li>
+                          <li>HTML</li>
+                          <li>CSS</li>
+                          <li>JavaScript</li>
+                          <li>React</li>
+                          <li>Node</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="row gutters-sm">

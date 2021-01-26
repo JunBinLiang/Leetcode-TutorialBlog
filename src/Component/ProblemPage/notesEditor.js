@@ -30,7 +30,7 @@ class NotesEditor extends Component {
   render() {
     return (
       <div className="container">
-        <div className="itemconfiguration margin" ref={`thing`}>
+        <div className="itemconfiguration margin " ref={`thing`}>
           <MDEditor.Markdown
             source={this.state.value}
             style={{ minHeight: "500px" }}

@@ -29,12 +29,12 @@ textarea {
   outline: none;
 }
 .outline-primary {
-  background-color: rgb(79, 79, 219);
-  border: rgb(79, 79, 219);
+  background-color: rgb(117, 117, 224);
+  border: rgb(102, 102, 218);
   color: black;
 }
 .outline-primary:hover {
-  background-color: rgb(65, 39, 179);
+  background-color: rgb(118, 100, 199);
 }
 textarea:hover {
   border: 3px solid #a0a0a0;
