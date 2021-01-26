@@ -64,7 +64,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container profilePage">
         <div className="main-body">
           <div className="row gutters-sm">
             <div className="col-md-4 mb-3">

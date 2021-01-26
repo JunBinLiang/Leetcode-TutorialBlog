@@ -36,7 +36,9 @@ class Home extends Component {
               <h1 className="gamma lato thin uppercase ls-xlarge">
                 Welcome To
                 <br />
-                <span className="open-sans tera ls-xlarge bold">66 Code</span>
+                <span className="open-sans tera ls-xlarge bold threeD">
+                  66 Code
+                </span>
                 <br />
                 <span className="epsilon ls-medium">
                   Prepare Your Coding Interview

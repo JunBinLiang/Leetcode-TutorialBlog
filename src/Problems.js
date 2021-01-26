@@ -76,95 +76,111 @@ class Problems extends Component {
     let problemcategory = (
       <div className="wrapper">
         <h1 className="open-sans">Our Topics :</h1>
-        <FadeIn>
-          <div className="cols">
-            <div
-              className="col"
-              onClick={() => {
-                this.handleClick1(0);
-              }}
-            >
-              <div className="container">
-                <div className="block">
-                  <p>Arrays</p>
-                </div>
-                {/* <div className="front open-sans">
-                  <div className="inner">
-                    <p>Arrays</p>
-                  </div>
-                </div> */}
-                {/* <div className="back">
-                  <div className="inner">
-                    <p></p>
-                  </div>
-                </div> */}
-              </div>
-            </div>
-            <div
-              className="col"
-              onClick={() => {
-                this.handleClick1(1);
-              }}
-            >
-              <div className="container">
-                <div className="block">
-                  <p>Lists</p>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col"
-              onClick={() => {
-                this.handleClick1(2);
-              }}
-            >
-              <div className="container">
-                <div className="block">
-                  <p>Trees</p>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div className="cols">
-            <div
-              className="col"
-              onClick={() => {
-                this.handleClick1(3);
-              }}
-            >
-              <div className="container">
-                <div className="block">
-                  <p>Graphs</p>
-                </div>
-              </div>
+        <div class="container problemMenu">
+          <div
+            class="card1"
+            onClick={() => {
+              this.handleClick1(1);
+            }}
+          >
+            <h3 class="title">Array</h3>
+            <div class="bar">
+              <div class="emptybar"></div>
+              <div class="filledbar"></div>
             </div>
-            <div
-              className="col"
-              onClick={() => {
-                this.handleClick1(4);
-              }}
-            >
-              <div className="container">
-                <div className="block">
-                  <p>DP</p>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col"
-              onClick={() => {
-                this.handleClick1(5);
-              }}
-            >
-              <div className="container">
-                <div className="block">
-                  <p>Math</p>
-                </div>
-              </div>
+            <div class="circle">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <circle class="stroke" cx="60" cy="60" r="50" />
+              </svg>
             </div>
           </div>
-        </FadeIn>
+          <div
+            class="card1"
+            onClick={() => {
+              this.handleClick1(2);
+            }}
+          >
+            <h3 class="title">List</h3>
+            <div class="bar">
+              <div class="emptybar"></div>
+              <div class="filledbar"></div>
+            </div>
+            <div class="circle">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <circle class="stroke" cx="60" cy="60" r="50" />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="card1"
+            onClick={() => {
+              this.handleClick1(3);
+            }}
+          >
+            <h3 class="title">Tree</h3>
+            <div class="bar">
+              <div class="emptybar"></div>
+              <div class="filledbar"></div>
+            </div>
+            <div class="circle">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <circle class="stroke" cx="60" cy="60" r="50" />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="card1"
+            onClick={() => {
+              this.handleClick1(4);
+            }}
+          >
+            <h3 class="title">Graph</h3>
+            <div class="bar">
+              <div class="emptybar"></div>
+              <div class="filledbar"></div>
+            </div>
+            <div class="circle">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <circle class="stroke" cx="60" cy="60" r="50" />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="card1"
+            onClick={() => {
+              this.handleClick1(5);
+            }}
+          >
+            <h3 class="title">DP</h3>
+            <div class="bar">
+              <div class="emptybar"></div>
+              <div class="filledbar"></div>
+            </div>
+            <div class="circle">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <circle class="stroke" cx="60" cy="60" r="50" />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="card1"
+            onClick={() => {
+              this.handleClick1(6);
+            }}
+          >
+            <h3 class="title">Math</h3>
+            <div class="bar">
+              <div class="emptybar"></div>
+              <div class="filledbar"></div>
+            </div>
+            <div class="circle">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <circle class="stroke" cx="60" cy="60" r="50" />
+              </svg>
+            </div>
+          </div>
+        </div>
       </div>
     );
 

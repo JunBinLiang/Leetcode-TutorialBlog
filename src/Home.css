@@ -120,6 +120,18 @@ button:hover {
   font-size: 6.5rem; /* 117 / 18 = 6.5 */
   margin-bottom: 0.25385rem;
 }
+.threeD {
+  color: #202020;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  display: block;
+  margin: 20px 0 0 0;
+  font-size: 100px;
+  line-height: 80px;
+  color: #31302f;
+  text-shadow: 0 13.36px 8.896px #66615a, 0 -2px 1px rgb(172, 171, 171);
+  letter-spacing: -4px;
+}
 
 .gamma {
   font-size: 2rem; /* 36 / 18 = 2 */
