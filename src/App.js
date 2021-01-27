@@ -19,16 +19,15 @@ import { connect } from "react-redux";
 import axios from "axios";
 
 
-import ApolloClient from 'apollo-boost';
-import { getBooksQuery } from './queries/queries';
+import Client from './GraphqlClient/GraphqlClient';
+import { getBooksQuery,addAuthor } from './queries/queries';
 
 
 
+//https://rubygarage.org/blog/graphql-in-react-with-apollo-client    graphql usage
 
 
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
-});
+
 
 let local="http://localhost:8080/";
 let heroku="https://frozen-atoll-01566.herokuapp.com/";
@@ -37,7 +36,8 @@ let heroku="https://frozen-atoll-01566.herokuapp.com/";
 class App extends Component {
   componentDidMount() {
     
-    client
+    /* query example
+    Client
     .query({
       query: getBooksQuery
     }).then(result => {
@@ -46,7 +46,21 @@ class App extends Component {
     .catch((err)=>{
       console.log('graph err ',err);
     });
+    */
+    
 
+    /* mutation example
+    Client
+    .mutate({
+      variables: {},
+      mutation: addAuthor
+    }).then(result => {
+      console.log("graphql ",result);
+    })
+    .catch((err)=>{
+      console.log('graph err ',err);
+    });
+    */
 
     let token = localStorage.getItem("token");
     if (token !== null) {
