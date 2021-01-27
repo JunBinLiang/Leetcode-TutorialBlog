@@ -18,12 +18,36 @@ import MyNavbar from "./Component/MyNavbar";
 import { connect } from "react-redux";
 import axios from "axios";
 
+
+import ApolloClient from 'apollo-boost';
+import { getBooksQuery } from './queries/queries';
+
+
+
+
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql'
+});
+
 let local="http://localhost:8080/";
 let heroku="https://frozen-atoll-01566.herokuapp.com/";
 
 
 class App extends Component {
   componentDidMount() {
+    
+    client
+    .query({
+      query: getBooksQuery
+    }).then(result => {
+      console.log("graphql ",result);
+    })
+    .catch((err)=>{
+      console.log('graph err ',err);
+    });
+
+
     let token = localStorage.getItem("token");
     if (token !== null) {
       this.props.setToken(token);
@@ -50,25 +74,25 @@ class App extends Component {
   }
 
   render() {
-    console.log("au ", this.props.solved);
-    return (
-      <div>
-        <HashRouter>
-          <MyNavbar />
-        </HashRouter>
 
-        <HashRouter>
-          <Switch>
-            <Route exact path={"/"} component={Home} />
-            <Route exact path={"/course"} component={Video} />
-            <Route exact path={"/problems"} component={Problems} />
-            <Route exact path="/problems/:id" component={Compile} />
-            <Route exact path={"/about"} component={Team} />
-            <Route exact path="/profile/:id" component={Profile} />
-            <Route component={Error} />;
-          </Switch>
-        </HashRouter>
-      </div>
+    return (
+        <div>
+          <HashRouter>
+            <MyNavbar />
+          </HashRouter>
+
+          <HashRouter>
+            <Switch>
+              <Route exact path={"/"} component={Home} />
+              <Route exact path={"/course"} component={Video} />
+              <Route exact path={"/problems"} component={Problems} />
+              <Route exact path="/problems/:id" component={Compile} />
+              <Route exact path={"/about"} component={Team} />
+              <Route exact path="/profile/:id" component={Profile} />
+              <Route component={Error} />;
+            </Switch>
+          </HashRouter>
+        </div>
     );
   }
 }
@@ -90,6 +114,9 @@ const mapDispatchToProps = (dispatch) => {
     login: (token) => dispatch({ type: "login" }),
   };
 };
+
+
+
 
 export default connect(
   mapStateToProps,

@@ -53,11 +53,10 @@ class MyNavbar extends Component {
   }
 
   componentDidUpdate() {
-    console.log("nav ", this.props.isAuthenticated);
+    //console.log("nav ", this.props.isAuthenticated);
   }
 
   googleResponse(response) {
-    console.log(response); //id_token
 
     axios
       .post(`https://frozen-atoll-01566.herokuapp.com/login`, {
@@ -93,7 +92,6 @@ class MyNavbar extends Component {
   }
 
   render() {
-    console.log(this.props.solved);
     let loginB = null;
     let logoutB = null;
     if (!this.props.isAuthenticated) {
