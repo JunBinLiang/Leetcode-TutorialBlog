@@ -235,7 +235,7 @@ class Editor extends Component {
     let resetB = (
       <Button
         className="outline-primary"
-        style={{ marginLeft: "10px" }}
+        style={{ marginLeft: "10px",marginBottom: "0px" }}
         onClick={() => {
           this.setState({ resetPopup: true });
         }}
