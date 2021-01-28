@@ -37,6 +37,8 @@ import axios from "axios";
 import InputField from "./InputField";
 import Congratulation from "./Congratulation";
 
+import Tabs from "./ProblemPage/Tabs";
+
 import { Parser, Converter } from "../Parser/Parser";
 
 let url1 = "https://frozen-atoll-01566.herokuapp.com/api/`";
@@ -466,7 +468,7 @@ class Editor extends Component {
           </div>
 
           <div>
-            <button
+            {/* <button
               className={this.state.inputstate ? "depressed" : "beforePress"}
               onClick={() => {
                 this.setState({ textareaState: 1 });
@@ -487,7 +489,17 @@ class Editor extends Component {
             {textarea}
             <br />
             {B}
-            {S}
+            {S} */}
+            <Tabs>
+              <div label="Input">
+                {textarea}
+                {B}
+                {S}
+              </div>
+
+              <div label="Output"> {textarea}</div>
+              <div label="Test Case"> {textarea}</div>
+            </Tabs>
           </div>
         </SplitterLayout>
 
