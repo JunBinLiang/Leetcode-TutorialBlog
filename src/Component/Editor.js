@@ -148,29 +148,27 @@ class Editor extends Component {
   }
 
   handleCompile() {
-    if(true){//parse check
+    
+    let lines=this.state.myinput.match(/[^\r\n]+/g);
+    if(!Parser(lines,ProblemSet.inputTypes[this.props.index])){//parse check
       this.setState({
         textareaState: 2,
       });
       return;
     }
-
+    let parseInput=Converter(lines,ProblemSet.inputTypes[this.props.index]);
+    //console.log(parseInput);
 
     const headers = {
       "Content-Type": "text/plain",
     };
     this.setState({ loading: true });
 
-    //lineString.match(/[^\r\n]+/g);
-    //let lines=this.state.myinput.match(/[^\r\n]+/g);
-    //console.log(lines) 
-
-
     axios
       .post(`https://frozen-atoll-01566.herokuapp.com/api/run`, {
         lang: this.state.mode,
         code: this.state.mycode + this.props.test,
-        input: this.state.myinput,
+        input: parseInput,
       })
       .then((res) => {
         let data = res.data;
@@ -186,14 +184,16 @@ class Editor extends Component {
   }
 
   handleSubmit() {
-    if(true){//parse check
+    let lines=this.state.myinput.match(/[^\r\n]+/g);
+    if(!Parser(lines,ProblemSet.inputTypes[this.props.index])){//parse check
       this.setState({
         textareaState: 2,
       });
       return;
     }
-
-
+    let parseInput=Converter(lines,ProblemSet.inputTypes[this.props.index]);
+    //console.log(parseInput);
+    
     const headers = {
       "Content-Type": "text/plain",
     };

@@ -44,7 +44,10 @@ let category = [[0], [0], [0], [0], [0], [1, 2]];
 let difficulty = [0, 1, 2];
 let stars = ["\u2B50", "\u2B50\u2B50", "\u2B50\u2B50\u2B50"];
 let solution = [solution1, solution1, solution1];
-let inputTypes = [];
+let inputTypes = [[0,1],[1,1,1,1],[1,1]];
+
+
+//let parsers=[arrayParser,isNumber,isString];//different parsers
 
 export {
   leetcodes,
@@ -58,4 +61,5 @@ export {
   difficulty,
   stars,
   solution,
+  inputTypes
 };

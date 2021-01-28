@@ -1,4 +1,4 @@
-//Different helper functions for parsing the input
+//Parser function
 function arrayParser(s) {
     if(s.length<2){
         return false;
@@ -10,8 +10,11 @@ function arrayParser(s) {
     }
     
     let nums=s.substring(1,n-1).split(/[ ,]+/);
+    
     for(let i=0;i<nums.length;i++){
-        if(!isNumber(nums[i]))return false;
+        if(isNumber(nums[i]) !== true){
+            return false;
+        }
     }
 
     return true;
@@ -34,15 +37,12 @@ function isString(s){
 
 
 
-
-
-
-
-//Trim inputs
+//Converter function
 function arrayConverter(s) {
-    let n=s.lengh;
+    let n=s.length;
     let nums=s.substring(1,n-1).split(/[ ,]+/);
-    return nums.join(' ');
+    let arr=[nums.length,...nums];
+    return arr.join(' ');
 }
 
 
@@ -70,32 +70,30 @@ let converters=[arrayConverter,numberConverter,stringConverter];//different pars
 
 
 
-function Parser(lines,instructions){
-    if(lines.length != instructions.length){
+function Parser(lines,inputTypes){
+    if(lines.length != inputTypes.length){
         return false;
     }
 
     for(let i=0;i<lines.length;i++){
-        if(parsers[instructions[i]](lines[i])){
+        if(!parsers[inputTypes[i]](lines[i])){
             return false;
         }
     }
     return true;
 }
 
-function Converter(lines,instructions){
+function Converter(lines,inputTypes){
     let res=[];
     for(let i=0;i<lines.length;i++){
-        res.push(converters[instructions[i]](lines[i]));
+        res.push(converters[inputTypes[i]](lines[i]));
     }
-    return res;
+    return res.join(' ');
 }
 
 
 
 
-  
 
-
-export default {Parser,Converter};
+export {Parser,Converter};
 
