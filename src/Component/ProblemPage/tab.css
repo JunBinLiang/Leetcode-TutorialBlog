@@ -1,6 +1,7 @@
 .tab-list {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid rgba(235, 234, 234, 0.815);
   padding-left: 0;
+  background-color: rgba(243, 243, 243, 0.808);
 }
 
 .tab-list-item {
@@ -9,13 +10,15 @@
   list-style: none;
   margin-bottom: -1px;
   padding: 0.5rem 0.75rem;
+  font-size: 16px;
+  letter-spacing: 0.5px;
 }
 .tab-list-item:hover {
-  background-color: rgb(198, 198, 236);
+  background-color: rgb(230, 236, 243);
 }
 
 .tab-list-active {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border: solid #ccc;
   border-width: 1px 1px 0 1px;
 }

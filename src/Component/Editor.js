@@ -37,7 +37,9 @@ import axios from "axios";
 import InputField from "./InputField";
 import Congratulation from "./Congratulation";
 
-import {Parser,Converter} from "../Parser/Parser";
+import Tabs from "./ProblemPage/Tabs";
+
+import { Parser, Converter } from "../Parser/Parser";
 
 let url1 = "https://frozen-atoll-01566.herokuapp.com/api/`";
 let url2 = "http://localhost:8080/api/";
@@ -77,6 +79,7 @@ class Editor extends Component {
       theme: "terminal",
       mode: "java",
       resetPopup: false,
+      wrongAnswer: false,
     };
     this.onchange = this.onchange.bind(this);
     this.handleCompile = this.handleCompile.bind(this);
@@ -148,15 +151,15 @@ class Editor extends Component {
   }
 
   handleCompile() {
-    
-    let lines=this.state.myinput.match(/[^\r\n]+/g);
-    if(!Parser(lines,ProblemSet.inputTypes[this.props.index])){//parse check
+    let lines = this.state.myinput.match(/[^\r\n]+/g);
+    if (!Parser(lines, ProblemSet.inputTypes[this.props.index])) {
+      //parse check
       this.setState({
         textareaState: 2,
       });
       return;
     }
-    let parseInput=Converter(lines,ProblemSet.inputTypes[this.props.index]);
+    let parseInput = Converter(lines, ProblemSet.inputTypes[this.props.index]);
     //console.log(parseInput);
 
     const headers = {
@@ -180,20 +183,22 @@ class Editor extends Component {
           loading: false,
           textareaState: 0,
         });
+        console.log(status);
       });
   }
 
   handleSubmit() {
-    let lines=this.state.myinput.match(/[^\r\n]+/g);
-    if(!Parser(lines,ProblemSet.inputTypes[this.props.index])){//parse check
+    let lines = this.state.myinput.match(/[^\r\n]+/g);
+    if (!Parser(lines, ProblemSet.inputTypes[this.props.index])) {
+      //parse check
       this.setState({
         textareaState: 2,
       });
       return;
     }
-    let parseInput=Converter(lines,ProblemSet.inputTypes[this.props.index]);
+    let parseInput = Converter(lines, ProblemSet.inputTypes[this.props.index]);
     //console.log(parseInput);
-    
+
     const headers = {
       "Content-Type": "text/plain",
     };
@@ -216,6 +221,7 @@ class Editor extends Component {
         if (B.length < t) {
           t = 0;
         }
+
         for (let i = B.length - 1; i >= 0; i--) {
           if (B[i].length == 0) continue;
           if (t > 0) {
@@ -229,19 +235,22 @@ class Editor extends Component {
 
         if (rightAns == this.props.testcase) {
           allRight = true;
+          this.setState({ wrongAnswer: false });
           swal("Congratulation!").then((willDelete) => {
             if (willDelete) {
               this.setState({ correct: false });
             }
           });
         } else {
+          this.setState({ wrongAnswer: true });
+
           swal({
             text: "You are not YOUXIU enough!",
             icon: "warning",
             dangerMode: true,
           });
         }
-
+        console.log(B);
         this.setState({
           status: status,
           output: message.reverse().join("\n"),
@@ -258,7 +267,7 @@ class Editor extends Component {
     let resetB = (
       <Button
         className="outline-primary"
-        style={{ marginLeft: "10px",marginBottom: "0px" }}
+        style={{ marginLeft: "10px", marginBottom: "0px" }}
         onClick={() => {
           this.setState({ resetPopup: true });
         }}
@@ -278,63 +287,33 @@ class Editor extends Component {
       </Button>
     );
 
-
     let textarea = (
       <FadeIn>
         <textarea
           id="textarea"
-          className="output"
+          className="output-textarea"
           name="code"
           type="textarea"
           componentClass="textarea"
-          rows="10"
-          cols="150"
-          width="30%"
           value={this.state.output}
           onChange={this.changeOutput}
         />
       </FadeIn>
     );
-
-    if (this.state.textareaState==1) {
+    if (this.state.textareaState == 2) {
       textarea = (
         <FadeIn>
           <textarea
             id="textarea"
-            className="output"
+            className="input-textarea wrong-output"
             name="code"
             type="textarea"
             componentClass="textarea"
-            rows="10"
-            cols="150"
-            width="30%"
-            style={{ backgroundColor: "black", color: "white" }}
-            value={this.state.myinput}
-            onChange={this.changeInput}
-          />
-        </FadeIn>
-      );
-    }
-    else if (this.state.textareaState == 2) {
-      textarea = (
-        <FadeIn>
-          <textarea
-            id="textarea"
-            className="output"
-            name="code"
-            type="textarea"
-            componentClass="textarea"
-            rows="10"
-            cols="150"
-            width="30%"
-            style={{ backgroundColor: "black", color: "white" }}
             value={"Invalid Input"}
           />
         </FadeIn>
       );
     }
-
-    
 
     let inputs = [];
 
@@ -369,7 +348,6 @@ class Editor extends Component {
         }
       }
     }
-
 
     //////////////////////////////////////////////
     if (!this.state.loading) {
@@ -415,6 +393,9 @@ class Editor extends Component {
 
     return (
       <div>
+        {congra}
+        {inputs}
+
         <SplitterLayout
           vertical={true}
           primaryMinSize={75}
@@ -422,11 +403,6 @@ class Editor extends Component {
           primaryMinSize={60}
         >
           <div>
-            {congra}
-            {inputs}
-
-            <br />
-
             <div style={{ display: "flex" }}>
               <Dropdown
                 className="theme"
@@ -466,28 +442,26 @@ class Editor extends Component {
           </div>
 
           <div>
-            <button
-              className={this.state.inputstate ? "depressed" : "beforePress"}
-              onClick={() => {
-                this.setState({ textareaState: 1 });
-              }}
-            >
-              Test
-            </button>
+            <Tabs className="test-output-tabs">
+              <div label="Testcase">
+                <FadeIn>
+                  <textarea
+                    id="textarea"
+                    className="input-textarea"
+                    name="code"
+                    type="textarea"
+                    componentClass="textarea"
+                    value={this.state.myinput}
+                    onChange={this.changeInput}
+                  />
+                </FadeIn>
 
-            <button
-              className={!this.state.inputstate ? "depressed" : "beforePress"}
-              onClick={() => {
-                this.setState({ textareaState: 0 });
-              }}
-            >
-              Output
-            </button>
+                {B}
+                {S}
+              </div>
 
-            {textarea}
-            <br />
-            {B}
-            {S}
+              <div label="Run Code Result">{textarea}</div>
+            </Tabs>
           </div>
         </SplitterLayout>
 

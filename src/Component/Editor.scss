@@ -19,15 +19,34 @@
   font-family: sans-serif;
 }
 
-textarea {
+.output-textarea .input-textarea {
   overflow-y: scroll;
-  padding: 6px;
-  resize: none;
-  border: 2px solid #c0c0c0;
-  border-radius: 4px;
+  margin-left: 4px;
   transition: 0.4s;
-  outline: none;
 }
+textarea {
+  padding: 8px;
+}
+.output-textarea {
+  min-height: 200px;
+  width: 100%;
+  cursor: context-menu;
+}
+.input-textarea {
+  width: 100%;
+  min-height: 100px;
+  background-color: black;
+  color: white;
+}
+
+.wrong-output {
+  color: rgb(202, 45, 45) !important;
+  font-size: 25px;
+  font-weight: bold;
+  border: 2px solid rgb(247, 73, 73) !important;
+  background-color: rgb(250, 203, 203) !important;
+}
+
 .outline-primary {
   background-color: rgb(117, 117, 224);
   border: rgb(102, 102, 218);
@@ -36,9 +55,7 @@ textarea {
 .outline-primary:hover {
   background-color: rgb(118, 100, 199);
 }
-textarea:hover {
-  border: 3px solid #a0a0a0;
-}
+
 .ace_editor,
 .ace_editor * {
   font-family: "Monaco", "Menlo", "Ubuntu Mono", "Droid Sans Mono", "Consolas",
