@@ -44,6 +44,7 @@ let category = [[0], [0], [0], [0], [0], [1, 2]];
 let difficulty = [0, 1, 2];
 let stars = ["\u2B50", "\u2B50\u2B50", "\u2B50\u2B50\u2B50"];
 let solution = [solution1, solution1, solution1];
+let inputTypes = [];
 
 export {
   leetcodes,

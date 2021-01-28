@@ -37,6 +37,8 @@ import axios from "axios";
 import InputField from "./InputField";
 import Congratulation from "./Congratulation";
 
+import {Parser,Converter} from "../Parser/Parser";
+
 let url1 = "https://frozen-atoll-01566.herokuapp.com/api/`";
 let url2 = "http://localhost:8080/api/";
 
@@ -68,7 +70,7 @@ class Editor extends Component {
       loading: false,
       summiting: false,
       A: [], //content of the result
-      inputstate: true,
+      textareaState: 1,
       myinput: "",
       correct: false, //if your answer are correct after submit
       done: false, //at the beginning,input is default state (not O||X)
@@ -146,10 +148,23 @@ class Editor extends Component {
   }
 
   handleCompile() {
+    if(true){//parse check
+      this.setState({
+        textareaState: 2,
+      });
+      return;
+    }
+
+
     const headers = {
       "Content-Type": "text/plain",
     };
     this.setState({ loading: true });
+
+    //lineString.match(/[^\r\n]+/g);
+    //let lines=this.state.myinput.match(/[^\r\n]+/g);
+    //console.log(lines) 
+
 
     axios
       .post(`https://frozen-atoll-01566.herokuapp.com/api/run`, {
@@ -165,12 +180,20 @@ class Editor extends Component {
           status: status,
           output: data.message,
           loading: false,
-          inputstate: false,
+          textareaState: 0,
         });
       });
   }
 
   handleSubmit() {
+    if(true){//parse check
+      this.setState({
+        textareaState: 2,
+      });
+      return;
+    }
+
+
     const headers = {
       "Content-Type": "text/plain",
     };
@@ -223,7 +246,7 @@ class Editor extends Component {
           status: status,
           output: message.reverse().join("\n"),
           summiting: false,
-          inputstate: false,
+          textareaState: 0,
           done: true,
           A: result.reverse(),
           correct: allRight,
@@ -254,22 +277,7 @@ class Editor extends Component {
         <i class="fa fa-refresh fa-spin"></i>
       </Button>
     );
-    let stateButon = "";
-    let smalltext = "";
 
-    if (this.state.inputstate) {
-      stateButon = (
-        <Button className="btn-success " onClick={this.inputstateChange}>
-          My output
-        </Button>
-      );
-    } else {
-      stateButon = (
-        <Button className="btn-success" onClick={this.inputstateChange}>
-          Input
-        </Button>
-      );
-    }
 
     let textarea = (
       <FadeIn>
@@ -288,7 +296,7 @@ class Editor extends Component {
       </FadeIn>
     );
 
-    if (this.state.inputstate) {
+    if (this.state.textareaState==1) {
       textarea = (
         <FadeIn>
           <textarea
@@ -307,6 +315,26 @@ class Editor extends Component {
         </FadeIn>
       );
     }
+    else if (this.state.textareaState == 2) {
+      textarea = (
+        <FadeIn>
+          <textarea
+            id="textarea"
+            className="output"
+            name="code"
+            type="textarea"
+            componentClass="textarea"
+            rows="10"
+            cols="150"
+            width="30%"
+            style={{ backgroundColor: "black", color: "white" }}
+            value={"Invalid Input"}
+          />
+        </FadeIn>
+      );
+    }
+
+    
 
     let inputs = [];
 
@@ -342,6 +370,8 @@ class Editor extends Component {
       }
     }
 
+
+    //////////////////////////////////////////////
     if (!this.state.loading) {
       if (this.state.summiting) {
         B = <Button className="outline-primary">Compile</Button>;
@@ -376,6 +406,7 @@ class Editor extends Component {
         );
       }
     }
+    //////////////////////////////////////////////////////////////////
 
     let congra;
     if (this.state.correct) {
@@ -438,19 +469,21 @@ class Editor extends Component {
             <button
               className={this.state.inputstate ? "depressed" : "beforePress"}
               onClick={() => {
-                this.setState({ inputstate: true });
+                this.setState({ textareaState: 1 });
               }}
             >
               Test
             </button>
+
             <button
               className={!this.state.inputstate ? "depressed" : "beforePress"}
               onClick={() => {
-                this.setState({ inputstate: false });
+                this.setState({ textareaState: 0 });
               }}
             >
               Output
             </button>
+
             {textarea}
             <br />
             {B}
