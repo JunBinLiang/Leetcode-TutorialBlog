@@ -291,50 +291,24 @@ class Editor extends Component {
       <FadeIn>
         <textarea
           id="textarea"
-          className="output"
+          className="output-textarea"
           name="code"
           type="textarea"
           componentClass="textarea"
-          rows="10"
-          cols="150"
-          width="30%"
           value={this.state.output}
           onChange={this.changeOutput}
         />
       </FadeIn>
     );
-
-    if (this.state.textareaState == 1) {
+    if (this.state.textareaState == 2) {
       textarea = (
         <FadeIn>
           <textarea
             id="textarea"
-            className="output"
+            className="input-textarea wrong-output"
             name="code"
             type="textarea"
             componentClass="textarea"
-            rows="10"
-            cols="150"
-            width="30%"
-            style={{ backgroundColor: "black", color: "white" }}
-            value={this.state.myinput}
-            onChange={this.changeInput}
-          />
-        </FadeIn>
-      );
-    } else if (this.state.textareaState == 2) {
-      textarea = (
-        <FadeIn>
-          <textarea
-            id="textarea"
-            className="output"
-            name="code"
-            type="textarea"
-            componentClass="textarea"
-            rows="10"
-            cols="150"
-            width="30%"
-            style={{ backgroundColor: "black", color: "white" }}
             value={"Invalid Input"}
           />
         </FadeIn>
@@ -419,6 +393,9 @@ class Editor extends Component {
 
     return (
       <div>
+        {congra}
+        {inputs}
+
         <SplitterLayout
           vertical={true}
           primaryMinSize={75}
@@ -426,11 +403,6 @@ class Editor extends Component {
           primaryMinSize={60}
         >
           <div>
-            {congra}
-            {inputs}
-
-            <br />
-
             <div style={{ display: "flex" }}>
               <Dropdown
                 className="theme"
@@ -470,37 +442,25 @@ class Editor extends Component {
           </div>
 
           <div>
-            {/* <button
-              className={this.state.inputstate ? "depressed" : "beforePress"}
-              onClick={() => {
-                this.setState({ textareaState: 1 });
-              }}
-            >
-              Test
-            </button>
+            <Tabs className="test-output-tabs">
+              <div label="Testcase">
+                <FadeIn>
+                  <textarea
+                    id="textarea"
+                    className="input-textarea"
+                    name="code"
+                    type="textarea"
+                    componentClass="textarea"
+                    value={this.state.myinput}
+                    onChange={this.changeInput}
+                  />
+                </FadeIn>
 
-            <button
-              className={!this.state.inputstate ? "depressed" : "beforePress"}
-              onClick={() => {
-                this.setState({ textareaState: 0 });
-              }}
-            >
-              Output
-            </button>
-
-            {textarea}
-            <br />
-            {B}
-            {S} */}
-            <Tabs>
-              <div label="Input">
-                {textarea}
                 {B}
                 {S}
               </div>
 
-              <div label="Output"> {textarea}</div>
-              <div label="Test Case"> {textarea}</div>
+              <div label="Run Code Result">{textarea}</div>
             </Tabs>
           </div>
         </SplitterLayout>
