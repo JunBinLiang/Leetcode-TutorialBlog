@@ -75,6 +75,7 @@ class Editor extends Component {
       theme: "terminal",
       mode: "java",
       resetPopup: false,
+      wrongAnswer: false,
     };
     this.onchange = this.onchange.bind(this);
     this.handleCompile = this.handleCompile.bind(this);
@@ -150,7 +151,7 @@ class Editor extends Component {
       "Content-Type": "text/plain",
     };
     this.setState({ loading: true });
-
+    this.setState({ wrongAnswer: false });
     axios
       .post(`https://frozen-atoll-01566.herokuapp.com/api/run`, {
         lang: this.state.mode,
@@ -167,6 +168,7 @@ class Editor extends Component {
           loading: false,
           inputstate: false,
         });
+        console.log(status);
       });
   }
 
@@ -193,6 +195,7 @@ class Editor extends Component {
         if (B.length < t) {
           t = 0;
         }
+
         for (let i = B.length - 1; i >= 0; i--) {
           if (B[i].length == 0) continue;
           if (t > 0) {
@@ -206,19 +209,22 @@ class Editor extends Component {
 
         if (rightAns == this.props.testcase) {
           allRight = true;
+          this.setState({ wrongAnswer: false });
           swal("Congratulation!").then((willDelete) => {
             if (willDelete) {
               this.setState({ correct: false });
             }
           });
         } else {
+          this.setState({ wrongAnswer: true });
+
           swal({
             text: "You are not YOUXIU enough!",
             icon: "warning",
             dangerMode: true,
           });
         }
-
+        console.log(B);
         this.setState({
           status: status,
           output: message.reverse().join("\n"),
@@ -235,7 +241,7 @@ class Editor extends Component {
     let resetB = (
       <Button
         className="outline-primary"
-        style={{ marginLeft: "10px",marginBottom: "0px" }}
+        style={{ marginLeft: "10px", marginBottom: "0px" }}
         onClick={() => {
           this.setState({ resetPopup: true });
         }}
@@ -306,6 +312,25 @@ class Editor extends Component {
           />
         </FadeIn>
       );
+    } else {
+      if (this.state.wrongAnswer) {
+        textarea = (
+          <FadeIn>
+            <textarea
+              id="textarea"
+              className="output wrong-output"
+              name="code"
+              type="textarea"
+              componentClass="textarea"
+              rows="10"
+              cols="150"
+              width="30%"
+              value={this.state.output}
+              onChange={this.changeOutput}
+            />
+          </FadeIn>
+        );
+      }
     }
 
     let inputs = [];
@@ -451,6 +476,7 @@ class Editor extends Component {
             >
               Output
             </button>
+
             {textarea}
             <br />
             {B}
