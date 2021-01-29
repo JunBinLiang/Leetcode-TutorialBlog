@@ -37,7 +37,8 @@ import axios from "axios";
 import InputField from "./InputField";
 import Congratulation from "./Congratulation";
 
-import Tabs from "./ProblemPage/Tabs";
+import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 
 import { Parser, Converter } from "../Parser/Parser";
 
@@ -80,6 +81,7 @@ class Editor extends Component {
       mode: "java",
       resetPopup: false,
       wrongAnswer: false,
+      tabSelectedIndex:0
     };
     this.onchange = this.onchange.bind(this);
     this.handleCompile = this.handleCompile.bind(this);
@@ -90,7 +92,7 @@ class Editor extends Component {
     this.select = this.select.bind(this);
     this.selectLan = this.selectLan.bind(this);
     this.toDeault = this.toDeault.bind(this);
-    this.textareaState1 = this.textareaState1.bind(this);
+    this.changeTest=this.changeTest.bind(this);
   }
 
   toDeault() {
@@ -119,10 +121,13 @@ class Editor extends Component {
     }
   }
 
-  textareaState1() {
-    console.log("call");
-    this.setState({ textareaState: 1 });
+  changeTest(event){
+    fetch(this.props.judgecase[event.target.value]).then((res) => res.text()).
+    then((text) => {
+      this.setState({ myinput: text });
+    });
   }
+
 
   selectLan(obj) {
     this.setState({ mode: obj.value });
@@ -131,6 +136,13 @@ class Editor extends Component {
   select(obj) {
     this.setState({ theme: obj.value });
   }
+
+  tabSelect = index => {
+    if(index == 2){
+      return;
+    }
+    this.setState({ tabSelectedIndex: index });
+  };
 
   inputstateChange() {
     let newstate = !this.state.inputstate;
@@ -187,9 +199,9 @@ class Editor extends Component {
           status: status,
           output: data.message,
           loading: false,
-          textareaState: 0,
+          textareaState: 1,
+          tabSelectedIndex:1
         });
-        console.log(status);
       });
   }
 
@@ -208,6 +220,7 @@ class Editor extends Component {
     const headers = {
       "Content-Type": "text/plain",
     };
+
     this.setState({ summiting: true });
     axios
       .post(`https://frozen-atoll-01566.herokuapp.com/api/submit`, {
@@ -260,10 +273,11 @@ class Editor extends Component {
           status: status,
           output: message.reverse().join("\n"),
           summiting: false,
-          textareaState: 0,
+          textareaState: 1,
           done: true,
           A: result.reverse(),
           correct: allRight,
+          tabSelectedIndex:1
         });
       });
   }
@@ -334,10 +348,14 @@ class Editor extends Component {
         />
       );
     }
+
+    let testCaseOption=[];
     let inputChoices = [];
     let inputs = [];
 
     for (let i = 0; i < this.props.testcase; i++) {
+      testCaseOption.push(<option value={i}>Test {i+1}</option>);
+
       if (!this.state.done) {
         inputs.push(
           <InputField bstate={1} index={i} judge={this.props.judgecase[i]} />
@@ -418,6 +436,11 @@ class Editor extends Component {
         );
       }
     }
+
+
+    
+    
+
     //////////////////////////////////////////////////////////////////
 
     let congra;
@@ -476,24 +499,57 @@ class Editor extends Component {
           </div>
 
           <div>
-            <Tabs
-              className="test-output-tabs"
-              textareaState1={this.textareaState1}
-            >
-              <div label="Testcase">{inputTextarea}</div>
 
-              <div label="Run Code Result">{outputTextarea}</div>
-              <div label="Other Testcases">
-                <a className="menu">
-                  <span className="menu-title">Select one testcase</span>
-                  <ul className="menu-dropdown">{inputChoices}</ul>
-                </a>
-                {outputTextarea}
+          <Tabs
+            selectedIndex={this.state.tabSelectedIndex}
+            onSelect={this.tabSelect}
+          >
+
+            <TabList>
+              <Tab onClick={()=>{
+                this.setState({textareaState:1});
+              }}>Input</Tab>
+              <Tab>Output</Tab>
+              <Tab>
+              
+              <div >
+                <select class="select-css" onChange={this.changeTest}>
+                    {testCaseOption}
+                </select>
               </div>
+              </Tab>
+            </TabList>
+
+
+            <TabPanel>
+              <div label="Testcase">
+                {inputTextarea}
+                {B}
+                {S}
+              </div>
+            </TabPanel>
+
+            <TabPanel>
+                <div label="Run Code Result">
+                  {outputTextarea}
+                  {B}
+                  {S}
+                </div>
+            </TabPanel>
+
+            <TabPanel>
+                <div label="Other Testcases">
+                  <a className="menu">
+                    <span className="menu-title">Select one testcase</span>
+                    <ul className="menu-dropdown">{inputChoices}</ul>
+                  </a>
+                </div>
+            </TabPanel>
+            
+
             </Tabs>
 
-            {B}
-            {S}
+            
           </div>
         </SplitterLayout>
 
