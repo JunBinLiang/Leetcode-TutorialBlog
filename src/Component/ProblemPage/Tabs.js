@@ -9,13 +9,17 @@ class Tabs extends Component {
 
   constructor(props) {
     super(props);
-
+    this.onClickTabItem=this.onClickTabItem.bind(this);
     this.state = {
       activeTab: this.props.children[0].props.label,
     };
   }
 
   onClickTabItem = (tab) => {
+    if(tab == 'Testcase'){
+      this.props.textareaState1();
+    }
+
     this.setState({ activeTab: tab });
   };
 
@@ -42,6 +46,7 @@ class Tabs extends Component {
             );
           })}
         </ol>
+
         <div className="tab-content">
           {children.map((child) => {
             if (child.props.label !== activeTab) return undefined;

@@ -90,6 +90,7 @@ class Editor extends Component {
     this.select = this.select.bind(this);
     this.selectLan = this.selectLan.bind(this);
     this.toDeault = this.toDeault.bind(this);
+    this.textareaState1=this.textareaState1.bind(this);
   }
 
   toDeault() {
@@ -116,6 +117,11 @@ class Editor extends Component {
           })
         );
     }
+  }
+
+  textareaState1(){
+    console.log("call");
+    this.setState({ textareaState: 1 });
   }
 
   selectLan(obj) {
@@ -250,7 +256,6 @@ class Editor extends Component {
             dangerMode: true,
           });
         }
-        console.log(B);
         this.setState({
           status: status,
           output: message.reverse().join("\n"),
@@ -287,7 +292,7 @@ class Editor extends Component {
       </Button>
     );
 
-    let textarea = (
+    let outputTextarea = (
       <FadeIn>
         <textarea
           id="textarea"
@@ -300,8 +305,11 @@ class Editor extends Component {
         />
       </FadeIn>
     );
+
+    let inputTextarea;
+
     if (this.state.textareaState == 2) {
-      textarea = (
+      inputTextarea = (
         <FadeIn>
           <textarea
             id="textarea"
@@ -314,6 +322,21 @@ class Editor extends Component {
         </FadeIn>
       );
     }
+    else{
+      inputTextarea=(
+        <textarea
+          id="textarea"
+          className="input-textarea"
+          name="code"
+          type="textarea"
+          componentClass="textarea"
+          value={this.state.myinput}
+          onChange={this.changeInput}
+        />
+      );
+    }
+
+
 
     let inputs = [];
 
@@ -442,26 +465,17 @@ class Editor extends Component {
           </div>
 
           <div>
-            <Tabs className="test-output-tabs">
-              <div label="Testcase">
-                <FadeIn>
-                  <textarea
-                    id="textarea"
-                    className="input-textarea"
-                    name="code"
-                    type="textarea"
-                    componentClass="textarea"
-                    value={this.state.myinput}
-                    onChange={this.changeInput}
-                  />
-                </FadeIn>
-
-                {B}
-                {S}
+            <Tabs className="test-output-tabs" textareaState1={this.textareaState1} >
+              <div label="Testcase"  >
+                {inputTextarea}
               </div>
 
-              <div label="Run Code Result">{textarea}</div>
+              <div label="Run Code Result">{outputTextarea}</div>
             </Tabs>
+
+            {B}
+            {S}
+
           </div>
         </SplitterLayout>
 
