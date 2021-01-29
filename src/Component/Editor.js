@@ -334,13 +334,27 @@ class Editor extends Component {
         />
       );
     }
-
+    let inputChoices = [];
     let inputs = [];
 
     for (let i = 0; i < this.props.testcase; i++) {
       if (!this.state.done) {
         inputs.push(
           <InputField bstate={1} index={i} judge={this.props.judgecase[i]} />
+        );
+
+        inputChoices.push(
+          <li
+            onClick={() => {
+              fetch(this.props.judgecase[i])
+                .then((res) => res.text())
+                .then((text) => {
+                  this.setState({ output: text });
+                });
+            }}
+          >
+            Testcase: {i}
+          </li>
         );
 
         if (i % 6 == 0 && i != 0) {
@@ -472,17 +486,7 @@ class Editor extends Component {
               <div label="Other Testcases">
                 <a className="menu">
                   <span className="menu-title">Select one testcase</span>
-                  <ul className="menu-dropdown">
-                    <li
-                      onClick={() => {
-                        this.setState({ output: "1 2 3" });
-                      }}
-                    >
-                      Testcase 1:
-                    </li>
-                    <li>Testcase 2:</li>
-                    <li>Testcase 3:</li>
-                  </ul>
+                  <ul className="menu-dropdown">{inputChoices}</ul>
                 </a>
                 {outputTextarea}
               </div>
