@@ -90,7 +90,7 @@ class Editor extends Component {
     this.select = this.select.bind(this);
     this.selectLan = this.selectLan.bind(this);
     this.toDeault = this.toDeault.bind(this);
-    this.textareaState1=this.textareaState1.bind(this);
+    this.textareaState1 = this.textareaState1.bind(this);
   }
 
   toDeault() {
@@ -119,7 +119,7 @@ class Editor extends Component {
     }
   }
 
-  textareaState1(){
+  textareaState1() {
     console.log("call");
     this.setState({ textareaState: 1 });
   }
@@ -321,9 +321,8 @@ class Editor extends Component {
           />
         </FadeIn>
       );
-    }
-    else{
-      inputTextarea=(
+    } else {
+      inputTextarea = (
         <textarea
           id="textarea"
           className="input-textarea"
@@ -335,8 +334,6 @@ class Editor extends Component {
         />
       );
     }
-
-
 
     let inputs = [];
 
@@ -465,17 +462,34 @@ class Editor extends Component {
           </div>
 
           <div>
-            <Tabs className="test-output-tabs" textareaState1={this.textareaState1} >
-              <div label="Testcase"  >
-                {inputTextarea}
-              </div>
+            <Tabs
+              className="test-output-tabs"
+              textareaState1={this.textareaState1}
+            >
+              <div label="Testcase">{inputTextarea}</div>
 
               <div label="Run Code Result">{outputTextarea}</div>
+              <div label="Other Testcases">
+                <a className="menu">
+                  <span className="menu-title">Select one testcase</span>
+                  <ul className="menu-dropdown">
+                    <li
+                      onClick={() => {
+                        this.setState({ output: "1 2 3" });
+                      }}
+                    >
+                      Testcase 1:
+                    </li>
+                    <li>Testcase 2:</li>
+                    <li>Testcase 3:</li>
+                  </ul>
+                </a>
+                {outputTextarea}
+              </div>
             </Tabs>
 
             {B}
             {S}
-
           </div>
         </SplitterLayout>
 
