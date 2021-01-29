@@ -124,7 +124,7 @@ class Editor extends Component {
   changeTest(event){
     fetch(this.props.judgecase[event.target.value]).then((res) => res.text()).
     then((text) => {
-      this.setState({ myinput: text });
+      this.setState({ myinput: text,tabSelectedIndex: 0, textareaState:1 });
     });
   }
 
