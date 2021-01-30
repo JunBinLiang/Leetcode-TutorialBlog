@@ -81,7 +81,7 @@ class Editor extends Component {
       mode: "java",
       resetPopup: false,
       wrongAnswer: false,
-      tabSelectedIndex:0
+      tabSelectedIndex: 0,
     };
     this.onchange = this.onchange.bind(this);
     this.handleCompile = this.handleCompile.bind(this);
@@ -92,7 +92,7 @@ class Editor extends Component {
     this.select = this.select.bind(this);
     this.selectLan = this.selectLan.bind(this);
     this.toDeault = this.toDeault.bind(this);
-    this.changeTest=this.changeTest.bind(this);
+    this.changeTest = this.changeTest.bind(this);
   }
 
   toDeault() {
@@ -121,13 +121,13 @@ class Editor extends Component {
     }
   }
 
-  changeTest(event){
-    fetch(this.props.judgecase[event.target.value]).then((res) => res.text()).
-    then((text) => {
-      this.setState({ myinput: text,tabSelectedIndex: 0, textareaState:1 });
-    });
+  changeTest(event) {
+    fetch(this.props.judgecase[event.target.value])
+      .then((res) => res.text())
+      .then((text) => {
+        this.setState({ myinput: text, tabSelectedIndex: 0, textareaState: 1 });
+      });
   }
-
 
   selectLan(obj) {
     this.setState({ mode: obj.value });
@@ -137,8 +137,8 @@ class Editor extends Component {
     this.setState({ theme: obj.value });
   }
 
-  tabSelect = index => {
-    if(index == 2){
+  tabSelect = (index) => {
+    if (index == 2) {
       return;
     }
     this.setState({ tabSelectedIndex: index });
@@ -200,7 +200,7 @@ class Editor extends Component {
           output: data.message,
           loading: false,
           textareaState: 1,
-          tabSelectedIndex:1
+          tabSelectedIndex: 1,
         });
       });
   }
@@ -277,7 +277,7 @@ class Editor extends Component {
           done: true,
           A: result.reverse(),
           correct: allRight,
-          tabSelectedIndex:1
+          tabSelectedIndex: 1,
         });
       });
   }
@@ -349,12 +349,12 @@ class Editor extends Component {
       );
     }
 
-    let testCaseOption=[];
+    let testCaseOption = [];
     let inputChoices = [];
     let inputs = [];
 
     for (let i = 0; i < this.props.testcase; i++) {
-      testCaseOption.push(<option value={i}>Test {i+1}</option>);
+      testCaseOption.push(<option value={i}>Test {i + 1}</option>);
 
       if (!this.state.done) {
         inputs.push(
@@ -437,10 +437,6 @@ class Editor extends Component {
       }
     }
 
-
-    
-    
-
     //////////////////////////////////////////////////////////////////
 
     let congra;
@@ -499,57 +495,53 @@ class Editor extends Component {
           </div>
 
           <div>
+            <Tabs
+              selectedIndex={this.state.tabSelectedIndex}
+              onSelect={this.tabSelect}
+            >
+              <TabList>
+                <Tab
+                  onClick={() => {
+                    this.setState({ textareaState: 1 });
+                  }}
+                >
+                  Input
+                </Tab>
+                <Tab>Output</Tab>
+                <Tab>
+                  <div>
+                    <select class="select-css" onChange={this.changeTest}>
+                      {testCaseOption}
+                    </select>
+                  </div>
+                </Tab>
+              </TabList>
 
-          <Tabs
-            selectedIndex={this.state.tabSelectedIndex}
-            onSelect={this.tabSelect}
-          >
+              <TabPanel>
+                <div label="Testcase">
+                  {inputTextarea}
+                  {B}
+                  {S}
+                </div>
+              </TabPanel>
 
-            <TabList>
-              <Tab onClick={()=>{
-                this.setState({textareaState:1});
-              }}>Input</Tab>
-              <Tab>Output</Tab>
-              <Tab>
-              
-              <div >
-                <select class="select-css" onChange={this.changeTest}>
-                    {testCaseOption}
-                </select>
-              </div>
-              </Tab>
-            </TabList>
-
-
-            <TabPanel>
-              <div label="Testcase">
-                {inputTextarea}
-                {B}
-                {S}
-              </div>
-            </TabPanel>
-
-            <TabPanel>
+              <TabPanel>
                 <div label="Run Code Result">
                   {outputTextarea}
                   {B}
                   {S}
                 </div>
-            </TabPanel>
+              </TabPanel>
 
-            <TabPanel>
+              <TabPanel>
                 <div label="Other Testcases">
                   <a className="menu">
                     <span className="menu-title">Select one testcase</span>
                     <ul className="menu-dropdown">{inputChoices}</ul>
                   </a>
                 </div>
-            </TabPanel>
-            
-
+              </TabPanel>
             </Tabs>
-
-            
           </div>
         </SplitterLayout>
 
