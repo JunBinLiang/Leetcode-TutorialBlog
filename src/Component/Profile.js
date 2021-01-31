@@ -6,9 +6,15 @@ import PieChart from "./PieChart";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "./Profiles.css";
-import EditProfile from "./editProfile";
+import EditProfile from "./EditProfile";
 import Calender from "./Calendar";
+
+import Client from "../GraphqlClient/GraphqlClient";
+import {getUserQuery } from "../queries/queries";
+import { connect } from "react-redux";
+
 const TOTAL_PROBLEM = 200;
+
 
 let local = "http://localhost:8080/";
 let heroku = "https://frozen-atoll-01566.herokuapp.com/";
@@ -17,61 +23,73 @@ class Profile extends Component {
   constructor() {
     super();
     this.state = {
+      id: "",
       name: "",
-      github: "",
-      twitter: "",
-      instagram: "",
-      facebook: "",
-      skills: ["HTML", "CSS"],
-      title: "default title",
-      email: "",
-      img: "",
+      pic: "",
+      email:"",
+      bio: "",
+      website:"",
+      location: "",
+      college: "",
       editMode: true,
+      skills:[]
     };
   }
+  
   myEdit() {
-    let email = this.state.email;
+    let email = this.props.email;
     let url = email.split("@")[0];
-    this.props.history.push("/profile/edit/" + url);
+    this.props.history.push("/setting/edit");
   }
 
   componentDidUpdate(previousProps, previousState) {
     if (previousProps.match.params.id != this.props.match.params.id) {
       let email = this.props.match.params.id;
-      axios
-        .post(heroku + `userInfor`, {
-          email: email,
-        })
-        .then((res) => {
-          console.log(res);
+      Client
+        .query({
+          query: getUserQuery,
+          variables: {email:email}
+        }).then(res => {
+          //console.log("graphql ",res.data);
           this.setState({
+            id: res.data.user.id,
             name: res.data.user.name,
-            email: res.data.user.email,
-            img: res.data.user.pic,
+            pic: res.data.user.pic,
+            bio: res.data.user.bio,
+            website: res.data.user.website,
+            location: res.data.user.location,
+            college: res.data.user.college,
+            email:res.data.user.email
           });
         })
-        .catch((err) => {
-          this.props.history.push("/404");
-        });
+        .catch((err)=>{
+          console.log('graph err ',err);
+      });
     }
   }
 
   componentDidMount() {
-    let email = this.props.match.params.id;
-    axios
-      .post(heroku + `userInfor`, {
-        email: email,
-      })
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          name: res.data.user.name,
-          email: res.data.user.email,
-          img: res.data.user.pic,
-        });
-      })
-      .catch((err) => {
-        this.props.history.push("/404");
+      let email = this.props.match.params.id;
+
+      Client
+        .query({
+          query: getUserQuery,
+          variables: {email:email}
+        }).then(res => {
+          //console.log("graphql ",res.data);
+          this.setState({
+            id: res.data.user.id,
+            name: res.data.user.name,
+            pic: res.data.user.pic,
+            bio: res.data.user.bio,
+            website: res.data.user.website,
+            location: res.data.user.location,
+            college: res.data.user.college,
+            email:res.data.user.email
+          });
+        })
+        .catch((err)=>{
+          console.log('graph err ',err);
       });
   }
 
@@ -85,21 +103,18 @@ class Profile extends Component {
                 <div className="card-body">
                   <div className="d-flex flex-column align-items-center text-center">
                     <img
-                      src={this.state.img}
+                      src={this.state.pic}
                       alt="Admin"
                       className="rounded-circle"
                       width="150"
                     />
                     <div className="mt-3">
                       <h4>{this.state.name}</h4>
-                      <p className="text-secondary mb-1">{this.state.title}</p>
+                      <p className="text-secondary mb-1">{this.state.bio}</p>
 
-                      <button className="btn btn-primary">Follow</button>
-                      <button className="btn btn-outline-primary">
-                        Message
-                      </button>
+                      
                       <div>
-                        {this.state.editMode ? (
+                        {this.state.email == this.props.email ? (
                           <button
                             onClick={() => {
                               this.myEdit();
@@ -136,7 +151,7 @@ class Profile extends Component {
                       </svg>
                       Website
                     </h6>
-                    <span className="text-secondary">https://bootdey.com</span>
+                    <span className="text-secondary">{this.state.website}</span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 className="mb-0">
@@ -370,4 +385,14 @@ class Profile extends Component {
   }
 }
 
-export default withRouter(Profile);
+
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+    isAuthenticated: state.isAuthenticated,
+    email: state.email,
+    solved: state.solved,
+  };
+};
+export default withRouter(connect(mapStateToProps)(Profile));
+

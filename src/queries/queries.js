@@ -46,6 +46,7 @@ const getBookQuery = gql`
     }
 `;
 
+
 const addAuthor = gql 
 `mutation AddAuthor{
     addAuthor{
@@ -54,4 +55,41 @@ const addAuthor = gql
     }
 }`
 
-export { getAuthorsQuery, getBooksQuery, addBookMutation, getBookQuery,addAuthor };
+
+const getUserQuery = gql`
+    query GetUser($email: String!){
+        user(email: $email) {
+            id
+            name
+            pic
+            bio
+            email
+            website
+            location
+            college
+        }
+    }
+`;
+
+const updateUser = gql`
+    mutation UpdateUser($id: String,$name: String,$website: String,$college: String,$location: String,$bio: String ){
+        updateUser(id:$id,name: $name, website:$website,college:$college,location:$location,bio:$bio){
+            id
+            name
+            pic
+            bio
+            email
+            website
+            location
+            college
+        }
+    }
+`;
+
+
+
+
+
+
+
+export { getAuthorsQuery, getBooksQuery, addBookMutation, getBookQuery,addAuthor,getUserQuery,updateUser };

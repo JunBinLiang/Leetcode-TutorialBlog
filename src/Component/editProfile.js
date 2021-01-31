@@ -2,7 +2,11 @@ import React, { Component, useState } from "react";
 import { data } from "./data/userData.js";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+import Button from "react-bootstrap/Button";
+import { connect } from "react-redux";
 
+import Client from "../GraphqlClient/GraphqlClient";
+import {getUserQuery,updateUser } from "../queries/queries";
 /*
 
  !! STILL MISSING IMAGE UPLOAD, SKILLS(LIST)
@@ -12,95 +16,139 @@ class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading:false,
       id: "",
       name: "",
-      github: "",
-      twitter: "",
-      instagram: "",
-      facebook: "",
-      skills: [],
-      title: "",
-      email: "",
-      img: "",
+      pic: "",
+      bio: "",
+      website:"",
+      location: "",
+      college: "",
+      email:"",
     };
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.editProfile = this.editProfile.bind(this);
+    this.submit = this.submit.bind(this);
   }
-  componentWillMount() {
+  componentDidMount() {
+    console.log("mount  ",this.props);
     this.getProfile();
   }
+
+  componentDidUpdate(previousProps, previousState) {
+    if (previousProps.email != this.props.email) {
+      let email = this.props.email.split("@")[0];
+
+      Client
+      .query({
+        query: getUserQuery,
+        variables: {email:email}
+      }).then(res => {
+        this.setState({
+          id: res.data.user.id,
+          name: res.data.user.name,
+          pic: res.data.user.pic,
+          bio: res.data.user.bio,
+          website: res.data.user.website,
+          location: res.data.user.location,
+          college: res.data.user.college,
+          email:res.data.user.email
+        });
+      })
+      .catch((err)=>{
+        console.log('graph err ',err);
+      });
+    }
+  }
+
+
   handleInputChange(e) {
     const target = e.target;
     const value = target.value;
     const name = target.name;
     this.setState({ [name]: value });
   }
-  getProfile() {
-    let profileId = this.props.match.params.id;
-    this.setState({
-      id: profileId,
-    });
-    axios.get(`/api/profile/${profileId}`).then((response) => {
-      this.setState(
-        {
-          name: response.data.name,
-          github: response.data.github,
-          twitter: response.data.twitter,
-          instagram: response.data.instagram,
-          facebook: response.data.facebook,
-          skills: response.data.skills,
-          title: response.data.title,
-          email: response.data.email,
-          img: response.data.img,
-        },
-        () => {
-          console.log(this.state);
-        }
-      );
-    });
-  }
-  editProfile(newProfile) {
-    console.log(newProfile);
-    axios
-      .request({
-        method: "put",
-        url: `/#/profile/${this.state.id}`,
-        data: newProfile,
+  
+    getProfile() {
+      let email = this.props.email.split("@")[0];
+      Client
+      .query({
+        query: getUserQuery,
+        variables: {email:email}
+      }).then(res => {
+        this.setState({
+          id: res.data.user.id,
+          name: res.data.user.name,
+          pic: res.data.user.pic,
+          bio: res.data.user.bio,
+          website: res.data.user.website,
+          location: res.data.user.location,
+          college: res.data.user.college,
+          email:res.data.user.email
+        });
+        
       })
-      .then((response) => {
-        this.props.history.push(`/#/profile/${this.state.id}`);
-      })
-      .catch((err) => console.log(err));
-  }
-  onSubmit(e) {
-    console.log(this.refs.name.value);
-    const newProfile = {
-      name: this.refs.name.value,
-      github: this.refs.github.value,
-      twitter: this.refs.twitter.value,
-      instagram: this.refs.instagram.value,
-      facebook: this.refs.facebook.value,
-      //   skills: this.refs.skills.value,
-      title: this.refs.title.value,
-      email: this.refs.email.value,
-      //   img:this.refs.img.value,
-    };
-    this.editProfile(newProfile);
-    e.preventDefault();
+      .catch((err)=>{
+        console.log('graph err ',err);
+      });
+    }
+
+
+  
+
+
+  submit() {
+    console.log('state  ',this.state);
+    this.setState({loading:true});
+
+    Client
+    .mutate({
+      variables: {id:this.state.id,name:this.state.name,website:this.state.website,college:this.state.college,location:this.state.location,bio:this.state.bio},
+      mutation: updateUser
+    }).then(res => {
+      console.log("update success ",res);
+      this.setState({
+        loading:false,
+        id: res.data.updateUser.id,
+        name: res.data.updateUser.name,
+        pic: res.data.updateUser.pic,
+        bio: res.data.updateUser.bio,
+        website: res.data.updateUser.website,
+        location: res.data.updateUser.location,
+        college: res.data.updateUser.college,
+        email:res.data.updateUser.email
+      });
+    })
+    .catch((err)=>{
+      console.log('graph err ',err);
+    });
   }
 
   render() {
+
+    let SaveB = (
+      <Button className="outline-primary">
+        <i class="fa fa-refresh fa-spin"></i>
+      </Button>
+    );
+
+    if(!this.state.loading){
+      SaveB=<Button className="outline-primary" onClick={this.submit}>
+                Save
+            </Button>
+    }
+
+
     return (
       <div className="container">
         <button
           onClick={() =>
-            this.props.history.push("/profile/" + this.props.match.params.id)
+            this.props.history.push("/profile/" + this.props.email.split("@")[0])
           }
         >
           GO BACK
         </button>
 
-        <form onSubmit={this.onSubmit.bind(this)}>
+       
           <fieldset className="form-group">
             <label htmlFor="name">Name</label>
             <input
@@ -111,66 +159,59 @@ class EditProfile extends Component {
             />
           </fieldset>
           <fieldset className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="website">Website</label>
             <input
-              name="email"
+              name="website"
               className="form-control"
-              value={this.state.email}
-              onChange={this.handleInputChange}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <label htmlFor="github">GitHub</label>
-            <input
-              name="github"
-              className="form-control"
-              value={this.state.gitHub}
-              onChange={this.handleInputChange}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <label htmlFor="twitter">Twitter</label>
-            <input
-              name="twitter"
-              className="form-control"
-              value={this.state.twitter}
-              onChange={this.handleInputChange}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <label htmlFor="instagram">Instagram</label>
-            <input
-              name="instagram"
-              className="form-control"
-              value={this.state.instagram}
-              onChange={this.handleInputChange}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <label htmlFor="facebook">Facebook</label>
-            <input
-              name="facebook"
-              className="form-control"
-              value={this.state.facebook}
-              onChange={this.handleInputChange}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <label htmlFor="title">Title</label>
-            <input
-              name="title"
-              className="form-control"
-              value={this.state.title}
+              value={this.state.website}
               onChange={this.handleInputChange}
             />
           </fieldset>
 
-          <button type="submit" className="btn btn-default">
-            Save Post
-          </button>
-        </form>
+          <fieldset className="form-group">
+            <label htmlFor="college">College</label>
+            <input
+              name="college"
+              className="form-control"
+              value={this.state.college}
+              onChange={this.handleInputChange}
+            />
+          </fieldset>
+
+
+          <fieldset className="form-group">
+            <label htmlFor="location">Location</label>
+            <input
+              name="location"
+              className="form-control"
+              value={this.state.location}
+              onChange={this.handleInputChange}
+            />
+          </fieldset>
+
+          <fieldset className="form-group">
+            <label htmlFor="bio">Description</label>
+            <input
+              name="bio"
+              className="form-control"
+              value={this.state.bio}
+              onChange={this.handleInputChange}
+            />
+          </fieldset>
+
+          {SaveB}
       </div>
     );
   }
 }
-export default withRouter(EditProfile);
+
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+    isAuthenticated: state.isAuthenticated,
+    email: state.email,
+    solved: state.solved,
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(EditProfile));

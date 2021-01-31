@@ -6,7 +6,7 @@ import Video from "./Component/Video";
 import Compile from "./Component/Compile";
 import Profile from "./Component/Profile.js";
 import Error from "./Component/Error";
-import EditProfile from "./Component/editProfile";
+import EditProfile from "./Component/EditProfile";
 
 import {
   Route,
@@ -20,7 +20,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 
 import Client from "./GraphqlClient/GraphqlClient";
-import { getBooksQuery, addAuthor } from "./queries/queries";
+import { getBooksQuery, addAuthor,getUserQuery } from "./queries/queries";
 
 //https://rubygarage.org/blog/graphql-in-react-with-apollo-client    graphql usage
 
@@ -29,17 +29,20 @@ let heroku = "https://frozen-atoll-01566.herokuapp.com/";
 
 class App extends Component {
   componentDidMount() {
-    /* query example
-    Client
+     //query example
+   
+
+     /*Client
     .query({
-      query: getBooksQuery
+      query: getUserQuery,
+      variables: {email:"junbinliang66"}
     }).then(result => {
       console.log("graphql ",result);
     })
     .catch((err)=>{
       console.log('graph err ',err);
-    });
-    */
+    });*/
+    
 
     /* mutation example
     Client
@@ -69,8 +72,8 @@ class App extends Component {
         if (res.status === 200) {
           console.log("authenticate");
           let email = res.data.user.email;
-          this.props.login();
           this.props.setEmail(email);
+          this.props.login();
           this.props.setSolved(res.data.user.solved);
         }
       })
@@ -94,7 +97,7 @@ class App extends Component {
             <Route exact path="/problems/:id" component={Compile} />
             <Route exact path={"/about"} component={Team} />
             <Route exact path="/profile/:id" component={Profile} />
-            <Route exact path="/profile/edit/:id" component={EditProfile} />
+            <Route exact path="/setting/edit" render={() =>(this.props.isAuthenticated ? ( <Route  component={EditProfile} />): (<Route component={Error} />))} />
             <Route component={Error} />;
           </Switch>
         </HashRouter>
