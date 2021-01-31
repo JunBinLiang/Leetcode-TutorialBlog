@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import * as ProblemSet from "../ProblemSet.js";
 
-import Tabs from "./ProblemPage/Tabs";
-import "./ProblemPage/tab.css";
+import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
+
 import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Editor from "./Editor";
 import Markdown from "react-markdown";
@@ -28,9 +29,16 @@ class Compile extends Component {
       submit: "",
       testcases: 0,
       solution: "",
+      selectedIndex: 0,
     };
   }
+  handleSelect = (index) => {
+    this.setState({ selectedIndex: index });
+  };
 
+  handleButtonClick = () => {
+    this.setState({ selectedIndex: 0 });
+  };
   componentDidMount() {
     let id = this.props.match.params.id;
     if (id >= ProblemSet.names.length) {
@@ -123,42 +131,47 @@ class Compile extends Component {
         <div style={{ width: "95%", "margin-left": "3%" }}>
           <div style={{ margin: "3%", width: "45%" }}>
             <SplitterLayout primaryMinSize={35} percentage={true}>
-              <Tabs>
-                <div label="Problem">
-                  <div>
-                    <h2
-                      className="problemTitle"
-                      style={{ width: "45%", "margin-left": "30%" }}
-                    >
-                      {" "}
-                      {ProblemSet.names[id]}
-                    </h2>
-                    <Markdown
-                      className="problemStatement"
-                      escapeHtml={true}
-                      source={this.state.description}
-                    />
-                  </div>
-                </div>
-                <div label="Solution">
-                  <div>
-                    <h2
-                      className="problemTitle"
-                      style={{ width: "45%", "margin-left": "30%" }}
-                    >
-                      {" "}
-                      {ProblemSet.names[id]}
-                    </h2>
-                    <Markdown
-                      className="problemSolution"
-                      escapeHtml={true}
-                      source={this.state.solution}
-                    />
-                  </div>
-                </div>
-                <div label="Notes" className="notes">
+              <Tabs
+                selectedIndex={this.state.selectedIndex}
+                onSelect={this.handleSelect}
+              >
+                <TabList>
+                  <Tab>Problem</Tab>
+                  <Tab>Solution</Tab>
+                  <Tab>Notes</Tab>
+                </TabList>
+                <TabPanel>
+                  <h2
+                    className="problemTitle"
+                    style={{ width: "45%", "margin-left": "30%" }}
+                  >
+                    {" "}
+                    {ProblemSet.names[id]}
+                  </h2>
+                  <Markdown
+                    className="problemStatement"
+                    escapeHtml={true}
+                    source={this.state.description}
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <h2
+                    className="problemTitle"
+                    style={{ width: "45%", "margin-left": "30%" }}
+                  >
+                    {" "}
+                    {ProblemSet.names[id]}
+                  </h2>
+                  <Markdown
+                    className="problemSolution"
+                    escapeHtml={true}
+                    source={this.state.solution}
+                  />
+                </TabPanel>
+
+                <TabPanel>
                   <NoteEditor />
-                </div>
+                </TabPanel>
               </Tabs>
 
               <div style={{ width: "100%" }}>

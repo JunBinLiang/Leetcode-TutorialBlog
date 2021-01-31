@@ -3,9 +3,10 @@ import { data } from "./data/userData.js";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import PieChart from "./PieChart";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "./Profiles.css";
-
+import EditProfile from "./editProfile";
 import Calender from "./Calendar";
 const TOTAL_PROBLEM = 200;
 
@@ -17,9 +18,21 @@ class Profile extends Component {
     super();
     this.state = {
       name: "",
+      github: "",
+      twitter: "",
+      instagram: "",
+      facebook: "",
+      skills: ["HTML", "CSS"],
+      title: "default title",
       email: "",
       img: "",
+      editMode: true,
     };
+  }
+  myEdit() {
+    let email = this.state.email;
+    let url = email.split("@")[0];
+    this.props.history.push("/profile/edit/" + url);
   }
 
   componentDidUpdate(previousProps, previousState) {
@@ -79,13 +92,24 @@ class Profile extends Component {
                     />
                     <div className="mt-3">
                       <h4>{this.state.name}</h4>
-                      <p className="text-secondary mb-1">
-                        Founder and Software Engineer
-                      </p>
+                      <p className="text-secondary mb-1">{this.state.title}</p>
+
                       <button className="btn btn-primary">Follow</button>
                       <button className="btn btn-outline-primary">
                         Message
                       </button>
+                      <div>
+                        {this.state.editMode ? (
+                          <button
+                            onClick={() => {
+                              this.myEdit();
+                            }}
+                          >
+                            {" "}
+                            Edit Profile
+                          </button>
+                        ) : null}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -132,7 +156,7 @@ class Profile extends Component {
                       </svg>
                       Github
                     </h6>
-                    <span className="text-secondary">bootdey</span>
+                    <span className="text-secondary">{this.state.github}</span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 className="mb-0">
@@ -152,7 +176,7 @@ class Profile extends Component {
                       </svg>
                       Twitter
                     </h6>
-                    <span className="text-secondary">@bootdey</span>
+                    <span className="text-secondary">{this.state.twitter}</span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 className="mb-0">
@@ -181,7 +205,9 @@ class Profile extends Component {
                       </svg>
                       Instagram
                     </h6>
-                    <span className="text-secondary">bootdey</span>
+                    <span className="text-secondary">
+                      {this.state.instagram}
+                    </span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 className="mb-0">
@@ -201,7 +227,7 @@ class Profile extends Component {
                       </svg>
                       Facebook
                     </h6>
-                    <span className="text-secondary">bootdey</span>
+                    <span className="text-secondary">{this.state.faceook}</span>
                   </li>
                 </ul>
               </div>
@@ -233,13 +259,9 @@ class Profile extends Component {
                       <h6 className="mb-0">Skills</h6>
                       <div class="skills mb-0">
                         <ul>
-                          <li>UI / UX</li>
-                          <li>Front End Development</li>
-                          <li>HTML</li>
-                          <li>CSS</li>
-                          <li>JavaScript</li>
-                          <li>React</li>
-                          <li>Node</li>
+                          {this.state.skills.map((skill) => (
+                            <li>{skill}</li>
+                          ))}
                         </ul>
                       </div>
                     </div>
