@@ -174,7 +174,7 @@ class Editor extends Component {
 
   handleCompile() {
     if (!this.props.isAuthenticated) {
-      Toast.info("Please Login First", 2000, () => {});
+      Toast.info("Please Login First", 1000, () => {});
       return;
     }
 
