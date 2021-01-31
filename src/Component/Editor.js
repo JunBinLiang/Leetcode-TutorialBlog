@@ -16,7 +16,7 @@ import "ace-builds/src-noconflict/theme-solarized_light";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 import "ace-builds/src-noconflict/theme-terminal";
 
-import Toast from 'light-toast';
+import Toast from "light-toast";
 import { connect } from "react-redux";
 import FadeIn from "react-fade-in";
 import SplitterLayout from "react-splitter-layout";
@@ -110,19 +110,18 @@ class Editor extends Component {
 
   componentDidUpdate(previousProps, previousState) {
     if (previousProps.code != this.props.code) {
-      fetch(this.props.judgecase[0])  //reset the state to initial,but not all, for example,"terminal"
-      .then((res) => res.text())
-      .then((text) => {
-        this.setState({
-          mycode: this.props.code,
-          A: [],
-          done: false,
-          output: "",
-          myinput: text,
-          tabSelectedIndex: 0,
+      fetch(this.props.judgecase[0]) //reset the state to initial,but not all, for example,"terminal"
+        .then((res) => res.text())
+        .then((text) => {
+          this.setState({
+            mycode: this.props.code,
+            A: [],
+            done: false,
+            output: "",
+            myinput: text,
+            tabSelectedIndex: 0,
+          });
         });
-    });
- 
     }
   }
 
@@ -159,7 +158,7 @@ class Editor extends Component {
       .then((res) => res.text())
       .then((text) => {
         this.setState({ mycode: this.props.code, myinput: text });
-    });
+      });
   }
   onchange(newvalue) {
     localStorage.setItem(this.props.name, newvalue);
@@ -174,8 +173,8 @@ class Editor extends Component {
   }
 
   handleCompile() {
-    if(!this.props.isAuthenticated){
-      Toast.info('Please Login First', 2000, () => {});
+    if (!this.props.isAuthenticated) {
+      Toast.info("Please Login First", 2000, () => {});
       return;
     }
 
@@ -190,7 +189,6 @@ class Editor extends Component {
     let parseInput = Converter(lines, ProblemSet.inputTypes[this.props.index]);
     //console.log(parseInput);
 
-
     this.setState({ loading: true });
 
     const config = {
@@ -198,11 +196,15 @@ class Editor extends Component {
     };
 
     axios
-      .post(url1+`run`, {
-        lang: this.state.mode,
-        code: this.state.mycode + this.props.test,
-        input: parseInput,
-      },config)
+      .post(
+        url1 + `run`,
+        {
+          lang: this.state.mode,
+          code: this.state.mycode + this.props.test,
+          input: parseInput,
+        },
+        config
+      )
       .then((res) => {
         let data = res.data;
         let status = parseInt(data.message.status);
@@ -218,11 +220,10 @@ class Editor extends Component {
   }
 
   handleSubmit() {
-    if(!this.props.isAuthenticated){
-      Toast.info('Please Login First', 2000, () => {});
+    if (!this.props.isAuthenticated) {
+      Toast.info("Please Login First", 2000, () => {});
       return;
     }
-
 
     let lines = this.state.myinput.match(/[^\r\n]+/g);
     if (!Parser(lines, ProblemSet.inputTypes[this.props.index])) {
@@ -245,10 +246,14 @@ class Editor extends Component {
 
     this.setState({ summiting: true });
     axios
-      .post(`https://frozen-atoll-01566.herokuapp.com/api/submit`, {
-        lang: this.state.mode,
-        code: this.state.mycode + this.props.submit,
-      },config)
+      .post(
+        `https://frozen-atoll-01566.herokuapp.com/api/submit`,
+        {
+          lang: this.state.mode,
+          code: this.state.mycode + this.props.submit,
+        },
+        config
+      )
       .then((res) => {
         let rightAns = 0;
         let data = res.data;
@@ -532,7 +537,10 @@ class Editor extends Component {
                 <Tab>Output</Tab>
                 <Tab>
                   <div>
-                    <select class="select-css" onChange={this.changeTest}>
+                    <select
+                      class="select-css select-btn"
+                      onChange={this.changeTest}
+                    >
                       {testCaseOption}
                     </select>
                   </div>
@@ -540,29 +548,18 @@ class Editor extends Component {
               </TabList>
 
               <TabPanel>
-                <div label="Testcase">
-                  {inputTextarea}
-                  {B}
-                  {S}
-                </div>
+                {inputTextarea}
+                {B}
+                {S}
               </TabPanel>
 
               <TabPanel>
-                <div label="Run Code Result">
-                  {outputTextarea}
-                  {B}
-                  {S}
-                </div>
+                {outputTextarea}
+                {B}
+                {S}
               </TabPanel>
 
-              <TabPanel>
-                <div label="Other Testcases">
-                  <a className="menu">
-                    <span className="menu-title">Select one testcase</span>
-                    <ul className="menu-dropdown">{inputChoices}</ul>
-                  </a>
-                </div>
-              </TabPanel>
+              <TabPanel></TabPanel>
             </Tabs>
           </div>
         </SplitterLayout>
@@ -596,6 +593,5 @@ const mapStateToProps = (state) => {
     solved: state.solved,
   };
 };
-
 
 export default connect(mapStateToProps)(Editor);
