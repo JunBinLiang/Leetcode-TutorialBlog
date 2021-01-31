@@ -29,11 +29,12 @@ class EditProfile extends Component {
     this.submit = this.submit.bind(this);
   }
   componentDidMount() {
-    console.log("mount  ", this.props);
+    //console.log("mount  ", this.props);
     this.getProfile();
   }
 
   componentDidUpdate(previousProps, previousState) {
+    //console.log("update ",this.props);
     if (previousProps.email != this.props.email) {
       let email = this.props.email.split("@")[0];
 
@@ -172,10 +173,10 @@ class EditProfile extends Component {
             Website url
           </label>
           <input
-            name="website-url"
+            name="website"
             className="form-control"
-            //  value={this.state.website}
-            // onChange={this.handleInputChange}
+            value={this.state.website}
+            onChange={this.handleInputChange}
           />
         </fieldset>
 
