@@ -7,11 +7,16 @@ import { connect } from "react-redux";
 
 import Client from "../GraphqlClient/GraphqlClient";
 import {getUserQuery,updateUser } from "../queries/queries";
-/*
 
- !! STILL MISSING IMAGE UPLOAD, SKILLS(LIST)
+import Toast from 'light-toast';
 
-*/
+
+
+
+
+
+
+
 class EditProfile extends Component {
   constructor(props) {
     super(props);
@@ -55,6 +60,7 @@ class EditProfile extends Component {
         });
       })
       .catch((err)=>{
+        Toast.info('Something go wrong!', 1500, () => {});
         console.log('graph err ',err);
       });
     }
@@ -68,7 +74,7 @@ class EditProfile extends Component {
     this.setState({ [name]: value });
   }
   
-    getProfile() {
+  getProfile() {
       let email = this.props.email.split("@")[0];
       Client
       .query({
@@ -88,6 +94,7 @@ class EditProfile extends Component {
         
       })
       .catch((err)=>{
+        Toast.info('Something go wrong!', 1500, () => {});
         console.log('graph err ',err);
       });
     }
@@ -106,6 +113,7 @@ class EditProfile extends Component {
       mutation: updateUser
     }).then(res => {
       console.log("update success ",res);
+      Toast.info('Success!', 1000, () => {});
       this.setState({
         loading:false,
         id: res.data.updateUser.id,
@@ -119,6 +127,8 @@ class EditProfile extends Component {
       });
     })
     .catch((err)=>{
+      Toast.info('Something go wrong!', 1000, () => {});
+      this.setState({loading:false});
       console.log('graph err ',err);
     });
   }
