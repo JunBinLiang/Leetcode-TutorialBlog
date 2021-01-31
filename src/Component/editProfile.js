@@ -3,12 +3,13 @@ import { data } from "./data/userData.js";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
-import { connect } from "react-redux";
+
 
 import Client from "../GraphqlClient/GraphqlClient";
 import {getUserQuery,updateUser } from "../queries/queries";
 
 import Toast from 'light-toast';
+import { connect } from "react-redux";
 
 
 

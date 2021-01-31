@@ -16,6 +16,8 @@ import "ace-builds/src-noconflict/theme-solarized_light";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 import "ace-builds/src-noconflict/theme-terminal";
 
+import Toast from 'light-toast';
+import { connect } from "react-redux";
 import FadeIn from "react-fade-in";
 import SplitterLayout from "react-splitter-layout";
 import "react-splitter-layout/lib/index.css";
@@ -108,16 +110,19 @@ class Editor extends Component {
 
   componentDidUpdate(previousProps, previousState) {
     if (previousProps.code != this.props.code) {
-      fetch(this.props.content)
-        .then((res) => res.text())
-        .then((text) =>
-          this.setState({
-            mycode: this.props.code,
-            A: [],
-            done: false,
-            output: "",
-          })
-        );
+      fetch(this.props.judgecase[0])  //reset the state to initial,but not all, for example,"terminal"
+      .then((res) => res.text())
+      .then((text) => {
+        this.setState({
+          mycode: this.props.code,
+          A: [],
+          done: false,
+          output: "",
+          myinput: text,
+          tabSelectedIndex: 0,
+        });
+    });
+ 
     }
   }
 
@@ -154,7 +159,7 @@ class Editor extends Component {
       .then((res) => res.text())
       .then((text) => {
         this.setState({ mycode: this.props.code, myinput: text });
-      });
+    });
   }
   onchange(newvalue) {
     localStorage.setItem(this.props.name, newvalue);
@@ -169,6 +174,11 @@ class Editor extends Component {
   }
 
   handleCompile() {
+    if(!this.props.isAuthenticated){
+      Toast.info('Please Login First', 2000, () => {});
+      return;
+    }
+
     let lines = this.state.myinput.match(/[^\r\n]+/g);
     if (!Parser(lines, ProblemSet.inputTypes[this.props.index])) {
       //parse check
@@ -206,6 +216,12 @@ class Editor extends Component {
   }
 
   handleSubmit() {
+    if(!this.props.isAuthenticated){
+      Toast.info('Please Login First', 2000, () => {});
+      return;
+    }
+
+
     let lines = this.state.myinput.match(/[^\r\n]+/g);
     if (!Parser(lines, ProblemSet.inputTypes[this.props.index])) {
       //parse check
@@ -566,4 +582,14 @@ class Editor extends Component {
   }
 }
 
-export default Editor;
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+    isAuthenticated: state.isAuthenticated,
+    email: state.email,
+    solved: state.solved,
+  };
+};
+
+
+export default connect(mapStateToProps)(Editor);
