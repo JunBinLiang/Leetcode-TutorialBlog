@@ -44,7 +44,7 @@ import "react-tabs/style/react-tabs.css";
 
 import { Parser, Converter } from "../Parser/Parser";
 
-let url1 = "https://frozen-atoll-01566.herokuapp.com/api/`";
+let url1 = "https://frozen-atoll-01566.herokuapp.com/api/";
 let url2 = "http://localhost:8080/api/";
 
 let hash = new Map();
@@ -190,17 +190,19 @@ class Editor extends Component {
     let parseInput = Converter(lines, ProblemSet.inputTypes[this.props.index]);
     //console.log(parseInput);
 
-    const headers = {
-      "Content-Type": "text/plain",
-    };
+
     this.setState({ loading: true });
 
+    const config = {
+      headers: { Authorization: `${this.props.token}` },
+    };
+
     axios
-      .post(`https://frozen-atoll-01566.herokuapp.com/api/run`, {
+      .post(url1+`run`, {
         lang: this.state.mode,
         code: this.state.mycode + this.props.test,
         input: parseInput,
-      })
+      },config)
       .then((res) => {
         let data = res.data;
         let status = parseInt(data.message.status);
@@ -237,12 +239,16 @@ class Editor extends Component {
       "Content-Type": "text/plain",
     };
 
+    const config = {
+      headers: { Authorization: `${this.props.token}` },
+    };
+
     this.setState({ summiting: true });
     axios
       .post(`https://frozen-atoll-01566.herokuapp.com/api/submit`, {
         lang: this.state.mode,
         code: this.state.mycode + this.props.submit,
-      })
+      },config)
       .then((res) => {
         let rightAns = 0;
         let data = res.data;
