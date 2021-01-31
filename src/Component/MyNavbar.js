@@ -65,7 +65,7 @@ class MyNavbar extends Component {
         code: response.tokenId,
       })
       .then((res) => {
-        //console.log(res);
+        //console.log('login',res);
         let token = res.data.token;
         let profile = res.data.user;
         let email=profile.email;
