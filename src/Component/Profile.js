@@ -113,6 +113,7 @@ class Profile extends Component {
                       <div>
                         {this.state.email == this.props.email ? (
                           <button
+                            className="edit-btn"
                             onClick={() => {
                               this.myEdit();
                             }}
