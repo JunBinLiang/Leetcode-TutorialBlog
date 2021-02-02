@@ -27,6 +27,8 @@ import Modal from "react-bootstrap/Modal";
 import ModalBody from "react-bootstrap/ModalBody";
 import ModalFooter from "react-bootstrap/ModalFooter";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Progress } from "react-sweet-progress";
+import "react-sweet-progress/lib/style.css";
 
 //import DarkModeToggle from "react-dark-mode-toggle";
 import Dropdown from "react-dropdown";
@@ -74,6 +76,7 @@ class Editor extends Component {
       output: "", //output in the text area
       loading: false,
       summiting: false,
+      show_result: false,
       A: [], //content of the result
       textareaState: 1,
       myinput: "",
@@ -82,7 +85,9 @@ class Editor extends Component {
       theme: "terminal",
       mode: "java",
       resetPopup: false,
+      total_test_case: 0,
       wrongAnswer: false,
+      number_of_correct: 0,
       tabSelectedIndex: 0,
     };
     this.onchange = this.onchange.bind(this);
@@ -262,6 +267,7 @@ class Editor extends Component {
         let allRight = false;
         let result = [];
         let message = [];
+        this.setState({ total_test_case: this.props.testcase });
 
         let t = this.props.testcase;
         if (B.length < t) {
@@ -278,6 +284,7 @@ class Editor extends Component {
             message.push(B[i]);
           }
         }
+        this.setState({ number_of_correct: rightAns });
 
         if (rightAns == this.props.testcase) {
           allRight = true;
@@ -305,6 +312,7 @@ class Editor extends Component {
           A: result.reverse(),
           correct: allRight,
           tabSelectedIndex: 1,
+          show_result: true,
         });
       });
   }
@@ -471,10 +479,24 @@ class Editor extends Component {
       congra = <Congratulation />;
     }
 
+    let result_bar;
+    if (this.state.show_result) {
+      let percentage = Math.round(
+        (this.state.number_of_correct / this.state.total_test_case) * 100
+      );
+
+      if (this.state.correct) {
+        result_bar = <Progress percent={percentage} status="success" />;
+      } else {
+        result_bar = <Progress percent={percentage} status="error" />;
+      }
+    }
     return (
       <div>
         {congra}
-        {inputs}
+        <div style={{ width: "80%", margin: "10px" }}>{result_bar}</div>
+
+        {/* {inputs} */}
 
         <SplitterLayout
           vertical={true}
