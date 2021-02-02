@@ -11,6 +11,7 @@ import Calender from "./Calendar";
 import Client from "../GraphqlClient/GraphqlClient";
 import { getUserQuery } from "../queries/queries";
 import { connect } from "react-redux";
+import Menu from "./Menu";
 
 const TOTAL_PROBLEM = 200;
 
@@ -113,6 +114,7 @@ class Profile extends Component {
                       <div>
                         {this.state.email == this.props.email ? (
                           <button
+                            className="edit-btn"
                             onClick={() => {
                               this.myEdit();
                             }}
@@ -304,6 +306,7 @@ class Profile extends Component {
           </div>
         </div>
         <Calender id={this.state.id} />
+        <Menu></Menu>
       </div>
     );
   }

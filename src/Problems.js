@@ -30,7 +30,6 @@ import Editor from "./Component/Editor";
 import ReactPlayer from "react-player";
 import FadeIn from "react-fade-in";
 
-import "./Component/Menu.css";
 import theme from "./picture/theme.png";
 import Home from "./Home";
 
@@ -61,7 +60,7 @@ class Problems extends Component {
   handleClick1(i) {
     this.props.mode1();
     this.setState({
-      categoryIndex: i-1,
+      categoryIndex: i - 1,
     });
   }
 
@@ -203,12 +202,13 @@ class Problems extends Component {
                   this.solve(i);
                 }}
               >
-                {i + 1}. {this.props.solved[i] ? <strike> {ProblemSet.names[i]}</strike> : ProblemSet.names[i]} 
-
-                {' '+ ProblemSet.stars[ProblemSet.difficulty[i]]}
-                
-                
-
+                {i + 1}.{" "}
+                {this.props.solved[i] ? (
+                  <strike> {ProblemSet.names[i]}</strike>
+                ) : (
+                  ProblemSet.names[i]
+                )}
+                {" " + ProblemSet.stars[ProblemSet.difficulty[i]]}
               </ListGroup.Item>
             ))}
           </FadeIn>
