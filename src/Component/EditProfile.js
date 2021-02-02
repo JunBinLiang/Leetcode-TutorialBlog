@@ -131,98 +131,96 @@ class EditProfile extends Component {
 
   render() {
     let SaveB = (
-      <Button className="btn btn-default outline-primary">
+      <Button className="outline-primary">
         <i class="fa fa-refresh fa-spin"></i>
       </Button>
     );
 
     if (!this.state.loading) {
       SaveB = (
-        <Button className="save-btn" onClick={this.submit}>
+        <Button className="form-btn" onClick={this.submit}>
           Save
         </Button>
       );
     }
 
     return (
-      <div className="container padding-top-bottom">
-        <div className="form-container">
-          <button
-            className="btn return-btn btn-default"
-            onClick={() =>
-              this.props.history.push(
-                "/profile/" + this.props.email.split("@")[0]
-              )
-            }
-          >
-            &laquo; Previous
-          </button>
-          <fieldset className="form-group">
-            <label className="edit-label" htmlFor="name">
-              Name
-            </label>
-            <input
-              name="name"
-              className="form-control"
-              value={this.state.name}
-              onChange={this.handleInputChange}
-            />
-          </fieldset>
+      <div className="container form-container">
+        <button
+          className="btn return-btn btn-default"
+          onClick={() =>
+            this.props.history.push(
+              "/profile/" + this.props.email.split("@")[0]
+            )
+          }
+        >
+          &laquo; Previous
+        </button>
+        <fieldset className="form-group">
+          <label className="edit-label" htmlFor="name">
+            Name
+          </label>
+          <input
+            name="name"
+            className="form-control"
+            value={this.state.name}
+            onChange={this.handleInputChange}
+          />
+        </fieldset>
 
-          <fieldset className="form-group">
-            <label className="edit-label" htmlFor="website">
-              Website url
-            </label>
-            <input
-              name="website"
-              className="form-control"
-              value={this.state.website}
-              onChange={this.handleInputChange}
-            />
-          </fieldset>
+        <fieldset className="form-group">
+          <label className="edit-label" htmlFor="website">
+            Website url
+          </label>
+          <input
+            name="website"
+            className="form-control"
+            value={this.state.website}
+            onChange={this.handleInputChange}
+          />
+        </fieldset>
 
-          <fieldset className="form-group">
-            <label className="edit-label" htmlFor="college">
-              College
-            </label>
-            <input
-              name="college"
-              className="form-control"
-              value={this.state.college}
-              onChange={this.handleInputChange}
-            />
-          </fieldset>
+        <fieldset className="form-group">
+          <label className="edit-label" htmlFor="college">
+            College
+          </label>
+          <input
+            name="college"
+            className="form-control"
+            value={this.state.college}
+            onChange={this.handleInputChange}
+          />
+        </fieldset>
 
-          <fieldset className="form-group">
-            <label className="edit-label" htmlFor="location">
-              Location
-            </label>
-            <input
-              name="location"
-              className="form-control"
-              value={this.state.location}
-              onChange={this.handleInputChange}
-            />
-          </fieldset>
+        <fieldset className="form-group">
+          <label className="edit-label" htmlFor="location">
+            Location
+          </label>
+          <input
+            name="location"
+            className="form-control"
+            value={this.state.location}
+            onChange={this.handleInputChange}
+          />
+        </fieldset>
 
-          <fieldset className="form-group ">
-            <label className="edit-label" htmlFor="bio">
-              Description
-            </label>
-            <input
-              name="bio"
-              className="form-control"
-              value={this.state.bio}
-              onChange={this.handleInputChange}
-            />
-          </fieldset>
+        <fieldset className="form-group">
+          <label className="edit-label" htmlFor="bio">
+            Description
+          </label>
+          <input
+            name="bio"
+            className="form-control"
+            value={this.state.bio}
+            onChange={this.handleInputChange}
+          />
+        </fieldset>
 
-          {/* <Form.Group>
+        {/* <Form.Group>
           <Form.File id="pic" label="Upload new profile image" />
         </Form.Group> */}
 
-          {SaveB}
-        </div>
+        {SaveB}
       </div>
     );
   }

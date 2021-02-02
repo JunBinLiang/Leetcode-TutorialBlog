@@ -1,22 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Fjalla+One&display=swap");
-.padding-top-bottom {
-  padding-top: 50px;
-  padding-bottom: 50px;
-  // background-color: rgb(243, 243, 243);
-}
+
 .form-container {
-  margin: auto;
-  width: 80%;
-  padding: 50px;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: rgb(236, 236, 236);
-  background-clip: border-box;
-  border: 0 solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
-  box-shadow: -12px -12px 12px 0 rgba(255, 255, 255, 0.815),
-    12px 12px 12px 0 rgba(0, 0, 0, 0.03);
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background: #f8f6ee;
+  padding: 50px 100px;
+
+  border: 2px solid black;
+  box-shadow: 15px 15px 1px #acc2ff, 15px 15px 1px 2px black;
 }
 
 .form-control {
@@ -24,38 +15,38 @@
   width: 100%;
   font-size: 14pt;
   line-height: 28pt;
-  font-family: " Times New Roman ", Times, serif;
-  background-color: #f8f8f8;
+  font-family: "Fjalla One";
+  border: none;
+  border-bottom: 3px solid black;
+  background: #f0efef;
   min-width: 250px;
   padding-left: 5px;
   outline: none;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
 }
 
 .edit-label {
   font-size: 14pt;
   line-height: 28pt;
-  font-family: " Times New Roman ", Times, serif;
+  font-family: "Fjalla One";
   font-weight: bold;
   letter-spacing: 0.5px;
 }
 .form-control:focus {
-  border-bottom: 3px solid #858ab8;
+  border-bottom: 5px solid #80bbff;
 }
 
-.save-btn {
+.form-btn {
   display: block;
   margin: 0 auto;
   line-height: 28pt;
   padding: 0 20px;
-  background-color: #d3412e;
-  color: rgb(255, 255, 255);
-  font-family: " Times New Roman ", Times, serif;
+  background-color: #f1f1f1;
+  color: black;
   letter-spacing: 2px;
   transition: 0.2s all ease-in-out;
   outline: none;
+  border: 1px solid black;
+  box-shadow: 3px 3px 1px #95a4ff, 3px 3px 1px 1px black;
 }
 .form-btn :hover {
   background: black;
@@ -66,21 +57,21 @@
 .form-control:-webkit-autofill,
 .form-control:-webkit-autofill:hover,
 .form-control:-webkit-autofill:focus {
-  border-bottom: 3px solid #95a0ff;
+  border-bottom: 5px solid #95a4ff;
   -webkit-text-fill-color: #2a293e;
   // -webkit-box-shadow: 0 0 0px 1000px #f8f4e5 inset;
   transition: background-color 5000s ease-in-out 0s;
 }
 .return-btn {
-  background-color: #ffffff;
+  background-color: #f1f1f1;
   color: black;
   text-decoration: none;
   display: inline-block;
   padding: 8px 16px;
+  font-family: "Fjalla One";
   margin-bottom: 20px;
-  font-family: " Times New Roman ", Times, serif;
 }
 .return-btn:hover {
-  background-color: rgb(197, 228, 248);
+  background-color: #ddd;
   color: black;
 }
