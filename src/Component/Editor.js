@@ -225,6 +225,7 @@ class Editor extends Component {
   }
 
   handleSubmit() {
+    this.setState({ show_result: false });
     if (!this.props.isAuthenticated) {
       Toast.info("Please Login First", 2000, () => {});
       return;
@@ -485,7 +486,7 @@ class Editor extends Component {
         (this.state.number_of_correct / this.state.total_test_case) * 100
       );
 
-      if (this.state.correct) {
+      if (!this.state.wrongAnswer) {
         result_bar = <Progress percent={percentage} status="success" />;
       } else {
         result_bar = <Progress percent={percentage} status="error" />;
