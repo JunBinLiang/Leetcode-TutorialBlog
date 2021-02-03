@@ -80,15 +80,15 @@ class Editor extends Component {
       A: [], //content of the result
       textareaState: 1,
       myinput: "",
-      correct: false, //if your answer are correct after submit
+      correct: 0, //how many correct answer
       done: false, //at the beginning,input is default state (not O||X)
       theme: "terminal",
       mode: "java",
       resetPopup: false,
       total_test_case: 0,
-      wrongAnswer: false,
       number_of_correct: 0,
       tabSelectedIndex: 0,
+      congraopen:false,
     };
     this.onchange = this.onchange.bind(this);
     this.handleCompile = this.handleCompile.bind(this);
@@ -225,7 +225,6 @@ class Editor extends Component {
   }
 
   handleSubmit() {
-    this.setState({ show_result: false });
     if (!this.props.isAuthenticated) {
       Toast.info("Please Login First", 2000, () => {});
       return;
@@ -253,67 +252,41 @@ class Editor extends Component {
     this.setState({ summiting: true });
     axios
       .post(
+        //url2 + `submit`,
         `https://frozen-atoll-01566.herokuapp.com/api/submit`,
         {
           lang: this.state.mode,
           code: this.state.mycode + this.props.submit,
+          index:this.props.index
         },
         config
       )
       .then((res) => {
-        let rightAns = 0;
         let data = res.data;
         let status = parseInt(data.message.status);
-        let B = data.message.split("\n");
         let allRight = false;
-        let result = [];
-        let message = [];
-        this.setState({ total_test_case: this.props.testcase });
 
-        let t = this.props.testcase;
-        if (B.length < t) {
-          t = 0;
-        }
 
-        for (let i = B.length - 1; i >= 0; i--) {
-          if (B[i].length == 0) continue;
-          if (t > 0) {
-            if (B[i].charAt(0) == "t") rightAns++;
-            result.push(B[i]);
-            t--;
-          } else {
-            message.push(B[i]);
-          }
-        }
-        this.setState({ number_of_correct: rightAns });
 
-        if (rightAns == this.props.testcase) {
-          allRight = true;
-          this.setState({ wrongAnswer: false });
+        if (data.correct == this.props.testcase) {
           swal("Congratulation!").then((willDelete) => {
             if (willDelete) {
-              this.setState({ correct: false });
+              this.setState({ congraopen: false });
             }
           });
         } else {
-          this.setState({ wrongAnswer: true });
 
-          swal({
-            text: "You are not YOUXIU enough!",
-            icon: "warning",
-            dangerMode: true,
-          });
         }
         this.setState({
           status: status,
-          output: message.reverse().join("\n"),
+          output: data.message,
           summiting: false,
           textareaState: 1,
           done: true,
-          A: result.reverse(),
-          correct: allRight,
+          correct: data.correct,
           tabSelectedIndex: 1,
           show_result: true,
+          congraopen:true
         });
       });
   }
@@ -386,56 +359,10 @@ class Editor extends Component {
     }
 
     let testCaseOption = [];
-    let inputChoices = [];
-    let inputs = [];
-
     for (let i = 0; i < this.props.testcase; i++) {
       testCaseOption.push(<option value={i}>Test {i + 1}</option>);
-
-      if (!this.state.done) {
-        inputs.push(
-          <InputField bstate={1} index={i} judge={this.props.judgecase[i]} />
-        );
-
-        inputChoices.push(
-          <li
-            onClick={() => {
-              fetch(this.props.judgecase[i])
-                .then((res) => res.text())
-                .then((text) => {
-                  this.setState({ output: text });
-                });
-            }}
-          >
-            Testcase: {i}
-          </li>
-        );
-
-        if (i % 6 == 0 && i != 0) {
-          inputs.push(<br />);
-          inputs.push(<br />);
-        }
-      } else {
-        if (
-          this.state.A[i] != null &&
-          this.state.A[i].length >= 1 &&
-          this.state.A[i].charAt(0) == "t"
-        ) {
-          inputs.push(
-            <InputField bstate={2} index={i} judge={this.props.judgecase[i]} />
-          );
-        } else {
-          inputs.push(
-            <InputField bstate={3} index={i} judge={this.props.judgecase[i]} />
-          );
-        }
-
-        if (i % 6 == 0 && i != 0) {
-          inputs.push(<br />);
-          inputs.push(<br />);
-        }
-      }
     }
+    
 
     //////////////////////////////////////////////
     if (!this.state.loading) {
@@ -476,17 +403,18 @@ class Editor extends Component {
     //////////////////////////////////////////////////////////////////
 
     let congra;
-    if (this.state.correct) {
+    console.log(this.state.congraopen,"    ",this.state.correct)
+    if (this.state.congraopen && this.props.testcase == this.state.correct) {
       congra = <Congratulation />;
     }
 
     let result_bar;
     if (this.state.show_result) {
       let percentage = Math.round(
-        (this.state.number_of_correct / this.state.total_test_case) * 100
+        (this.state.correct / this.props.testcase) * 100
       );
 
-      if (!this.state.wrongAnswer) {
+      if (this.state.correct == this.props.testcase) {
         result_bar = <Progress percent={percentage} status="success" />;
       } else {
         result_bar = <Progress percent={percentage} status="error" />;
@@ -495,9 +423,7 @@ class Editor extends Component {
     return (
       <div>
         {congra}
-        <div style={{ width: "80%", margin: "10px" }}>{result_bar}</div>
-
-        {/* {inputs} */}
+        
 
         <SplitterLayout
           vertical={true}
@@ -572,12 +498,14 @@ class Editor extends Component {
 
               <TabPanel>
                 {inputTextarea}
+                <div style={{ width: "80%", margin: "10px" }}>{result_bar}</div>
                 {B}
                 {S}
               </TabPanel>
 
               <TabPanel>
                 {outputTextarea}
+                <div style={{ width: "80%", margin: "10px" }}>{result_bar}</div>
                 {B}
                 {S}
               </TabPanel>
