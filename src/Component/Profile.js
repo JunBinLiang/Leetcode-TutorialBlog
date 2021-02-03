@@ -2,7 +2,8 @@ import React, { Component, useState } from "react";
 import { data } from "./data/userData.js";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import PieChart from "./PieChart";
+import ReactStoreIndicator from "react-score-indicator";
+
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 
 import "./Profiles.css";
@@ -291,11 +292,21 @@ class Profile extends Component {
                         {this.state.problemSolved}
                       </span>
 
-                      <div style={{ width: "60%", float: "right" }}>
-                        <PieChart
-                          percent={
-                            (this.state.problemSolved / TOTAL_PROBLEM) * 100
-                          }
+                      <div>
+                        <ReactStoreIndicator
+                          value={30}
+                          maxValue={100}
+                          stepsColors={[
+                            "#3da940",
+                            "#3da940",
+                            "#3da940",
+                            "#53b83a",
+                            "#84c42b",
+                            "#f1bc00",
+                            "#ed8d00",
+                            "#d12000",
+                          ]}
+                          style={{ marginTop: "10px" }}
                         />
                       </div>
                     </div>
