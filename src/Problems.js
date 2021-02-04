@@ -186,7 +186,6 @@ class Problems extends Component {
     if (this.props.mode == 1) {
       problemcategory = "";
       let plist = ProblemSet.category[this.state.categoryIndex];
-      console.log(this.props.solved);
 
       problemlist = (
         <div className="container" style={{ width: "75%" }}>
@@ -203,7 +202,7 @@ class Problems extends Component {
                 }}
               >
                 {i + 1}.{" "}
-                {this.props.solved[i] ? (
+                {this.props.user.solved[i] ? (
                   <strike> {ProblemSet.names[i]}</strike>
                 ) : (
                   ProblemSet.names[i]
@@ -425,7 +424,7 @@ class Code extends Component {
 const mapStateToProps = (state) => {
   return {
     mode: state.mode,
-    solved: state.solved,
+    user:state.user
   };
 };
 

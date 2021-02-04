@@ -38,7 +38,7 @@ class MyNavbar extends Component {
   }
 
   myProfile(){
-    let email=this.props.email;
+    let email=this.props.user.email;
     let url=email.split("@")[0];
     this.props.history.push("/profile/"+url);
   }
@@ -47,13 +47,21 @@ class MyNavbar extends Component {
 
   logout() {
     //empty the token
+    var emptySolve = new Array(100);
+    emptySolve.fill(false);
+    let vistor={
+      solved:emptySolve
+    }
+    
+
     localStorage.setItem("token", "");
+    this.props.setUser(vistor)
     console.log("logout");
     this.props.logout();
   }
 
   componentDidUpdate() {
-    //console.log("nav ", this.props.isAuthenticated);
+
   }
 
   googleResponse(response) {
@@ -67,16 +75,11 @@ class MyNavbar extends Component {
       .then((res) => {
         //console.log('login',res);
         let token = res.data.token;
-        let profile = res.data.user;
-        let email=profile.email;
-
         localStorage.setItem("token", token);
+        
         this.props.setToken(token);
-        this.props.setEmail(email);
-        this.props.setSolved(profile.solved);
+        this.props.setUser(res.data.user)
         this.props.loginSuccess();
-        //console.log(token);
-        //console.log(profile);
       });
   }
 
@@ -147,19 +150,17 @@ class MyNavbar extends Component {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.isAuthenticated,
-    email:state.email,
-    solved:state.solved
+    user:state.user
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setUser: (user) => dispatch({ type: "user", val: user }),
     resetMode: () => dispatch({ type: "reset" }),
     loginSuccess: () => dispatch({ type: "login" }),
     setToken: (token) => dispatch({ type: "setToken", val: token }),
     logout: () => dispatch({ type: "logout" }),
-    setSolved: (solved) => dispatch({ type: "setSolved", val: solved }),
-    setEmail: (email) => dispatch({ type: "setEmail", val: email })
   };
 };
 

@@ -1,7 +1,6 @@
 import React, { Component, useState } from "react";
 import { data } from "./data/userData.js";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 import Button from "react-bootstrap/Button";
 
 import Client from "../GraphqlClient/GraphqlClient";
@@ -29,14 +28,13 @@ class EditProfile extends Component {
     this.submit = this.submit.bind(this);
   }
   componentDidMount() {
-    //console.log("mount  ", this.props);
     this.getProfile();
   }
 
   componentDidUpdate(previousProps, previousState) {
     //console.log("update ",this.props);
-    if (previousProps.email != this.props.email) {
-      let email = this.props.email.split("@")[0];
+    /*if (previousProps.email != this.props.email) {
+      /*let email = this.props.email.split("@")[0];
 
       Client.query({
         query: getUserQuery,
@@ -58,7 +56,7 @@ class EditProfile extends Component {
           Toast.info("Something go wrong!", 1500, () => {});
           console.log("graph err ", err);
         });
-    }
+    }*/
   }
 
   handleInputChange(e) {
@@ -69,31 +67,19 @@ class EditProfile extends Component {
   }
 
   getProfile() {
-    let email = this.props.email.split("@")[0];
-    Client.query({
-      query: getUserQuery,
-      variables: { email: email },
-    })
-      .then((res) => {
-        this.setState({
-          id: res.data.user.id,
-          name: res.data.user.name,
-          pic: res.data.user.pic,
-          bio: res.data.user.bio,
-          website: res.data.user.website,
-          location: res.data.user.location,
-          college: res.data.user.college,
-          email: res.data.user.email,
-        });
-      })
-      .catch((err) => {
-        Toast.info("Something go wrong!", 1500, () => {});
-        console.log("graph err ", err);
-      });
+    this.setState({
+      id: this.props.user.id,
+      name: this.props.user.name,
+      pic: this.props.user.pic,
+      bio: this.props.user.bio,
+      website: this.props.user.website,
+      location: this.props.user.location,
+      college: this.props.user.college,
+      email: this.props.user.email,
+    });
   }
 
   submit() {
-    console.log("state  ", this.state);
     this.setState({ loading: true });
 
     Client.mutate({
@@ -109,20 +95,16 @@ class EditProfile extends Component {
     })
       .then((res) => {
         console.log("update success ", res);
+
         Toast.info("Success!", 1000, () => {});
         this.setState({
           loading: false,
-          id: res.data.updateUser.id,
-          name: res.data.updateUser.name,
-          pic: res.data.updateUser.pic,
-          bio: res.data.updateUser.bio,
-          website: res.data.updateUser.website,
-          location: res.data.updateUser.location,
-          college: res.data.updateUser.college,
-          email: res.data.updateUser.email,
         });
+
+        console.log('save user ', res.data.updateUser)
+        this.props.setUser(res.data.updateUser);
       })
-      .catch((err) => {
+      .catch((err) => {//error handling for updating
         Toast.info("Something go wrong!", 1000, () => {});
         this.setState({ loading: false });
         console.log("graph err ", err);
@@ -150,7 +132,7 @@ class EditProfile extends Component {
           className="btn return-btn btn-default"
           onClick={() =>
             this.props.history.push(
-              "/profile/" + this.props.email.split("@")[0]
+              "/profile/" + this.props.user.email.split("@")[0]
             )
           }
         >
@@ -230,9 +212,16 @@ const mapStateToProps = (state) => {
   return {
     token: state.token,
     isAuthenticated: state.isAuthenticated,
-    email: state.email,
-    solved: state.solved,
+    user: state.user,
   };
 };
 
-export default withRouter(connect(mapStateToProps)(EditProfile));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUser: (user) => dispatch({ type: "user", val: user }),
+    setToken: (token) => dispatch({ type: "setToken", val: token }),
+    login: (token) => dispatch({ type: "login" }),
+  };
+};
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(EditProfile));

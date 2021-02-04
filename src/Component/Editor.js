@@ -226,7 +226,7 @@ class Editor extends Component {
 
   handleSubmit() {
     if (!this.props.isAuthenticated) {
-      Toast.info("Please Login First", 2000, () => {});
+      Toast.info("Please Login First", 1000, () => {});
       return;
     }
 
@@ -252,8 +252,8 @@ class Editor extends Component {
     this.setState({ summiting: true });
     axios
       .post(
-        //url2 + `submit`,
-        `https://frozen-atoll-01566.herokuapp.com/api/submit`,
+        url1 + `submit`,
+        //`https://frozen-atoll-01566.herokuapp.com/api/submit`,
         {
           lang: this.state.mode,
           code: this.state.mycode + this.props.submit,
@@ -264,11 +264,18 @@ class Editor extends Component {
       .then((res) => {
         let data = res.data;
         let status = parseInt(data.message.status);
-        let allRight = false;
 
 
 
         if (data.correct == this.props.testcase) {
+          if(this.props.user.solved[this.props.index]){
+
+          }
+          else{
+            this.props.user.solved[this.props.index]=true;
+            this.props.user.count++;
+          }
+
           swal("Congratulation!").then((willDelete) => {
             if (willDelete) {
               this.setState({ congraopen: false });
@@ -540,8 +547,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.token,
     isAuthenticated: state.isAuthenticated,
-    email: state.email,
-    solved: state.solved,
+    user: state.user,
   };
 };
 

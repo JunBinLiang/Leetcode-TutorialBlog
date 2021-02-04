@@ -1,9 +1,11 @@
- const initialState = {
+var emptySolve = new Array(100);
+emptySolve.fill(false); 
+
+const initialState = {
     mode: 0,
 	isAuthenticated:false,
     token:"",
-    email:"",
-    solved:[]
+    user:{solved:emptySolve}
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,6 +15,7 @@ const reducer = (state = initialState, action) => {
             mode: 0
         }
     }
+
     
 	if (action.type === 'mode1') {
         return {
@@ -41,12 +44,7 @@ const reducer = (state = initialState, action) => {
             token: action.val
         }
     }
-    if (action.type === 'setEmail') {
-        return {
-			...state,
-            email: action.val
-        }
-    }
+
 	if (action.type === 'logout') {
         return {
 			...state,
@@ -55,10 +53,10 @@ const reducer = (state = initialState, action) => {
         }
     }
 
-    if (action.type === 'setSolved') {
+    if (action.type === 'user') {
         return {
 			...state,
-            solved:[...action.val]
+            user: {...action.val}
         }
     }
 	

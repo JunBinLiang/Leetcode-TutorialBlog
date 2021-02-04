@@ -70,11 +70,9 @@ class App extends Component {
       .then((res) => {
         //user information will be added later,first lunch
         if (res.status === 200) {
-          console.log("authenticate");
-          let email = res.data.user.email;
-          this.props.setEmail(email);
+          console.log("authenticate ",res);
+          this.props.setUser(res.data.user);
           this.props.login();
-          this.props.setSolved(res.data.user.solved);
         }
       })
       .catch((err) => {
@@ -83,6 +81,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('user',this.props.user);
     return (
       <div>
         <HashRouter>
@@ -112,11 +111,13 @@ const mapStateToProps = (state) => {
     isAuthenticated: state.isAuthenticated,
     email: state.email,
     solved: state.solved,
+    user:state.user
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setUser: (user) => dispatch({ type: "user", val: user }),
     setToken: (token) => dispatch({ type: "setToken", val: token }),
     setEmail: (email) => dispatch({ type: "setEmail", val: email }),
     setSolved: (solved) => dispatch({ type: "setSolved", val: solved }),
@@ -128,3 +129,14 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
+
+
+
+
+
+
+
+
+
+//issue need to solve: 
+//1. auto logout bug

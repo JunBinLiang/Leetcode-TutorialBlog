@@ -37,8 +37,6 @@ class Profile extends Component {
   }
 
   myEdit() {
-    let email = this.props.email;
-    let url = email.split("@")[0];
     this.props.history.push("/setting/edit");
   }
 
@@ -56,7 +54,7 @@ class Profile extends Component {
             name: res.data.user.name,
             pic: res.data.user.pic,
             bio: res.data.user.bio,
-            website: res.data.user.website,
+            //website: res.data.user.website,
             location: res.data.user.location,
             college: res.data.user.college,
             email: res.data.user.email,
@@ -82,7 +80,7 @@ class Profile extends Component {
           name: res.data.user.name,
           pic: res.data.user.pic,
           bio: res.data.user.bio,
-          // website: res.data.user.website,
+          //website: res.data.user.website,
           location: res.data.user.location,
           college: res.data.user.college,
           email: res.data.user.email,
@@ -113,7 +111,7 @@ class Profile extends Component {
                       <p className="text-secondary mb-1">{this.state.bio}</p>
 
                       <div>
-                        {this.state.email == this.props.email ? (
+                        {this.state.email == this.props.user.email ? (
                           <button
                             className="edit-btn"
                             onClick={() => {
@@ -289,13 +287,13 @@ class Profile extends Component {
                           fontWeight: "200",
                         }}
                       >
-                        {this.state.problemSolved}
+                       
                       </span>
 
                       <div>
                         <ReactStoreIndicator
-                          value={30}
-                          maxValue={100}
+                          value={this.props.user.count}
+                          maxValue={3}
                           stepsColors={[
                             "#3da940",
                             "#3da940",
@@ -327,8 +325,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.token,
     isAuthenticated: state.isAuthenticated,
-    email: state.email,
-    solved: state.solved,
+    user:state.user
   };
 };
 export default withRouter(connect(mapStateToProps)(Profile));

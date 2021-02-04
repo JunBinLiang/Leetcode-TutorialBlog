@@ -67,6 +67,7 @@ const getUserQuery = gql`
             website
             location
             college
+            count
         }
     }
 `;
@@ -82,6 +83,8 @@ const updateUser = gql`
             website
             location
             college
+            count
+            solved
         }
     }
 `;
