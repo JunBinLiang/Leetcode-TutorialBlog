@@ -84,7 +84,6 @@ const updateUser = gql`
             location
             college
             count
-            solved
         }
     }
 `;
