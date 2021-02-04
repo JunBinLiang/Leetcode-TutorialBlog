@@ -47,17 +47,10 @@ class MyNavbar extends Component {
 
   logout() {
     //empty the token
-    var emptySolve = new Array(100);
-    emptySolve.fill(false);
-    let vistor={
-      solved:emptySolve
-    }
-    
-
     localStorage.setItem("token", "");
-    this.props.setUser(vistor)
-    console.log("logout");
+    this.props.emptyUser()
     this.props.logout();
+    console.log("logout");
   }
 
   componentDidUpdate() {
@@ -161,6 +154,7 @@ const mapDispatchToProps = (dispatch) => {
     loginSuccess: () => dispatch({ type: "login" }),
     setToken: (token) => dispatch({ type: "setToken", val: token }),
     logout: () => dispatch({ type: "logout" }),
+    emptyUser: () => dispatch({ type: "emptyUser" }),
   };
 };
 

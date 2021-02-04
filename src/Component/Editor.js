@@ -213,7 +213,7 @@ class Editor extends Component {
       .then((res) => {
         let data = res.data;
         let status = parseInt(data.message.status);
-        console.log(res);
+        //console.log(res);
         this.setState({
           status: status,
           output: data.message,
@@ -221,6 +221,21 @@ class Editor extends Component {
           textareaState: 1,
           tabSelectedIndex: 1,
         });
+      })
+      .catch((err)=>{
+        console.log('err ',err);
+        if(err.response){ //unauthorized, session may be expired
+          if(err.response.status == 401){
+            this.props.emptyUser();
+            this.props.logout();
+            this.setState({loading:false});
+          }
+        }
+        else{
+          //unknown error
+          this.setState({loading:false});
+          Toast.info("Unknown Error", 1000, () => {});
+        }
       });
   }
 
@@ -295,6 +310,20 @@ class Editor extends Component {
           show_result: true,
           congraopen:true
         });
+      })
+      .catch((err)=>{
+        if(err.response){
+          if(err.response.status == 401){
+            this.props.emptyUser();
+            this.props.logout();
+            this.setState({loading:false});
+          }
+        }
+        else{
+          //unknown error
+          this.setState({loading:false});
+          Toast.info("Unknown Error", 1000, () => {});
+        }
       });
   }
 
@@ -410,7 +439,6 @@ class Editor extends Component {
     //////////////////////////////////////////////////////////////////
 
     let congra;
-    console.log(this.state.congraopen,"    ",this.state.correct)
     if (this.state.congraopen && this.props.testcase == this.state.correct) {
       congra = <Congratulation />;
     }
@@ -543,6 +571,13 @@ class Editor extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    emptyUser: () => dispatch({ type: "emptyUser" }),
+    logout: () => dispatch({ type: "logout" })
+  };
+};
+
 const mapStateToProps = (state) => {
   return {
     token: state.token,
@@ -551,4 +586,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Editor);
+export default connect(mapStateToProps,mapDispatchToProps)(Editor);

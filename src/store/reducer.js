@@ -59,6 +59,15 @@ const reducer = (state = initialState, action) => {
             user: {...action.val}
         }
     }
+
+    if (action.type === 'emptyUser') {
+        let A = new Array(100);
+        A.fill(false); 
+        return {
+			...state,
+            user: {solved:A}
+        }
+    }
 	
     return state;
 };
