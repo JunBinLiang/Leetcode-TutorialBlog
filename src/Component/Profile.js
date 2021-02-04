@@ -32,6 +32,7 @@ class Profile extends Component {
       location: "",
       college: "",
       editMode: true,
+      count:0,
       skills: [],
     };
   }
@@ -58,6 +59,7 @@ class Profile extends Component {
             location: res.data.user.location,
             college: res.data.user.college,
             email: res.data.user.email,
+            count:res.data.user.count
           });
         })
         .catch((err) => {
@@ -84,6 +86,7 @@ class Profile extends Component {
           location: res.data.user.location,
           college: res.data.user.college,
           email: res.data.user.email,
+          count:res.data.user.count
         });
       })
       .catch((err) => {
@@ -292,7 +295,7 @@ class Profile extends Component {
 
                       <div>
                         <ReactStoreIndicator
-                          value={this.props.user.count}
+                          value={this.state.count}
                           maxValue={3}
                           stepsColors={[
                             "#3da940",

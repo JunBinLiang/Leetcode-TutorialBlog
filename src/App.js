@@ -140,3 +140,4 @@ export default connect(
 
 //issue need to solve: 
 //1. auto logout bug
+//2.lotout in profile page => login imediate
