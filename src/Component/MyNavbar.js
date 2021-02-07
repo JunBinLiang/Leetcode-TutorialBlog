@@ -35,12 +35,17 @@ class MyNavbar extends Component {
     this.onFailure = this.onFailure.bind(this);
     this.logout = this.logout.bind(this);
     this.myProfile = this.myProfile.bind(this);
+    this.myNotes = this.myNotes.bind(this);
   }
-
-  myProfile(){
-    let email=this.props.user.email;
-    let url=email.split("@")[0];
-    this.props.history.push("/profile/"+url);
+  myNotes() {
+    let email = this.props.user.email;
+    let url = email.split("@")[0];
+    this.props.history.push("/notes/" + url);
+  }
+  myProfile() {
+    let email = this.props.user.email;
+    let url = email.split("@")[0];
+    this.props.history.push("/profile/" + url);
   }
 
   onFailure() {}
@@ -49,26 +54,22 @@ class MyNavbar extends Component {
     //empty the token
     var emptySolve = new Array(100);
     emptySolve.fill(false);
-    let vistor={
-      solved:emptySolve
-    }
-    
+    let vistor = {
+      solved: emptySolve,
+    };
 
     localStorage.setItem("token", "");
-    this.props.setUser(vistor)
+    this.props.setUser(vistor);
     console.log("logout");
     this.props.logout();
   }
 
-  componentDidUpdate() {
-
-  }
+  componentDidUpdate() {}
 
   googleResponse(response) {
-
     axios
       .post(`https://frozen-atoll-01566.herokuapp.com/login`, {
-         //.post("http://localhost:8080/login", {
+        //.post("http://localhost:8080/login", {
 
         code: response.tokenId,
       })
@@ -76,9 +77,9 @@ class MyNavbar extends Component {
         //console.log('login',res);
         let token = res.data.token;
         localStorage.setItem("token", token);
-        
+
         this.props.setToken(token);
-        this.props.setUser(res.data.user)
+        this.props.setUser(res.data.user);
         this.props.loginSuccess();
       });
   }
@@ -123,6 +124,7 @@ class MyNavbar extends Component {
         <Menu defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]}>
           <SubMenu key="sub4" icon={<SettingOutlined />} title="66Bro">
             <Menu.Item onClick={this.myProfile}>Profile</Menu.Item>
+            <Menu.Item onClick={this.myNotes}>Notes</Menu.Item>
             <Menu.Item onClick={this.logout}>Logout</Menu.Item>
           </SubMenu>
         </Menu>
@@ -150,7 +152,7 @@ class MyNavbar extends Component {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.isAuthenticated,
-    user:state.user
+    user: state.user,
   };
 };
 
