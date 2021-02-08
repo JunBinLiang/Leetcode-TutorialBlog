@@ -101,10 +101,11 @@ class EditProfile extends Component {
           loading: false,
         });
 
-        console.log('save user ', res.data.updateUser)
+        console.log("save user ", res.data.updateUser);
         this.props.setUser(res.data.updateUser);
       })
-      .catch((err) => {//error handling for updating
+      .catch((err) => {
+        //error handling for updating
         Toast.info("Something go wrong!", 1000, () => {});
         this.setState({ loading: false });
         console.log("graph err ", err);
@@ -144,7 +145,7 @@ class EditProfile extends Component {
           </label>
           <input
             name="name"
-            className="form-control"
+            className="edit-profile-form-control"
             value={this.state.name}
             onChange={this.handleInputChange}
           />
@@ -156,7 +157,7 @@ class EditProfile extends Component {
           </label>
           <input
             name="website"
-            className="form-control"
+            className="edit-profile-form-control"
             value={this.state.website}
             onChange={this.handleInputChange}
           />
@@ -168,7 +169,7 @@ class EditProfile extends Component {
           </label>
           <input
             name="college"
-            className="form-control"
+            className="edit-profile-form-control"
             value={this.state.college}
             onChange={this.handleInputChange}
           />
@@ -180,7 +181,7 @@ class EditProfile extends Component {
           </label>
           <input
             name="location"
-            className="form-control"
+            className="edit-profile-form-control"
             value={this.state.location}
             onChange={this.handleInputChange}
           />
@@ -192,7 +193,7 @@ class EditProfile extends Component {
           </label>
           <input
             name="bio"
-            className="form-control"
+            className="edit-profile-form-control"
             value={this.state.bio}
             onChange={this.handleInputChange}
           />
@@ -224,4 +225,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(EditProfile));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(EditProfile)
+);

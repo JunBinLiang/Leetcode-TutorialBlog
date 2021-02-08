@@ -7,6 +7,7 @@ import Compile from "./Component/Compile";
 import Profile from "./Component/Profile.js";
 import Error from "./Component/Error";
 import EditProfile from "./Component/EditProfile";
+import AllNotes from "./Component/AllNotes";
 
 import {
   Route,
@@ -20,7 +21,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 
 import Client from "./GraphqlClient/GraphqlClient";
-import { getBooksQuery, addAuthor,getUserQuery } from "./queries/queries";
+import { getBooksQuery, addAuthor, getUserQuery } from "./queries/queries";
 
 //https://rubygarage.org/blog/graphql-in-react-with-apollo-client    graphql usage
 
@@ -29,10 +30,9 @@ let heroku = "https://frozen-atoll-01566.herokuapp.com/";
 
 class App extends Component {
   componentDidMount() {
-     //query example
-   
+    //query example
 
-     /*Client
+    /*Client
     .query({
       query: getUserQuery,
       variables: {email:"junbinliang66"}
@@ -42,7 +42,6 @@ class App extends Component {
     .catch((err)=>{
       console.log('graph err ',err);
     });*/
-    
 
     /* mutation example
     Client
@@ -70,7 +69,7 @@ class App extends Component {
       .then((res) => {
         //user information will be added later,first lunch
         if (res.status === 200) {
-          console.log("authenticate ",res);
+          console.log("authenticate ", res);
           this.props.setUser(res.data.user);
           this.props.login();
         }
@@ -81,7 +80,11 @@ class App extends Component {
   }
 
   render() {
+<<<<<<< HEAD
     //console.log('user',this.props.user);
+=======
+    console.log("user", this.props.user);
+>>>>>>> 8b3633161e3c32d419d74b80c4cbbec33362eac2
     return (
       <div>
         <HashRouter>
@@ -96,7 +99,18 @@ class App extends Component {
             <Route exact path="/problems/:id" component={Compile} />
             <Route exact path={"/about"} component={Team} />
             <Route exact path="/profile/:id" component={Profile} />
-            <Route exact path="/setting/edit" render={() =>(this.props.isAuthenticated ? ( <Route  component={EditProfile} />): (<Route component={Error} />))} />
+            <Route exact path="/notes/:id" component={AllNotes} />
+            <Route
+              exact
+              path="/setting/edit"
+              render={() =>
+                this.props.isAuthenticated ? (
+                  <Route component={EditProfile} />
+                ) : (
+                  <Route component={Error} />
+                )
+              }
+            />
             <Route component={Error} />;
           </Switch>
         </HashRouter>
@@ -111,7 +125,7 @@ const mapStateToProps = (state) => {
     isAuthenticated: state.isAuthenticated,
     email: state.email,
     solved: state.solved,
-    user:state.user
+    user: state.user,
   };
 };
 
@@ -130,14 +144,6 @@ export default connect(
   mapDispatchToProps
 )(App);
 
-
-
-
-
-
-
-
-
-//issue need to solve: 
+//issue need to solve:
 //1. auto logout bug
 //2.lotout in profile page => login imediate

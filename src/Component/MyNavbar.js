@@ -155,6 +155,7 @@ const mapDispatchToProps = (dispatch) => {
     setToken: (token) => dispatch({ type: "setToken", val: token }),
     logout: () => dispatch({ type: "logout" }),
     emptyUser: () => dispatch({ type: "emptyUser" }),
+    resetMode: () => dispatch({ type: "reset" }),
   };
 };
 
