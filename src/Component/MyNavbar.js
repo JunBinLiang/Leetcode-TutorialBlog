@@ -35,12 +35,19 @@ class MyNavbar extends Component {
     this.onFailure = this.onFailure.bind(this);
     this.logout = this.logout.bind(this);
     this.myProfile = this.myProfile.bind(this);
+    this.myNotes = this.myNotes.bind(this);
   }
 
   myProfile(){
     let email=this.props.user.email;
     let url=email.split("@")[0];
     this.props.history.push("/profile/"+url);
+  }
+
+  myNotes() {
+    let email = this.props.user.email;
+    let url = email.split("@")[0];
+    this.props.history.push("/notes/" + url);
   }
 
   onFailure() {}
@@ -116,6 +123,7 @@ class MyNavbar extends Component {
         <Menu defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]}>
           <SubMenu key="sub4" icon={<SettingOutlined />} title="66Bro">
             <Menu.Item onClick={this.myProfile}>Profile</Menu.Item>
+            <Menu.Item onClick={this.myNotes}>Notes</Menu.Item>
             <Menu.Item onClick={this.logout}>Logout</Menu.Item>
           </SubMenu>
         </Menu>
