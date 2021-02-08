@@ -80,11 +80,7 @@ class App extends Component {
   }
 
   render() {
-<<<<<<< HEAD
-    //console.log('user',this.props.user);
-=======
     console.log("user", this.props.user);
->>>>>>> 8b3633161e3c32d419d74b80c4cbbec33362eac2
     return (
       <div>
         <HashRouter>
