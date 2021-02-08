@@ -32,7 +32,7 @@ class Profile extends Component {
       location: "",
       college: "",
       editMode: true,
-      count:0,
+      count: 0,
       skills: [],
     };
   }
@@ -59,7 +59,7 @@ class Profile extends Component {
             location: res.data.user.location,
             college: res.data.user.college,
             email: res.data.user.email,
-            count:res.data.user.count
+            count: res.data.user.count,
           });
         })
         .catch((err) => {
@@ -86,7 +86,7 @@ class Profile extends Component {
           location: res.data.user.location,
           college: res.data.user.college,
           email: res.data.user.email,
-          count:res.data.user.count
+          count: res.data.user.count,
         });
       })
       .catch((err) => {
@@ -289,9 +289,7 @@ class Profile extends Component {
                           fontSize: "50px",
                           fontWeight: "200",
                         }}
-                      >
-                       
-                      </span>
+                      ></span>
 
                       <div>
                         <ReactStoreIndicator
@@ -318,7 +316,6 @@ class Profile extends Component {
           </div>
         </div>
         <Calender id={this.state.id} />
-        <Menu></Menu>
       </div>
     );
   }
@@ -328,7 +325,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.token,
     isAuthenticated: state.isAuthenticated,
-    user:state.user
+    user: state.user,
   };
 };
 export default withRouter(connect(mapStateToProps)(Profile));

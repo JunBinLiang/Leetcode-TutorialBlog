@@ -10,7 +10,7 @@
   box-shadow: 15px 15px 1px #acc2ff, 15px 15px 1px 2px black;
 }
 
-.form-control {
+.edit-profile-form-control {
   display: block;
   width: 100%;
   font-size: 14pt;
@@ -31,7 +31,7 @@
   font-weight: bold;
   letter-spacing: 0.5px;
 }
-.form-control:focus {
+.edit-profile-form-control:focus {
   border-bottom: 5px solid #80bbff;
 }
 
@@ -54,9 +54,9 @@
   border: 1px solid black;
 }
 
-.form-control:-webkit-autofill,
-.form-control:-webkit-autofill:hover,
-.form-control:-webkit-autofill:focus {
+.edit-profile-form-control:-webkit-autofill,
+.edit-profile-form-control:-webkit-autofill:hover,
+.edit-profile-form-control:-webkit-autofill:focus {
   border-bottom: 5px solid #95a4ff;
   -webkit-text-fill-color: #2a293e;
   // -webkit-box-shadow: 0 0 0px 1000px #f8f4e5 inset;
