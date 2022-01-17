@@ -6,9 +6,9 @@
 66Code is a coding platform helping people to improve data structure and algorithm. It is an application that prepares you for your technical interviews.
 
 ### Contributor:
-[**JunBin Liang**](https://junbinliang.github.io/Leetcode-TutorialBlog/#/)
-[**LiuLan Zheng**](https://github.com/liulanz)
-[**Lin Weiting**](https://github.com/lin75)
+[**JunBin Liang**](https://junbinliang.github.io/Leetcode-TutorialBlog/#/)<br/>
+[**LiuLan Zheng**](https://github.com/liulanz)<br/>
+[**Lin Weiting**](https://github.com/lin75)<br/>
 
 <br/><br/>
 ## Available Scripts
