@@ -1,4 +1,6 @@
 ## Overview:
+A web application similar to LeetCode where users can compile, submit programs, check solutions, and jot down notes.
+
 ### Application Name:
 [**66Code**](https://junbinliang.github.io/Leetcode-TutorialBlog/#/)
 
