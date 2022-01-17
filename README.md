@@ -9,6 +9,7 @@
 [**JunBin Liang**](https://junbinliang.github.io/Leetcode-TutorialBlog/#/)<br/>
 [**LiuLan Zheng**](https://github.com/liulanz)<br/>
 [**Lin Weiting**](https://github.com/lin75)<br/>
+[**Fei Zhai**](https://github.com/feizhai39)<br/>
 
 <br/><br/>
 ## Available Scripts
